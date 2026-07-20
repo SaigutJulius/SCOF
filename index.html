@@ -1,0 +1,788 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="SCOF connects Kenyan coffee farms, traceability, AI and responsible infrastructure into one digital coffee ecosystem.">
+  <meta name="theme-color" content="#153d2d">
+  <title>SCOF — From Kenyan Farms to a Global Digital Ecosystem</title>
+  <style>
+    :root {
+      --forest: #153d2d;
+      --forest-deep: #09251b;
+      --leaf: #5d7d43;
+      --lime: #b6d56a;
+      --cream: #f5f0e4;
+      --paper: #fffdf7;
+      --clay: #b85c38;
+      --gold: #d9a74a;
+      --ink: #182019;
+      --muted: #687169;
+      --line: rgba(21, 61, 45, .15);
+      --shadow: 0 24px 70px rgba(15, 42, 30, .14);
+      --radius: 28px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    body.menu-open { overflow: hidden; }
+    img { display: block; width: 100%; }
+    a { color: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    .wrap { width: min(1180px, calc(100% - 40px)); margin-inline: auto; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 18px;
+      color: var(--leaf);
+      font-size: .74rem;
+      font-weight: 800;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before { content: ""; width: 32px; height: 1px; background: currentColor; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2, h3 { line-height: 1.06; letter-spacing: -.035em; }
+    h1 { max-width: 900px; margin-bottom: 24px; font-family: Georgia, serif; font-size: clamp(3.25rem, 7.7vw, 7.3rem); font-weight: 500; }
+    h2 { max-width: 780px; margin-bottom: 24px; font-family: Georgia, serif; font-size: clamp(2.35rem, 5vw, 4.8rem); font-weight: 500; }
+    h3 { margin-bottom: 12px; font-size: 1.25rem; }
+    .lead { max-width: 690px; color: var(--muted); font-size: clamp(1.05rem, 1.7vw, 1.28rem); }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      min-height: 52px;
+      padding: 0 24px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: .9rem;
+      font-weight: 800;
+      transition: transform .25s, background .25s, color .25s, border-color .25s;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { color: var(--forest-deep); background: var(--lime); }
+    .btn-primary:hover { background: #c9e783; }
+    .btn-ghost { color: white; border-color: rgba(255,255,255,.42); }
+    .btn-ghost:hover { background: white; color: var(--forest-deep); }
+
+    .site-header {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 50;
+      transition: background .25s, box-shadow .25s;
+    }
+    .site-header.scrolled { background: rgba(9, 37, 27, .94); box-shadow: 0 10px 40px rgba(0,0,0,.13); backdrop-filter: blur(14px); }
+    .nav { display: flex; align-items: center; justify-content: space-between; min-height: 82px; color: white; }
+    .brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; }
+    .bean {
+      position: relative;
+      width: 38px;
+      height: 38px;
+      border: 1px solid rgba(255,255,255,.42);
+      border-radius: 50% 46% 50% 44%;
+      transform: rotate(-18deg);
+    }
+    .bean::after { content: ""; position: absolute; top: 5px; bottom: 5px; left: 18px; width: 1px; background: var(--lime); transform: rotate(18deg); }
+    .brand strong { display: block; font-family: Georgia, serif; font-size: 1.3rem; letter-spacing: .12em; }
+    .brand small { display: block; margin-top: -3px; color: rgba(255,255,255,.62); font-size: .61rem; letter-spacing: .18em; text-transform: uppercase; }
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+    .nav-links a { text-decoration: none; font-size: .82rem; font-weight: 700; }
+    .nav-links a:not(.nav-cta) { color: rgba(255,255,255,.78); }
+    .nav-links a:hover { color: white; }
+    .nav-cta { padding: 10px 17px; border: 1px solid rgba(255,255,255,.35); border-radius: 999px; }
+    .menu-btn { display: none; width: 44px; height: 44px; padding: 0; border: 1px solid rgba(255,255,255,.28); border-radius: 50%; color: white; background: transparent; font-size: 1.2rem; }
+
+    .hero {
+      position: relative;
+      display: flex;
+      min-height: 100svh;
+      align-items: flex-end;
+      padding: 170px 0 82px;
+      color: white;
+      background: var(--forest-deep) url("images coffe farm/1000053894.jpg") center 55% / cover no-repeat;
+      isolation: isolate;
+    }
+    .hero::before { content: ""; position: absolute; inset: 0; z-index: -2; background: linear-gradient(90deg, rgba(4,24,17,.91) 0%, rgba(4,24,17,.68) 47%, rgba(4,24,17,.18) 78%), linear-gradient(0deg, rgba(4,24,17,.72), transparent 55%); }
+    .hero::after { content: ""; position: absolute; inset: auto 0 0; z-index: -1; height: 120px; background: linear-gradient(transparent, rgba(4,24,17,.58)); }
+    .hero .eyebrow { color: var(--lime); }
+    .hero-copy { max-width: 930px; }
+    .hero-copy > p { max-width: 650px; margin-bottom: 32px; color: rgba(255,255,255,.78); font-size: clamp(1.05rem, 2vw, 1.34rem); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .hero-foot { display: grid; grid-template-columns: repeat(3, auto); width: fit-content; margin-top: 72px; border-top: 1px solid rgba(255,255,255,.2); }
+    .hero-proof { padding: 20px 48px 0 0; }
+    .hero-proof + .hero-proof { padding-left: 32px; border-left: 1px solid rgba(255,255,255,.2); }
+    .hero-proof strong { display: block; margin-bottom: 3px; color: var(--lime); font-family: Georgia, serif; font-size: 1.25rem; }
+    .hero-proof span { color: rgba(255,255,255,.64); font-size: .78rem; }
+    .scroll-cue { position: absolute; right: 4vw; bottom: 68px; display: flex; align-items: center; gap: 12px; color: rgba(255,255,255,.64); font-size: .69rem; letter-spacing: .16em; text-transform: uppercase; writing-mode: vertical-rl; }
+    .scroll-cue::after { content: ""; width: 1px; height: 64px; background: rgba(255,255,255,.4); }
+
+    section { padding: 120px 0; }
+    .manifesto { background: var(--cream); }
+    .manifesto-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 9vw; align-items: start; }
+    .quote { position: sticky; top: 130px; padding-top: 4px; }
+    .quote p { margin-bottom: 24px; font-family: Georgia, serif; font-size: clamp(2rem, 3.6vw, 3.65rem); line-height: 1.13; letter-spacing: -.03em; }
+    .quote span { color: var(--leaf); font-size: .76rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    .proof-list { display: grid; }
+    .proof-item { display: grid; grid-template-columns: 54px 1fr; gap: 20px; padding: 25px 0; border-top: 1px solid var(--line); }
+    .proof-item:last-child { border-bottom: 1px solid var(--line); }
+    .proof-num { color: var(--clay); font-family: Georgia, serif; font-size: 1rem; }
+    .proof-item h3 { margin-bottom: 6px; }
+    .proof-item p { margin-bottom: 0; color: var(--muted); font-size: .94rem; }
+
+    .farm { background: var(--paper); }
+    .section-head { display: flex; justify-content: space-between; gap: 40px; margin-bottom: 54px; align-items: end; }
+    .section-head p { max-width: 430px; margin-bottom: 8px; color: var(--muted); }
+    .gallery { display: grid; grid-template-columns: 1.15fr .85fr; grid-template-rows: 330px 330px; gap: 18px; }
+    .photo { position: relative; overflow: hidden; border-radius: var(--radius); background: var(--forest); }
+    .photo:first-child { grid-row: 1 / 3; }
+    .photo img { height: 100%; object-fit: cover; transition: transform .8s cubic-bezier(.2,.7,.2,1); }
+    .photo:hover img { transform: scale(1.035); }
+    .photo::after { content: ""; position: absolute; inset: 40% 0 0; background: linear-gradient(transparent, rgba(4,24,17,.82)); }
+    .photo figcaption { position: absolute; z-index: 2; right: 24px; bottom: 22px; left: 24px; color: white; }
+    .photo figcaption strong { display: block; font-family: Georgia, serif; font-size: 1.25rem; }
+    .photo figcaption span { color: rgba(255,255,255,.7); font-size: .77rem; }
+
+    .intelligence { position: relative; color: white; background: var(--forest-deep); overflow: hidden; }
+    .intelligence::before { content: ""; position: absolute; width: 760px; height: 760px; right: -360px; top: -380px; border: 1px solid rgba(182,213,106,.14); border-radius: 50%; box-shadow: 0 0 0 100px rgba(182,213,106,.025), 0 0 0 200px rgba(182,213,106,.018); }
+    .intelligence .eyebrow { color: var(--lime); }
+    .intelligence .lead { color: rgba(255,255,255,.65); }
+    .tech-intro { position: relative; display: grid; grid-template-columns: 1.08fr .72fr; gap: 9vw; align-items: end; }
+    .tech-principle { padding: 24px 0 5px 24px; border-left: 1px solid rgba(182,213,106,.42); }
+    .tech-principle strong { display: block; margin-bottom: 9px; color: var(--lime); font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; }
+    .tech-principle p { margin: 0; color: rgba(255,255,255,.68); font-family: Georgia, serif; font-size: 1.35rem; line-height: 1.35; }
+    .operating-loop { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); margin: 64px 0 38px; border-top: 1px solid rgba(255,255,255,.15); }
+    .loop-step { position: relative; padding: 32px 30px 28px 0; }
+    .loop-step::before { content: ""; position: absolute; top: -5px; left: 0; width: 9px; height: 9px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 0 6px var(--forest-deep); }
+    .loop-step::after { content: "→"; position: absolute; top: 31px; right: 26px; color: rgba(182,213,106,.45); }
+    .loop-step:last-child::after { content: "↺"; }
+    .loop-step small { color: var(--lime); font-size: .66rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+    .loop-step h3 { margin: 17px 0 7px; font-size: 1.05rem; }
+    .loop-step p { max-width: 210px; margin: 0; color: rgba(255,255,255,.5); font-size: .78rem; }
+
+    .command-shell { position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,.14); border-radius: 28px; color: #dce8df; background: #0b2018; box-shadow: 0 36px 110px rgba(0,0,0,.35); }
+    .command-topbar { display: flex; align-items: center; justify-content: space-between; min-height: 62px; padding: 0 22px; border-bottom: 1px solid rgba(255,255,255,.09); background: rgba(255,255,255,.025); }
+    .command-brand { display: flex; align-items: center; gap: 10px; font-size: .76rem; font-weight: 800; letter-spacing: .1em; }
+    .command-brand::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 0 5px rgba(182,213,106,.1); }
+    .command-meta { display: flex; align-items: center; gap: 18px; color: rgba(255,255,255,.42); font-size: .68rem; }
+    .command-live { color: var(--lime); }
+    .command-body { display: grid; grid-template-columns: 190px 1fr; min-height: 610px; }
+    .command-nav { padding: 24px 16px; border-right: 1px solid rgba(255,255,255,.08); background: rgba(0,0,0,.1); }
+    .command-nav small { display: block; padding: 0 10px 12px; color: rgba(255,255,255,.32); font-size: .61rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    .command-nav span { display: block; margin-bottom: 5px; padding: 10px; border-radius: 9px; color: rgba(255,255,255,.48); font-size: .72rem; }
+    .command-nav span.active { color: white; background: rgba(182,213,106,.12); }
+    .command-nav span.active::before { content: "●"; margin-right: 9px; color: var(--lime); font-size: .55rem; }
+    .command-main { padding: 26px; background: #0e291f; }
+    .command-heading { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 22px; }
+    .command-heading span { color: rgba(255,255,255,.39); font-size: .67rem; text-transform: uppercase; }
+    .command-heading h3 { margin: 5px 0 0; font-family: Georgia, serif; font-size: 1.75rem; font-weight: 500; }
+    .command-action { padding: 8px 12px; border: 1px solid rgba(182,213,106,.25); border-radius: 999px; color: var(--lime); font-size: .65rem; font-weight: 800; }
+    .metric-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .metric { padding: 16px; border: 1px solid rgba(255,255,255,.08); border-radius: 14px; background: rgba(255,255,255,.035); }
+    .metric span { display: block; color: rgba(255,255,255,.4); font-size: .61rem; letter-spacing: .06em; text-transform: uppercase; }
+    .metric strong { display: block; margin: 8px 0 3px; font-family: Georgia, serif; font-size: 1.4rem; font-weight: 500; }
+    .metric small { color: var(--lime); font-size: .64rem; }
+    .command-grid { display: grid; grid-template-columns: 1.12fr .88fr; gap: 12px; margin-top: 12px; }
+    .command-panel { padding: 18px; border: 1px solid rgba(255,255,255,.08); border-radius: 16px; background: rgba(255,255,255,.035); }
+    .panel-title { display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; }
+    .panel-title strong { font-size: .74rem; }
+    .panel-title span { color: rgba(255,255,255,.35); font-size: .61rem; }
+    .block-photo { position: relative; height: 205px; overflow: hidden; border-radius: 12px; }
+    .block-photo img { height: 100%; object-fit: cover; }
+    .block-photo::after { content: ""; position: absolute; inset: 35% 0 0; background: linear-gradient(transparent, rgba(4,24,17,.86)); }
+    .photo-reading { position: absolute; z-index: 2; right: 13px; bottom: 12px; left: 13px; display: flex; align-items: end; justify-content: space-between; font-size: .67rem; }
+    .photo-reading strong { display: block; margin-bottom: 2px; color: white; font-size: .78rem; }
+    .photo-reading span { color: var(--lime); }
+    .health-bars { margin-top: 15px; }
+    .health-row { display: grid; grid-template-columns: 84px 1fr 35px; gap: 10px; align-items: center; margin-top: 9px; color: rgba(255,255,255,.48); font-size: .61rem; }
+    .bar { height: 5px; border-radius: 99px; background: rgba(255,255,255,.08); overflow: hidden; }
+    .bar i { display: block; height: 100%; border-radius: inherit; background: var(--lime); }
+    .task { padding: 14px 0; border-top: 1px solid rgba(255,255,255,.08); }
+    .task:first-of-type { border-top: 0; }
+    .task-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .task-top strong { font-size: .72rem; }
+    .priority { padding: 4px 7px; border-radius: 99px; color: #f5cf83; background: rgba(217,167,74,.12); font-size: .54rem; font-weight: 800; text-transform: uppercase; }
+    .priority.normal { color: var(--lime); background: rgba(182,213,106,.1); }
+    .task p { margin: 5px 0 0; color: rgba(255,255,255,.42); font-size: .64rem; line-height: 1.5; }
+    .ai-note { margin-top: 13px; padding: 14px; border-left: 2px solid var(--lime); border-radius: 0 10px 10px 0; color: rgba(255,255,255,.66); background: rgba(182,213,106,.07); font-size: .65rem; }
+    .ai-note b { color: var(--lime); }
+    .command-caption { display: flex; justify-content: space-between; gap: 20px; padding: 14px 22px; border-top: 1px solid rgba(255,255,255,.08); color: rgba(255,255,255,.35); font-size: .62rem; }
+    .trust-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-top: 38px; background: rgba(255,255,255,.12); }
+    .trust-item { padding: 22px 26px; background: var(--forest-deep); }
+    .trust-item strong { display: block; margin-bottom: 6px; color: white; font-size: .8rem; }
+    .trust-item p { margin: 0; color: rgba(255,255,255,.48); font-size: .72rem; }
+    .tech-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+    .btn-outline-light { border: 1px solid rgba(255,255,255,.26); color: white; background: rgba(255,255,255,.04); }
+    .btn-outline-light:hover { border-color: var(--lime); background: rgba(182,213,106,.08); }
+    .coin-concept { display: grid; grid-template-columns: .9fr 1.1fr; gap: 6vw; align-items: center; margin-top: 76px; padding: 28px; border: 1px solid rgba(255,255,255,.13); border-radius: 28px; background: rgba(255,255,255,.035); }
+    .coin-visual { overflow: hidden; border-radius: 20px; background: #071c14; }
+    .coin-visual img { width: 100%; aspect-ratio: 1; object-fit: cover; }
+    .plan-badge { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px; padding: 7px 11px; border: 1px solid rgba(182,213,106,.28); border-radius: 999px; color: var(--lime); font-size: .65rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+    .plan-badge::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--gold); }
+    .coin-copy h3 { max-width: 520px; margin-bottom: 18px; font-family: Georgia, serif; font-size: clamp(2rem, 4vw, 3.4rem); font-weight: 500; }
+    .coin-copy p { max-width: 540px; color: rgba(255,255,255,.62); }
+    .concept-note { margin-top: 22px; padding: 15px 17px; border-left: 2px solid var(--lime); color: rgba(255,255,255,.54); background: rgba(182,213,106,.055); font-size: .74rem; }
+
+    .journey { background: var(--cream); }
+    .trace { display: grid; grid-template-columns: repeat(6, 1fr); margin-top: 64px; counter-reset: step; }
+    .trace-step { position: relative; padding: 44px 20px 22px 0; border-top: 1px solid rgba(21,61,45,.27); counter-increment: step; }
+    .trace-step::before { content: ""; position: absolute; top: -6px; left: 0; width: 11px; height: 11px; border-radius: 50%; background: var(--clay); box-shadow: 0 0 0 6px var(--cream); }
+    .trace-step small { color: var(--clay); font-weight: 800; letter-spacing: .08em; }
+    .trace-step h3 { margin: 10px 0 7px; font-size: 1rem; }
+    .trace-step p { margin-bottom: 0; padding-right: 12px; color: var(--muted); font-size: .78rem; }
+    .journey-visual { display: grid; grid-template-columns: 1.1fr .9fr; gap: 18px; margin-top: 60px; }
+    .journey-visual img { height: 440px; object-fit: cover; border-radius: var(--radius); }
+    .batch-card { display: flex; flex-direction: column; justify-content: space-between; padding: 36px; border-radius: var(--radius); color: white; background: var(--forest); }
+    .batch-label { color: var(--lime); font-size: .7rem; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
+    .batch-card h3 { margin: 16px 0 10px; font-family: Georgia, serif; font-size: 2.2rem; font-weight: 500; }
+    .batch-card p { color: rgba(255,255,255,.65); }
+    .batch-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.15); }
+    .batch-meta span { color: rgba(255,255,255,.46); font-size: .68rem; text-transform: uppercase; }
+    .batch-meta strong { display: block; margin-top: 3px; font-size: .84rem; }
+
+    .ecosystem { background: var(--paper); }
+    .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 52px; }
+    .pillar { min-height: 260px; padding: 28px; border: 1px solid var(--line); border-radius: 22px; background: white; transition: transform .25s, box-shadow .25s; }
+    .pillar:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+    .pillar-icon { display: grid; width: 46px; height: 46px; margin-bottom: 45px; place-items: center; border-radius: 50%; color: var(--forest); background: var(--cream); font-size: 1.2rem; }
+    .pillar p { margin-bottom: 0; color: var(--muted); font-size: .9rem; }
+    .pillar.future { color: white; background: var(--forest); }
+    .pillar.future p { color: rgba(255,255,255,.64); }
+    .pillar.future .pillar-icon { background: rgba(182,213,106,.15); color: var(--lime); }
+
+    .partnerships { color: white; background: #0d2f23; }
+    .partnerships .eyebrow { color: var(--lime); }
+    .partnerships .section-head p { color: rgba(255,255,255,.62); }
+    .value-flow {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      margin: 58px 0 30px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 22px;
+      background: rgba(255,255,255,.04);
+      overflow: hidden;
+    }
+    .flow-node { position: relative; min-height: 150px; padding: 26px; border-right: 1px solid rgba(255,255,255,.11); }
+    .flow-node:last-child { border-right: 0; }
+    .flow-node::after { content: "→"; position: absolute; z-index: 2; top: 24px; right: -12px; display: grid; width: 24px; height: 24px; place-items: center; border-radius: 50%; color: var(--forest-deep); background: var(--lime); font-size: .8rem; }
+    .flow-node:last-child::after { display: none; }
+    .flow-node small { color: var(--lime); font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+    .flow-node h3 { margin: 24px 0 6px; }
+    .flow-node p { margin: 0; color: rgba(255,255,255,.53); font-size: .8rem; }
+    .return-flow { display: flex; align-items: center; justify-content: center; gap: 18px; margin-bottom: 58px; color: rgba(255,255,255,.56); font-size: .78rem; font-weight: 700; letter-spacing: .06em; text-align: center; text-transform: uppercase; }
+    .return-flow::before, .return-flow::after { content: ""; width: min(180px, 16vw); height: 1px; background: rgba(182,213,106,.38); }
+    .partner-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .partner-card { min-height: 220px; display: flex; flex-direction: column; padding: 22px; border: 1px solid rgba(255,255,255,.11); border-radius: 18px; background: rgba(255,255,255,.035); }
+    .partner-card span { display: block; margin-bottom: 28px; color: var(--lime); font-family: Georgia, serif; font-size: 1.45rem; }
+    .partner-card h3 { font-size: 1rem; }
+    .partner-card p { margin: 0; color: rgba(255,255,255,.52); font-size: .79rem; }
+    .partner-action { display: inline-flex; align-items: center; gap: 7px; width: fit-content; margin-top: auto; padding-top: 18px; color: var(--lime); font-size: .7rem; font-weight: 800; text-decoration: none; }
+    .partner-action:hover { color: white; }
+
+    .scope { background: var(--cream); }
+    .scope-summary { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+    .stage-key { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); font-size: .75rem; font-weight: 700; }
+    .stage-key::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--forest); }
+    .stage-key.roadmap::before { background: var(--gold); }
+    .scope-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 54px; }
+    .scope-card { position: relative; min-height: 280px; padding: 28px; border: 1px solid var(--line); border-radius: 22px; background: var(--paper); }
+    .stage { display: inline-flex; padding: 6px 10px; border-radius: 999px; color: var(--forest); background: rgba(21,61,45,.09); font-size: .63rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    .stage.roadmap { color: #805414; background: rgba(217,167,74,.18); }
+    .scope-card h3 { margin-top: 50px; }
+    .scope-card p { margin: 0; color: var(--muted); font-size: .86rem; }
+    .scope-card ul { margin: 18px 0 0; padding: 0; list-style: none; color: var(--muted); font-size: .79rem; }
+    .scope-card li { margin-top: 7px; }
+    .scope-card li::before { content: "·"; margin-right: 8px; color: var(--clay); font-weight: 900; }
+
+    .stfirm { background: var(--paper); }
+    .stfirm-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 8vw; align-items: start; }
+    .stfirm-intro { position: sticky; top: 125px; }
+    .stfirm-mark { display: inline-flex; align-items: center; gap: 12px; margin-top: 24px; padding: 11px 16px; border: 1px solid var(--line); border-radius: 999px; color: var(--forest); font-size: .75rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    .stfirm-mark::before { content: "ST"; display: grid; width: 30px; height: 30px; place-items: center; border-radius: 50%; color: white; background: var(--forest); font-size: .65rem; }
+    .delivery-list { display: grid; }
+    .delivery-item { display: grid; grid-template-columns: 42px 1fr; gap: 18px; padding: 25px 0; border-top: 1px solid var(--line); }
+    .delivery-item:last-child { border-bottom: 1px solid var(--line); }
+    .delivery-item > span { color: var(--clay); font-family: Georgia, serif; }
+    .delivery-item h3 { margin-bottom: 6px; }
+    .delivery-item p { margin: 0; color: var(--muted); font-size: .88rem; }
+
+    .closing { position: relative; display: flex; min-height: 680px; align-items: center; color: white; background: var(--forest-deep) url("assets/processing-yard.jpg") center / cover no-repeat; isolation: isolate; }
+    .closing::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(5,28,20,.94), rgba(5,28,20,.66) 60%, rgba(5,28,20,.32)); }
+    .closing-copy { max-width: 760px; }
+    .closing .eyebrow { color: var(--lime); }
+    .closing p { max-width: 610px; color: rgba(255,255,255,.7); font-size: 1.08rem; }
+    .closing .btn { margin-top: 18px; }
+
+    footer { padding: 54px 0 28px; color: white; background: #061b14; }
+    .footer-top { display: grid; grid-template-columns: 1fr auto auto; gap: 70px; padding-bottom: 44px; border-bottom: 1px solid rgba(255,255,255,.1); }
+    .footer-about { max-width: 380px; }
+    .footer-about p { margin: 18px 0 0; color: rgba(255,255,255,.5); font-size: .85rem; }
+    .footer-col strong { display: block; margin-bottom: 14px; color: var(--lime); font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; }
+    .footer-col a { display: block; margin: 8px 0; color: rgba(255,255,255,.64); text-decoration: none; font-size: .84rem; }
+    .footer-col a:hover { color: white; }
+    .footer-bottom { display: flex; justify-content: space-between; padding-top: 24px; color: rgba(255,255,255,.36); font-size: .72rem; }
+
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 900px) {
+      .nav-links { position: fixed; inset: 0; z-index: -1; display: none; flex-direction: column; justify-content: center; gap: 30px; background: var(--forest-deep); font-size: 1.1rem; }
+      .nav-links.open { display: flex; }
+      .menu-btn { display: block; }
+      .manifesto-grid, .tech-intro { grid-template-columns: 1fr; gap: 64px; }
+      .coin-concept { grid-template-columns: 1fr; }
+      .operating-loop { grid-template-columns: repeat(2, 1fr); row-gap: 10px; }
+      .command-body { grid-template-columns: 1fr; }
+      .command-nav { display: none; }
+      .metric-row { grid-template-columns: repeat(2, 1fr); }
+      .quote { position: static; }
+      .trace { grid-template-columns: repeat(3, 1fr); row-gap: 26px; }
+      .pillars { grid-template-columns: repeat(2, 1fr); }
+      .partner-grid, .scope-grid { grid-template-columns: repeat(2, 1fr); }
+      .stfirm-grid { grid-template-columns: 1fr; gap: 54px; }
+      .stfirm-intro { position: static; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .footer-about { grid-column: 1 / 3; }
+    }
+
+    @media (max-width: 680px) {
+      .wrap { width: min(100% - 28px, 1180px); }
+      section { padding: 84px 0; }
+      .hero { padding: 138px 0 54px; background-position: 46% center; }
+      .hero::before { background: linear-gradient(90deg, rgba(4,24,17,.91), rgba(4,24,17,.55)), linear-gradient(0deg, rgba(4,24,17,.82), transparent); }
+      h1 { font-size: clamp(3rem, 15vw, 4.8rem); }
+      .hero-foot { grid-template-columns: 1fr; width: 100%; margin-top: 52px; }
+      .hero-proof, .hero-proof + .hero-proof { padding: 14px 0; border-left: 0; border-bottom: 1px solid rgba(255,255,255,.16); }
+      .scroll-cue { display: none; }
+      .section-head { display: block; }
+      .gallery { grid-template-columns: 1fr; grid-template-rows: repeat(3, 340px); }
+      .photo:first-child { grid-row: auto; }
+      .tech-intro { gap: 36px; }
+      .operating-loop { grid-template-columns: 1fr; border-top: 0; }
+      .loop-step { padding: 20px 30px 20px 24px; border-left: 1px solid rgba(255,255,255,.15); }
+      .loop-step::before { top: 27px; left: -5px; }
+      .loop-step::after { top: auto; right: 4px; bottom: 12px; transform: rotate(90deg); }
+      .command-topbar { padding: 0 15px; }
+      .command-meta span:first-child { display: none; }
+      .command-main { padding: 16px; }
+      .command-heading { display: block; }
+      .command-action { display: inline-flex; margin-top: 12px; }
+      .metric-row, .command-grid { grid-template-columns: 1fr; }
+      .block-photo { height: 230px; }
+      .command-caption { display: block; }
+      .command-caption span { display: block; margin-top: 5px; }
+      .trust-row { grid-template-columns: 1fr; }
+      .trace { grid-template-columns: 1fr 1fr; }
+      .journey-visual { grid-template-columns: 1fr; }
+      .journey-visual img { height: 330px; }
+      .batch-card { min-height: 380px; }
+      .pillars { grid-template-columns: 1fr; }
+      .value-flow { grid-template-columns: 1fr; }
+      .flow-node { min-height: auto; border-right: 0; border-bottom: 1px solid rgba(255,255,255,.11); }
+      .flow-node:last-child { border-bottom: 0; }
+      .flow-node::after { top: auto; right: 24px; bottom: -12px; transform: rotate(90deg); }
+      .partner-grid, .scope-grid { grid-template-columns: 1fr; }
+      .footer-top { gap: 36px; }
+      .footer-bottom { display: block; }
+      .footer-bottom span { display: block; margin-top: 8px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+  <link rel="stylesheet" href="assets/footer-system.css">
+  <script src="assets/footer-system.js" defer></script>
+</head>
+<body>
+  <header class="site-header" id="header">
+    <div class="wrap nav">
+      <a class="brand" href="#top" aria-label="SCOF home">
+        <span class="bean" aria-hidden="true"></span>
+        <span><strong>SCOF</strong><small>Kenyan coffee ecosystem</small></span>
+      </a>
+      <nav class="nav-links" id="nav-links" aria-label="Main navigation">
+        <a href="#farm">Our Farms</a>
+        <a href="#technology">Technology</a>
+        <a href="#traceability">Traceability</a>
+        <a href="#partnerships">Partnerships</a>
+        <a class="nav-cta" href="https://wa.me/4915210207415?text=Hello%20SCOF%20team%2C%20I%20visited%20the%20SCOF%20website%20and%20would%20like%20to%20discuss%20a%20partnership." target="_blank" rel="noopener noreferrer" aria-label="Discuss a partnership with SCOF on WhatsApp">Partner with SCOF</a>
+      </nav>
+      <button class="menu-btn" id="menu-btn" type="button" aria-label="Open navigation" aria-expanded="false">☰</button>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">Rooted in Kenya · Built for the world</p>
+          <h1>From Kenyan coffee farms to a global digital ecosystem.</h1>
+          <p>Coffee. Technology. AI. Renewable energy. Community. One connected vision built on a real agricultural foundation.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#farm">Explore the farm <span aria-hidden="true">↘</span></a>
+            <a class="btn btn-ghost" href="#technology">Discover SSOS</a>
+          </div>
+        </div>
+        <div class="hero-foot reveal">
+          <div class="hero-proof"><strong>Real farms</strong><span>Active coffee production</span></div>
+          <div class="hero-proof"><strong>Real infrastructure</strong><span>Processing and drying facilities</span></div>
+          <div class="hero-proof"><strong>Digital layer</strong><span>SSOS intelligence and traceability</span></div>
+        </div>
+      </div>
+      <span class="scroll-cue">Field to future</span>
+    </section>
+
+    <section class="manifesto">
+      <div class="wrap manifesto-grid">
+        <div class="quote reveal">
+          <p>“We are not building from nothing. We are digitizing and expanding an existing coffee ecosystem.”</p>
+          <span>The SCOF foundation</span>
+        </div>
+        <div>
+          <p class="eyebrow reveal">Why SCOF</p>
+          <div class="proof-list">
+            <article class="proof-item reveal"><span class="proof-num">01</span><div><h3>Coffee farms</h3><p>Established trees, productive blocks and the agricultural knowledge to grow quality coffee.</p></div></article>
+            <article class="proof-item reveal"><span class="proof-num">02</span><div><h3>Processing capability</h3><p>Washing, drying and post-harvest infrastructure connect the farm to a market-ready product.</p></div></article>
+            <article class="proof-item reveal"><span class="proof-num">03</span><div><h3>Farmers and community</h3><p>People, skills and local relationships remain at the centre of the ecosystem.</p></div></article>
+            <article class="proof-item reveal"><span class="proof-num">04</span><div><h3>ST-Firm technology</h3><p>Software and AI create the operating layer for visibility, decisions and future scale.</p></div></article>
+            <article class="proof-item reveal"><span class="proof-num">05</span><div><h3>A long-term roadmap</h3><p>Renewable energy and a responsible digital treasury vision support resilient growth.</p></div></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="farm" id="farm">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div><p class="eyebrow">Our farms</p><h2>A living operation, captured as it is.</h2></div>
+          <p>Healthy trees, clean access rows and visible infrastructure tell a stronger story than a whitepaper ever could.</p>
+        </div>
+        <div class="gallery">
+          <figure class="photo reveal"><img src="assets/farm-rows.jpg" alt="Maintained access path between rows of coffee trees" loading="lazy"><figcaption><strong>Maintained plantation blocks</strong><span>Clear access for monitoring, care and harvest</span></figcaption></figure>
+          <figure class="photo reveal"><img src="images coffe farm/1000053901.jpg" alt="Coffee tree branches carrying clusters of developing cherries" loading="lazy"><figcaption><strong>Healthy cherry loads</strong><span>Visible production in the field</span></figcaption></figure>
+          <figure class="photo reveal"><img src="assets/drying-tables.jpg" alt="Raised coffee drying tables at the processing facility" loading="lazy"><figcaption><strong>Post-harvest infrastructure</strong><span>Drying capacity beyond the farm gate</span></figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="intelligence" id="technology">
+      <div class="wrap">
+        <div class="tech-intro">
+          <div class="reveal">
+            <p class="eyebrow">SSOS · Farm intelligence</p>
+            <h2>The farm becomes a system you can see—and improve.</h2>
+            <p class="lead">SSOS connects field observations, crop history, images and team actions into one operational view. The goal is simple: turn scattered farm knowledge into timely, practical decisions.</p>
+          </div>
+          <aside class="tech-principle reveal">
+            <strong>Our principle</strong>
+            <p>AI supports the farmer. It does not replace the farmer’s judgement.</p>
+          </aside>
+        </div>
+
+        <div class="tech-actions reveal">
+          <a class="btn btn-primary" href="st-firm.html">Discover the ST-Firm ecosystem <span aria-hidden="true">→</span></a>
+          <a class="btn btn-outline-light" href="#technology-scope">Explore the technology roadmap</a>
+        </div>
+
+        <div class="operating-loop" aria-label="SSOS farm intelligence operating loop">
+          <article class="loop-step reveal"><small>01 · Observe</small><h3>Capture the field</h3><p>Record blocks, crop condition, images, work and harvest events close to where they happen.</p></article>
+          <article class="loop-step reveal"><small>02 · Understand</small><h3>Build context</h3><p>Connect today’s observation with variety, plant age, location and production history.</p></article>
+          <article class="loop-step reveal"><small>03 · Act</small><h3>Prioritize work</h3><p>Surface follow-ups, risks and AI-assisted recommendations for human review.</p></article>
+          <article class="loop-step reveal"><small>04 · Verify</small><h3>Learn over time</h3><p>Track what was done, compare outcomes and strengthen the next decision cycle.</p></article>
+        </div>
+
+        <div class="command-shell reveal" aria-label="Illustrative SSOS farm command centre interface">
+          <div class="command-topbar">
+            <div class="command-brand">SSOS FARM INTELLIGENCE</div>
+            <div class="command-meta"><span>Kenyan operations</span><span class="command-live">● Field data connected</span></div>
+          </div>
+          <div class="command-body">
+            <aside class="command-nav" aria-label="Illustrative application navigation">
+              <small>Operations</small>
+              <span class="active">Overview</span>
+              <span>Farm blocks</span>
+              <span>Field activity</span>
+              <span>Crop health</span>
+              <span>Harvests</span>
+              <span>Traceability</span>
+              <small style="margin-top:24px">Intelligence</small>
+              <span>AI field notes</span>
+              <span>Reports</span>
+            </aside>
+            <div class="command-main">
+              <div class="command-heading">
+                <div><span>Farm overview · illustrative</span><h3>Good morning, field team.</h3></div>
+                <div class="command-action">＋ Add field observation</div>
+              </div>
+              <div class="metric-row">
+                <div class="metric"><span>Monitored blocks</span><strong>12</strong><small>All reporting</small></div>
+                <div class="metric"><span>Crop status</span><strong>Good</strong><small>Stable this cycle</small></div>
+                <div class="metric"><span>Open actions</span><strong>04</strong><small>2 due this week</small></div>
+                <div class="metric"><span>Latest update</span><strong>Today</strong><small>Block KEN-07</small></div>
+              </div>
+              <div class="command-grid">
+                <section class="command-panel">
+                  <div class="panel-title"><strong>Block KEN-07 · Field health</strong><span>Updated today</span></div>
+                  <div class="block-photo">
+                    <img src="assets/coffee-tree-detail.jpg" alt="Coffee tree carrying a dense crop of developing cherries" loading="lazy">
+                    <div class="photo-reading"><div><strong>SL28 / SL34</strong>6-year block · Image record</div><span>Healthy load</span></div>
+                  </div>
+                  <div class="health-bars">
+                    <div class="health-row"><span>Canopy</span><div class="bar"><i style="width:86%"></i></div><b>86%</b></div>
+                    <div class="health-row"><span>Cherry load</span><div class="bar"><i style="width:91%"></i></div><b>91%</b></div>
+                    <div class="health-row"><span>Field records</span><div class="bar"><i style="width:78%"></i></div><b>78%</b></div>
+                  </div>
+                </section>
+                <section class="command-panel">
+                  <div class="panel-title"><strong>Priority actions</strong><span>Human reviewed</span></div>
+                  <article class="task"><div class="task-top"><strong>Update disease inspection</strong><span class="priority">Attention</span></div><p>Block KEN-03 · Field record due this week.</p></article>
+                  <article class="task"><div class="task-top"><strong>Capture new field images</strong><span class="priority normal">Scheduled</span></div><p>Blocks KEN-07 and KEN-09 · Compare cherry development.</p></article>
+                  <article class="task"><div class="task-top"><strong>Review harvest readiness</strong><span class="priority normal">Planned</span></div><p>Use field observations and team judgement before scheduling.</p></article>
+                  <div class="ai-note"><b>AI-assisted field note</b><br>Fruit load appears strong in the latest image. Verify on site and maintain the planned monitoring cycle.</div>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div class="command-caption"><div>Illustrative SSOS product vision · Representative data only</div><span>Designed by ST-Firm for field-to-market operations</span></div>
+        </div>
+
+        <div class="trust-row">
+          <article class="trust-item reveal"><strong>Human in the loop</strong><p>Recommendations remain reviewable, contextual and connected to accountable field action.</p></article>
+          <article class="trust-item reveal"><strong>Permission-aware</strong><p>Farm, operational and partner views can be separated according to roles and legitimate access.</p></article>
+          <article class="trust-item reveal"><strong>Built to learn</strong><p>The record improves over seasons as observations, actions and outcomes accumulate.</p></article>
+        </div>
+
+        <article class="coin-concept reveal" aria-labelledby="coin-concept-title">
+          <div class="coin-visual"><img src="assets/scof-coin-powered-by.png" alt="Illustrative antique-gold SCOF concept coin powered by SSOS and ST-Firm" loading="lazy"></div>
+          <div class="coin-copy">
+            <span class="plan-badge">Planned ecosystem layer</span>
+            <h3 id="coin-concept-title">A digital utility layer rooted in real coffee.</h3>
+            <p>The future SCOF digital asset is being explored as one component of a wider product economy: connecting participation, rewards, traceable products, heritage records and selected ecosystem services.</p>
+            <p>Its purpose must come from useful products and verified operations. The farm, the coffee and the technology come first.</p>
+            <div class="concept-note"><strong>Concept status:</strong> This visual presents the long-term product direction only. It is not an offer for sale, a price announcement or a promise of financial return.</div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="journey" id="traceability">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div><p class="eyebrow">From cherry to cup</p><h2>A verifiable story for every batch.</h2></div>
+          <p>Traceability turns agricultural work into buyer confidence—from a known block through processing, quality and export.</p>
+        </div>
+        <div class="trace">
+          <article class="trace-step reveal"><small>01</small><h3>Farm block</h3><p>Origin, variety and location.</p></article>
+          <article class="trace-step reveal"><small>02</small><h3>Harvest</h3><p>Date, lot and field record.</p></article>
+          <article class="trace-step reveal"><small>03</small><h3>Processing</h3><p>Method and washing stage.</p></article>
+          <article class="trace-step reveal"><small>04</small><h3>Drying</h3><p>Stage, duration and handling.</p></article>
+          <article class="trace-step reveal"><small>05</small><h3>Quality</h3><p>Grade and batch profile.</p></article>
+          <article class="trace-step reveal"><small>06</small><h3>Market</h3><p>Export batch and buyer record.</p></article>
+        </div>
+        <div class="journey-visual">
+          <img class="reveal" src="assets/coffee-cherries.jpg" alt="Coffee tree with a heavy crop of green and ripening cherries" loading="lazy">
+          <aside class="batch-card reveal">
+            <div><span class="batch-label">Illustrative digital passport</span><h3>Batch SCOF–KE–042</h3><p>A simple, buyer-ready record linking coffee to its source, process and sustainability information.</p></div>
+            <div class="batch-meta"><div><span>Origin</span><strong>Kenyan highlands</strong></div><div><span>Process</span><strong>Washed</strong></div><div><span>Source</span><strong>Block KEN-07</strong></div><div><span>Status</span><strong>Drying stage</strong></div></div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="ecosystem" id="ecosystem">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div><p class="eyebrow">One connected ecosystem</p><h2>Agriculture first. Technology in service of it.</h2></div>
+          <p>SCOF connects the physical value chain to tools and infrastructure designed for long-term competitiveness.</p>
+        </div>
+        <div class="pillars">
+          <article class="pillar reveal"><span class="pillar-icon">☕</span><h3>Coffee</h3><p>Productive farms, quality-focused processing and a clear path from cherry to cup.</p></article>
+          <article class="pillar reveal"><span class="pillar-icon">◫</span><h3>Technology</h3><p>ST-Firm software creates a shared operating system for records, workflows and visibility.</p></article>
+          <article class="pillar reveal"><span class="pillar-icon">✦</span><h3>AI</h3><p>Decision support helps teams identify patterns, prioritize attention and improve planning.</p></article>
+          <article class="pillar reveal"><span class="pillar-icon">☀</span><h3>Renewable energy</h3><p>A future pathway toward more resilient and responsible farm and processing operations.</p></article>
+          <article class="pillar reveal"><span class="pillar-icon">◎</span><h3>Community</h3><p>Farmer support, local skills and shared progress are fundamental to sustainable growth.</p></article>
+          <article class="pillar future reveal"><span class="pillar-icon">◇</span><h3>Digital treasury</h3><p>A long-term vision for responsible digital infrastructure—built after real utility, not instead of it.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="partnerships" id="partnerships">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div><p class="eyebrow">Partnerships and linkages</p><h2>No single company builds a coffee ecosystem alone.</h2></div>
+          <p>SCOF is the connective layer: aligning production, processing, technology, market access and long-term infrastructure around shared value.</p>
+        </div>
+
+        <div class="value-flow reveal" aria-label="SCOF coffee value chain">
+          <article class="flow-node"><small>01 · Origin</small><h3>Farms & farmers</h3><p>Crop care, field records, harvest and local knowledge.</p></article>
+          <article class="flow-node"><small>02 · Value</small><h3>Processing & quality</h3><p>Washing, drying, grading and batch preparation.</p></article>
+          <article class="flow-node"><small>03 · Trust</small><h3>SSOS digital record</h3><p>Traceability, operational data and buyer visibility.</p></article>
+          <article class="flow-node"><small>04 · Reach</small><h3>Buyers & markets</h3><p>Roasters, hospitality, export partners and consumers.</p></article>
+        </div>
+        <div class="return-flow reveal">Market insight, better decisions and value return to origin</div>
+
+        <div class="partner-grid">
+          <article class="partner-card reveal"><span>01</span><h3>Farmers & cooperatives</h3><p>Production partnerships, training, data ownership and shared quality improvement.</p><a class="partner-action" href="https://wa.me/4915210207415?text=Hello%20SCOF%20team%2C%20I%20would%20like%20to%20discuss%20a%20farmers%20and%20cooperatives%20partnership." target="_blank" rel="noopener noreferrer" aria-label="Discuss a farmers and cooperatives partnership on WhatsApp">Discuss this partnership →</a></article>
+          <article class="partner-card reveal"><span>02</span><h3>Processors & millers</h3><p>Post-harvest capacity, lot separation and consistent processing records.</p><a class="partner-action" href="https://wa.me/4915210207415?text=Hello%20SCOF%20team%2C%20I%20would%20like%20to%20discuss%20a%20processors%20and%20millers%20partnership." target="_blank" rel="noopener noreferrer" aria-label="Discuss a processors and millers partnership on WhatsApp">Discuss this partnership →</a></article>
+          <article class="partner-card reveal"><span>03</span><h3>Buyers & roasters</h3><p>Traceable sourcing, quality feedback and long-term market relationships.</p><a class="partner-action" href="https://wa.me/4915210207415?text=Hello%20SCOF%20team%2C%20I%20would%20like%20to%20discuss%20a%20buyers%20and%20roasters%20partnership." target="_blank" rel="noopener noreferrer" aria-label="Discuss a buyers and roasters partnership on WhatsApp">Discuss this partnership →</a></article>
+          <article class="partner-card reveal"><span>04</span><h3>Logistics & export</h3><p>Movement, documentation and dependable connections to global markets.</p><a class="partner-action" href="https://wa.me/4915210207415?text=Hello%20SCOF%20team%2C%20I%20would%20like%20to%20discuss%20a%20logistics%20and%20export%20partnership." target="_blank" rel="noopener noreferrer" aria-label="Discuss a logistics and export partnership on WhatsApp">Discuss this partnership →</a></article>
+          <article class="partner-card reveal"><span>05</span><h3>Research & agronomy</h3><p>Field knowledge, crop-health expertise and evidence-based recommendations.</p><a class="partner-action" href="https://wa.me/4915210207415?text=Hello%20SCOF%20team%2C%20I%20would%20like%20to%20discuss%20a%20research%20and%20agronomy%20partnership." target="_blank" rel="noopener noreferrer" aria-label="Discuss a research and agronomy partnership on WhatsApp">Discuss this partnership →</a></article>
+          <article class="partner-card reveal"><span>06</span><h3>Energy partners</h3><p>Future renewable solutions for resilient farm and processing operations.</p><a class="partner-action" href="https://wa.me/4915210207415?text=Hello%20SCOF%20team%2C%20I%20would%20like%20to%20discuss%20a%20renewable%20energy%20partnership." target="_blank" rel="noopener noreferrer" aria-label="Discuss a renewable energy partnership on WhatsApp">Discuss this partnership →</a></article>
+          <article class="partner-card reveal"><span>07</span><h3>Technology partners</h3><p>Devices, connectivity, data services and responsible system integration.</p><a class="partner-action" href="https://wa.me/4915210207415?text=Hello%20SCOF%20team%2C%20I%20would%20like%20to%20discuss%20a%20technology%20partnership." target="_blank" rel="noopener noreferrer" aria-label="Discuss a technology partnership on WhatsApp">Discuss this partnership →</a></article>
+          <article class="partner-card reveal"><span>08</span><h3>Impact & capital partners</h3><p>Aligned support for infrastructure, farmer value and measured expansion.</p><a class="partner-action" href="https://wa.me/4915210207415?text=Hello%20SCOF%20team%2C%20I%20would%20like%20to%20discuss%20an%20impact%20and%20capital%20partnership." target="_blank" rel="noopener noreferrer" aria-label="Discuss an impact and capital partnership on WhatsApp">Discuss this partnership →</a></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="scope" id="technology-scope">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow">Our technology scope</p>
+            <h2>One operating layer from the field to the market.</h2>
+            <div class="scope-summary"><span class="stage-key">Core platform scope</span><span class="stage-key roadmap">Planned capability</span></div>
+          </div>
+          <p>The roadmap is modular: begin with reliable farm and batch records, then add intelligence, integrations and infrastructure as the ecosystem grows.</p>
+        </div>
+        <div class="scope-grid">
+          <article class="scope-card reveal"><span class="stage">Core scope</span><h3>Farm registry & mapping</h3><p>A structured digital identity for farms, blocks, plants and field locations.</p><ul><li>Block IDs and GPS</li><li>Variety and plant age</li><li>Field images and history</li></ul></article>
+          <article class="scope-card reveal"><span class="stage">Core scope</span><h3>Field operations</h3><p>Practical workflows for monitoring crop health, work and production.</p><ul><li>Inspection records</li><li>Yield and harvest history</li><li>Disease and activity logs</li></ul></article>
+          <article class="scope-card reveal"><span class="stage">Core scope</span><h3>Batch traceability</h3><p>A connected record from origin through processing, quality and export.</p><ul><li>Harvest lots</li><li>Processing and drying</li><li>Quality and export batches</li></ul></article>
+          <article class="scope-card reveal"><span class="stage roadmap">Planned capability</span><h3>AI decision support</h3><p>Analysis that helps teams prioritize attention without replacing farmer expertise.</p><ul><li>Field-image assistance</li><li>Risk and anomaly signals</li><li>Contextual recommendations</li></ul></article>
+          <article class="scope-card reveal"><span class="stage roadmap">Planned capability</span><h3>Buyer & partner portal</h3><p>Permission-based visibility for sourcing, quality and sustainability information.</p><ul><li>Digital batch passports</li><li>Buyer feedback loops</li><li>Partner reporting</li></ul></article>
+          <article class="scope-card reveal"><span class="stage roadmap">Planned capability</span><h3>Connected infrastructure</h3><p>Future integrations across devices, payments, renewable energy and treasury tools.</p><ul><li>Sensor and device data</li><li>Energy monitoring</li><li>Responsible digital rails</li></ul></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="stfirm" id="st-firm">
+      <div class="wrap stfirm-grid">
+        <div class="stfirm-intro reveal">
+          <p class="eyebrow">Technology by ST-Firm</p>
+          <h2>The engineering backbone behind SCOF.</h2>
+          <p class="lead">ST-Firm translates the realities of coffee operations into secure, useful digital products—connecting field workflows, data, AI and partner experiences into one evolving platform.</p>
+          <span class="stfirm-mark">Architecture · Software · AI</span>
+        </div>
+        <div class="delivery-list">
+          <article class="delivery-item reveal"><span>01</span><div><h3>Product and system architecture</h3><p>Define the platform modules, user roles, information flows and phased delivery roadmap around real operational needs.</p></div></article>
+          <article class="delivery-item reveal"><span>02</span><div><h3>Software engineering</h3><p>Design and build the SSOS applications, interfaces and workflows used by farm teams, operators and approved partners.</p></div></article>
+          <article class="delivery-item reveal"><span>03</span><div><h3>Data and AI engineering</h3><p>Create reliable data foundations and carefully governed intelligence for monitoring, recommendations and planning.</p></div></article>
+          <article class="delivery-item reveal"><span>04</span><div><h3>Integrations and interoperability</h3><p>Connect relevant payment, logistics, device, identity and market services as the partnership network develops.</p></div></article>
+          <article class="delivery-item reveal"><span>05</span><div><h3>Security and responsible access</h3><p>Build permission-aware systems that respect operational boundaries, partner access and responsible use of farm data.</p></div></article>
+          <article class="delivery-item reveal"><span>06</span><div><h3>Continuous improvement</h3><p>Learn from users in the field, measure what works and evolve the platform in practical stages rather than all at once.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="closing" id="contact">
+      <div class="wrap closing-copy reveal">
+        <p class="eyebrow">Build with us</p>
+        <h2>See the farm. Understand the system. Shape what comes next.</h2>
+        <p>We welcome conversations with coffee buyers, technology partners, impact collaborators and aligned investors who value real operations and a credible path to digital transformation.</p>
+        <a class="btn btn-primary" href="https://wa.me/4915210207415?text=Hello%20SCOF%20team%2C%20I%20visited%20the%20SCOF%20website%20and%20would%20like%20to%20learn%20more%20about%20the%20coffee%20ecosystem." target="_blank" rel="noopener noreferrer" aria-label="Start a conversation with SCOF on WhatsApp">Start a WhatsApp conversation <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pf-footer pf-footer--scof" data-premium-footer>
+    <div class="pf-wrap">
+      <section class="pf-stage" data-footer-glass aria-labelledby="scof-footer-title">
+        <div class="pf-visual" aria-hidden="true">
+          <div class="pf-orb"><span class="pf-bean-hero"></span></div>
+        </div>
+        <div class="pf-message">
+          <span class="pf-kicker">SCOF · Kitale, Kenya</span>
+          <h2 id="scof-footer-title">Rooted in Kitale. Connected to the world.</h2>
+          <p>Real coffee operations strengthened by traceability, intelligent systems, responsible infrastructure, and global partnerships.</p>
+          <div class="pf-actions">
+            <a class="pf-button pf-button--primary" href="https://wa.me/4915210207415?text=Hello%20SCOF%20team%2C%20I%20visited%20the%20SCOF%20website%20and%20would%20like%20to%20learn%20more%20about%20the%20coffee%20ecosystem." target="_blank" rel="noopener noreferrer" aria-label="Start a conversation with SCOF on WhatsApp">Chat on WhatsApp <span aria-hidden="true">→</span></a>
+            <a class="pf-button" href="st-firm.html">Explore ST-Firm</a>
+          </div>
+        </div>
+      </section>
+
+      <nav class="pf-dock" data-footer-glass aria-label="SCOF connected ecosystem">
+        <a class="pf-dock-card is-current" href="#farm">
+          <span class="pf-dock-icon"><span class="pf-mini-bean" aria-hidden="true"></span></span>
+          <span class="pf-dock-copy"><strong>SCOF</strong><small>Coffee ecosystem · Kitale</small></span>
+        </a>
+        <a class="pf-dock-card" href="#technology">
+          <span class="pf-dock-icon"><span class="pf-code">SSOS</span></span>
+          <span class="pf-dock-copy"><strong>Intelligence</strong><small>AI and operational software</small></span>
+        </a>
+        <a class="pf-dock-card" href="st-firm.html">
+          <span class="pf-dock-icon"><img src="assets/ST-Firm Logo Transparent.png" alt="ST-Firm supplied logo" width="724" height="780" loading="lazy" decoding="async"></span>
+          <span class="pf-dock-copy"><strong>ST-Firm</strong><small>Engineering backbone · Berlin</small></span>
+        </a>
+      </nav>
+
+      <div class="pf-info">
+        <div class="pf-location-pair">
+          <div class="pf-location"><small>Farm operations</small><strong>Kitale, Kenya</strong></div>
+          <div class="pf-location"><small>Engineering HQ</small><strong>Berlin, Deutschland</strong></div>
+        </div>
+        <nav class="pf-quicklinks" aria-label="SCOF footer navigation">
+          <a href="#farm">Farms</a><a href="#technology">Technology</a><a href="#traceability">Traceability</a><a href="#partnerships">Partners</a>
+        </nav>
+        <div class="pf-owner">
+          <small>Founder & proprietor</small>
+          <strong>Engineer Saigut Julius Kipkorir</strong>
+          <p><a href="https://wa.me/4915210207415?text=Hello%20SCOF%20team%2C%20I%20am%20viewing%20the%20SCOF%20website%20and%20would%20like%20to%20ask%20a%20question." target="_blank" rel="noopener noreferrer">WhatsApp</a> · <a href="https://wa.me/4915210207415?text=Hello%20SCOF%20team%2C%20I%20am%20viewing%20the%20SCOF%20website%20and%20would%20like%20to%20ask%20a%20question." target="_blank" rel="noopener noreferrer" aria-label="Message plus 49 1521 0207415 on WhatsApp">+49 1521 0207415</a></p>
+        </div>
+      </div>
+
+      <div class="pf-legal">
+        <p>© <span id="year" data-footer-year>2026</span> Engineer Saigut Julius Kipkorir, sole proprietor trading as ST-Firm. All rights reserved.</p>
+        <div class="pf-legal-links"><a href="LICENSE">Proprietary License</a><a href="st-firm.html">ST-Firm</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <a class="whatsapp-float" href="https://wa.me/4915210207415?text=Hello%20SCOF%20team%2C%20I%20am%20viewing%20the%20SCOF%20website%20and%20would%20like%20to%20ask%20a%20question." target="_blank" rel="noopener noreferrer" aria-label="Chat with SCOF on WhatsApp">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16.04 3C8.84 3 3 8.76 3 15.87c0 2.5.73 4.94 2.1 7.02L3.72 28l5.28-1.37a13.1 13.1 0 0 0 7.03 2.02h.01C23.23 28.65 29 22.9 29 15.8 29 8.72 23.23 3 16.04 3Zm7.6 18.2c-.32.9-1.9 1.72-2.62 1.8-.68.07-1.54.1-2.48-.2-.57-.18-1.3-.42-2.24-.82-3.94-1.67-6.5-5.55-6.7-5.8-.2-.26-1.6-2.1-1.6-4.02 0-1.91 1.02-2.86 1.38-3.25.36-.38.79-.48 1.05-.48h.76c.24.01.56-.09.88.66.32.77 1.1 2.68 1.2 2.87.1.2.16.42.03.67-.13.26-.2.42-.4.64-.2.23-.42.5-.6.67-.2.2-.4.41-.17.8.23.38 1.02 1.65 2.18 2.68 1.5 1.32 2.76 1.73 3.16 1.92.4.2.63.16.86-.1.23-.25.99-1.14 1.25-1.53.26-.38.53-.32.89-.2.36.13 2.3 1.07 2.69 1.27.4.2.66.29.76.45.1.16.1.93-.22 1.83Z"/></svg>
+    <span>Chat on WhatsApp</span>
+  </a>
+
+  <script>
+    const header = document.getElementById('header');
+    const menuButton = document.getElementById('menu-btn');
+    const navLinks = document.getElementById('nav-links');
+    const syncHeader = () => header.classList.toggle('scrolled', window.scrollY > 24);
+    syncHeader();
+    window.addEventListener('scroll', syncHeader, { passive: true });
+
+    menuButton.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('open');
+      document.body.classList.toggle('menu-open', open);
+      menuButton.setAttribute('aria-expanded', String(open));
+      menuButton.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+      menuButton.textContent = open ? '×' : '☰';
+    });
+    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      document.body.classList.remove('menu-open');
+      menuButton.setAttribute('aria-expanded', 'false');
+      menuButton.textContent = '☰';
+    }));
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } });
+    }, { threshold: .12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
