@@ -332,11 +332,11 @@
     .footer-col a:hover { color: white; }
     .footer-bottom { display: flex; justify-content: space-between; padding-top: 24px; color: rgba(255,255,255,.36); font-size: .72rem; }
 
-    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal { opacity: 0; transform: translateY(24px); will-change: transform, opacity; transition: opacity .7s cubic-bezier(.25,.1,.25,1), transform .7s cubic-bezier(.25,.1,.25,1); }
     .reveal.visible { opacity: 1; transform: none; }
 
     @media (max-width: 900px) {
-      .nav-links { position: fixed; inset: 0; z-index: -1; display: none; flex-direction: column; justify-content: center; gap: 30px; background: var(--forest-deep); font-size: 1.1rem; }
+      .nav-links { position: fixed; inset: 0; z-index: 40; display: none; flex-direction: column; justify-content: center; gap: 30px; background: var(--forest-deep); font-size: 1.1rem; }
       .nav-links.open { display: flex; }
       .menu-btn { display: block; }
       .manifesto-grid, .tech-intro { grid-template-columns: 1fr; gap: 64px; }
@@ -355,9 +355,9 @@
       .footer-about { grid-column: 1 / 3; }
     }
 
-    @media (max-width: 680px) {
+    @media (max-width: 650px) {
       .wrap { width: min(100% - 28px, 1180px); }
-      section { padding: 84px 0; }
+      section { padding: 96px 0; }
       .hero { padding: 138px 0 54px; background-position: 46% center; }
       .hero::before { background: linear-gradient(90deg, rgba(4,24,17,.91), rgba(4,24,17,.55)), linear-gradient(0deg, rgba(4,24,17,.82), transparent); }
       h1 { font-size: clamp(3rem, 15vw, 4.8rem); }
@@ -720,7 +720,7 @@
           <span class="pf-dock-copy"><strong>SCOF</strong><small>Coffee ecosystem · Kitale</small></span>
         </a>
         <a class="pf-dock-card" href="#technology">
-          <span class="pf-dock-icon"><span class="pf-code">SSOS</span></span>
+          <span class="pf-dock-icon"><img src="assets/SSOS-Logo-Transparent.png" alt="SSOS intelligence logo" width="731" height="725" loading="lazy" decoding="async"></span>
           <span class="pf-dock-copy"><strong>Intelligence</strong><small>AI and operational software</small></span>
         </a>
         <a class="pf-dock-card" href="st-firm.html">

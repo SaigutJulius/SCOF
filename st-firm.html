@@ -23,7 +23,8 @@
     }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    body { margin: 0; color: var(--ink); background: var(--paper); font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    body { margin: 0; color: var(--ink); background: var(--paper); font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; }
+    body.menu-open { overflow: hidden; }
     img { display: block; width: 100%; }
     a { color: inherit; }
     .wrap { width: min(1180px, calc(100% - 40px)); margin-inline: auto; }
@@ -39,7 +40,7 @@
     .section { padding: 112px 0; }
     .section-head { display: flex; align-items: end; justify-content: space-between; gap: 45px; margin-bottom: 52px; }
     .section-head > p { max-width: 455px; color: var(--muted); }
-    .btn { display: inline-flex; min-height: 50px; align-items: center; justify-content: center; gap: 10px; padding: 0 22px; border-radius: 999px; font-size: .88rem; font-weight: 800; text-decoration: none; transition: transform .2s, background .2s, border-color .2s; }
+    .btn { display: inline-flex; min-height: 50px; align-items: center; justify-content: center; gap: 10px; padding: 0 22px; border-radius: 999px; font-size: .88rem; font-weight: 800; text-decoration: none; transition: transform .2s, background .2s, border-color .2s; -webkit-tap-highlight-color: transparent; }
     .btn:hover { transform: translateY(-2px); }
     .btn-primary { color: var(--night); background: var(--lime); }
     .btn-outline { border: 1px solid rgba(255,255,255,.3); color: white; background: rgba(255,255,255,.035); }
@@ -54,7 +55,7 @@
     .nav-links a { color: rgba(255,255,255,.7); font-size: .82rem; font-weight: 700; text-decoration: none; }
     .nav-links a:hover { color: white; }
     .nav-links .scof-link { padding: 9px 15px; border: 1px solid rgba(255,255,255,.24); border-radius: 999px; color: white; }
-    .menu { display: none; border: 0; color: white; background: transparent; font: inherit; }
+    .menu { display: none; min-width: 44px; min-height: 44px; border: 0; color: white; background: transparent; font: inherit; cursor: pointer; }
 
     .hero { position: relative; min-height: 100svh; display: flex; align-items: center; overflow: hidden; padding: 145px 0 75px; color: white; background: var(--night); }
     .hero::before { content: ""; position: absolute; inset: 0; opacity: .48; background: radial-gradient(circle at 80% 15%, rgba(189,217,120,.16), transparent 28%), linear-gradient(120deg, rgba(20,67,48,.32), transparent 48%); }
@@ -65,7 +66,7 @@
     .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 31px; }
     .system-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; margin-top: 72px; border: 1px solid rgba(255,255,255,.12); border-radius: 22px; overflow: hidden; background: rgba(255,255,255,.12); }
     .system-chip { min-height: 145px; padding: 22px; background: rgba(6,26,19,.88); }
-    .system-chip small { color: var(--lime); font-size: .65rem; font-weight: 850; letter-spacing: .12em; text-transform: uppercase; }
+    .system-chip small { color: var(--lime); font-size: .67rem; font-weight: 850; letter-spacing: .12em; text-transform: uppercase; }
     .system-chip strong { display: block; margin: 25px 0 5px; font-family: Georgia, serif; font-size: 1.25rem; font-weight: 500; }
     .system-chip span { color: rgba(255,255,255,.48); font-size: .76rem; }
 
@@ -81,12 +82,12 @@
     .division { min-height: 310px; padding: 30px; border: 1px solid var(--line); border-radius: var(--radius); background: rgba(255,255,255,.68); }
     .division-top { display: flex; align-items: center; justify-content: space-between; }
     .division-code { color: var(--green); font-size: .68rem; font-weight: 900; letter-spacing: .13em; }
-    .status { padding: 6px 9px; border-radius: 999px; color: var(--green); background: rgba(49,95,66,.1); font-size: .59rem; font-weight: 850; text-transform: uppercase; }
+    .status { padding: 6px 9px; border-radius: 999px; color: var(--green); background: rgba(49,95,66,.1); font-size: .63rem; font-weight: 850; text-transform: uppercase; }
     .status.planned { color: #835a19; background: rgba(212,164,75,.16); }
     .division h3 { margin-top: 62px; font-family: Georgia, serif; font-size: 2rem; font-weight: 500; }
     .division p { color: var(--muted); }
     .tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 22px; }
-    .tags span { padding: 6px 9px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); font-size: .65rem; }
+    .tags span { padding: 6px 9px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); font-size: .67rem; }
 
     .proof-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 70px; align-items: center; }
     .proof-image { position: relative; }
@@ -126,7 +127,7 @@
     footer { padding: 28px 0; color: rgba(255,255,255,.48); background: var(--night); font-size: .74rem; }
     .footer-inner { display: flex; justify-content: space-between; gap: 25px; }
 
-    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .7s, transform .7s; }
+    .reveal { opacity: 0; transform: translateY(20px); will-change: transform, opacity; transition: opacity .7s cubic-bezier(.25,.1,.25,1), transform .7s cubic-bezier(.25,.1,.25,1); }
     .reveal.visible { opacity: 1; transform: none; }
 
     @media (max-width: 900px) {
@@ -141,7 +142,7 @@
     }
     @media (max-width: 650px) {
       .wrap { width: min(100% - 28px, 1180px); }
-      .section { padding: 80px 0; }
+      .section { padding: 96px 0; }
       .section-head { display: block; }
       .system-row, .division-grid { grid-template-columns: 1fr; }
       .proof-image img { height: 480px; }
@@ -253,7 +254,7 @@
           <span class="pf-dock-copy"><strong>ST-Firm</strong><small>Engineering systems · Berlin</small></span>
         </a>
         <a class="pf-dock-card" href="index.html#technology">
-          <span class="pf-dock-icon"><span class="pf-code">SSOS</span></span>
+          <span class="pf-dock-icon"><img src="assets/SSOS-Logo-Transparent.png" alt="SSOS intelligence logo" width="731" height="725" loading="lazy" decoding="async"></span>
           <span class="pf-dock-copy"><strong>Intelligence</strong><small>AI and operational software</small></span>
         </a>
         <a class="pf-dock-card" href="index.html">
@@ -290,8 +291,8 @@
   <script>
     const menu = document.getElementById('menu');
     const nav = document.getElementById('nav-links');
-    menu.addEventListener('click', () => { const open = nav.classList.toggle('open'); menu.setAttribute('aria-expanded', String(open)); });
-    nav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => { nav.classList.remove('open'); menu.setAttribute('aria-expanded', 'false'); }));
+    menu.addEventListener('click', () => { const open = nav.classList.toggle('open'); document.body.classList.toggle('menu-open', open); menu.setAttribute('aria-expanded', String(open)); menu.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation'); menu.textContent = open ? '✕' : 'Menu'; });
+    nav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => { nav.classList.remove('open'); document.body.classList.remove('menu-open'); menu.setAttribute('aria-expanded', 'false'); menu.setAttribute('aria-label', 'Open navigation'); menu.textContent = 'Menu'; }));
     document.getElementById('year').textContent = new Date().getFullYear();
     const observer = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } }), { threshold: .12 });
     document.querySelectorAll('.reveal').forEach(element => observer.observe(element));
