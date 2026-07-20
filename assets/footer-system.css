@@ -126,6 +126,7 @@
 }
 
 .pf-orb::before { inset: 13px; border: 1px solid rgba(255,255,255,.1); }
+.pf-orb:has(.pf-hero-logo)::before { border-color: rgba(255,255,255,.18); background: radial-gradient(circle, rgba(255,255,255,.92) 0%, rgba(255,255,255,.55) 55%, rgba(240,245,242,.3) 80%, transparent 100%); }
 .pf-orb::after { width: 62%; height: 17%; bottom: -30px; background: rgba(0,0,0,.46); filter: blur(20px); transform: rotateX(72deg); }
 
 .pf-bean-hero {
@@ -217,6 +218,7 @@
 .pf-dock-card:hover, .pf-dock-card.is-current { border-color: rgba(255,255,255,.1); background: rgba(255,255,255,.055); transform: translateY(-4px); }
 .pf-dock-icon { display: grid; width: 68px; height: 68px; place-items: center; border-radius: 18px; background: radial-gradient(circle at 38% 22%, rgba(255,255,255,.15), rgba(255,255,255,.025) 65%); box-shadow: inset 0 1px 0 rgba(255,255,255,.13), 0 14px 28px rgba(0,0,0,.26); }
 .pf-dock-icon img { width: 62px; height: 64px; object-fit: contain; transform-style: preserve-3d; filter: drop-shadow(0 0 12px rgba(255, 255, 255, .28)) drop-shadow(0 0 24px rgba(255, 255, 255, .1)); animation: pf-logo-float 3.5s ease-in-out .8s infinite; }
+.pf-dock-icon:has(img) { background: radial-gradient(circle at 38% 22%, rgba(255,255,255,.92), rgba(240,245,242,.65) 65%); box-shadow: inset 0 1px 0 rgba(255,255,255,.45), 0 14px 28px rgba(0,0,0,.26); }
 .pf-mini-bean { width: 33px; height: 44px; border: 1px solid rgba(216,241,154,.75); border-radius: 56% 42% 54% 44%; transform: rotate(-18deg); box-shadow: inset 6px 5px 10px rgba(255,255,255,.09), 0 8px 16px rgba(0,0,0,.3); }
 .pf-mini-bean::after { content: ""; position: absolute; top: 6px; bottom: 6px; left: 16px; width: 1px; background: var(--pf-green); transform: rotate(18deg); }
 .pf-code { color: var(--pf-accent); font-size: .78rem; font-weight: 850; letter-spacing: .1em; }
