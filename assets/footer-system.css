@@ -127,6 +127,8 @@
 
 .pf-orb::before { inset: 13px; border: 1px solid rgba(255,255,255,.1); }
 .pf-orb:has(.pf-hero-logo)::before { border-color: rgba(255,255,255,.28); border-width: 1.5px; background: radial-gradient(circle, #ffffff 0%, rgba(255,255,255,.97) 35%, rgba(248,252,250,.78) 60%, rgba(240,245,242,.4) 85%, transparent 100%); box-shadow: 0 0 28px rgba(255,255,255,.55), 0 0 60px rgba(255,255,255,.25), inset 0 1px 4px rgba(255,255,255,.9); }
+.pf-orb--scof-logo { border-color: rgba(183,220,93,.3); box-shadow: 0 42px 75px rgba(0,0,0,.42), 0 0 60px rgba(183,220,93,.15), 0 0 120px rgba(183,220,93,.08), inset 0 1px 0 rgba(255,255,255,.35), inset 0 -28px 50px rgba(0,0,0,.16); }
+.pf-orb--scof-logo .pf-hero-logo { width: min(210px, 72%); height: min(210px, 72%); border-radius: 50%; object-fit: cover; transform: perspective(400px) rotateY(-6deg) rotateX(4deg); filter: drop-shadow(0 0 22px rgba(183,220,93,.4)) drop-shadow(0 0 44px rgba(183,220,93,.18)) drop-shadow(0 8px 20px rgba(0,0,0,.35)); animation: pf-logo-bounce3d 3.5s cubic-bezier(.25,.1,.25,1) infinite; }
 .pf-orb::after { width: 62%; height: 17%; bottom: -30px; background: rgba(0,0,0,.46); filter: blur(20px); transform: rotateX(72deg); }
 
 .pf-bean-hero {
@@ -321,10 +323,15 @@
   50% { transform: translateY(-5px) rotateX(2deg); }
 }
 
+@keyframes pf-logo-bounce3d {
+  0%, 100% { transform: perspective(400px) rotateY(-6deg) rotateX(4deg) translateY(0); }
+  50% { transform: perspective(400px) rotateY(6deg) rotateX(-3deg) translateY(-8px); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .pf-footer *, .pf-footer *::before, .pf-footer *::after { transition-duration: .01ms !important; }
   .pf-button:hover, .pf-dock-card:hover { transform: none; }
-  .pf-hero-logo, .pf-dock-icon img { animation: none !important; }
+  .pf-hero-logo, .pf-dock-icon img, .pf-orb--scof-logo .pf-hero-logo { animation: none !important; }
 }
 
 @media (forced-colors: active) {

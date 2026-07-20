@@ -48,7 +48,7 @@
     header { position: fixed; z-index: 50; top: 0; right: 0; left: 0; border-bottom: 1px solid rgba(255,255,255,.1); background: rgba(6,26,19,.78); backdrop-filter: blur(18px); }
     .nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 24px; color: white; }
     .brand { display: inline-flex; align-items: center; gap: 13px; text-decoration: none; }
-    .brand-mark { display: grid; width: 38px; height: 38px; place-items: center; border: 1px solid rgba(189,217,120,.55); border-radius: 50%; color: var(--lime); font-size: .72rem; font-weight: 900; }
+    .brand-logo { width: 38px; height: 38px; border-radius: 50%; object-fit: contain; }
     .brand strong { display: block; letter-spacing: .14em; }
     .brand small { display: block; color: rgba(255,255,255,.5); font-size: .59rem; letter-spacing: .08em; }
     .nav-links { display: flex; align-items: center; gap: 27px; }
@@ -166,7 +166,7 @@
 <body>
   <header>
     <div class="wrap nav">
-      <a class="brand" href="#top" aria-label="ST-Firm home"><span class="brand-mark">ST</span><span><strong>ST-FIRM</strong><small>IDEE MEETS TECH</small></span></a>
+      <a class="brand" href="#top" aria-label="ST-Firm home"><img class="brand-logo" src="assets/ST-Firm Logo Transparent.png" alt="ST-Firm logo" width="724" height="780" loading="lazy" decoding="async"><span><strong>ST-FIRM</strong><small>IDEE MEETS TECH</small></span></a>
       <nav class="nav-links" id="nav-links" aria-label="Main navigation"><a href="#systems">Systems</a><a href="#proof">Proof</a><a href="#model">Our model</a><a href="#story">Story</a><a class="scof-link" href="index.html">Enter SCOF</a></nav>
       <button class="menu" id="menu" type="button" aria-label="Open navigation" aria-expanded="false">Menu</button>
     </div>
