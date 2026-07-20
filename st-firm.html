@@ -59,9 +59,9 @@
 
     .hero { position: relative; min-height: 100svh; display: flex; align-items: center; overflow: hidden; padding: 145px 0 75px; color: white; background: var(--night); }
     .hero::before { content: ""; position: absolute; inset: 0; opacity: .48; background: radial-gradient(circle at 80% 15%, rgba(189,217,120,.16), transparent 28%), linear-gradient(120deg, rgba(20,67,48,.32), transparent 48%); }
-    .hero::after { content: ""; position: absolute; width: 650px; height: 650px; right: -270px; bottom: -300px; border: 1px solid rgba(189,217,120,.13); border-radius: 50%; box-shadow: 0 0 0 105px rgba(189,217,120,.025), 0 0 0 210px rgba(189,217,120,.017); }
-    .hero-inner { position: relative; z-index: 2; }
+    .hero-inner { position: relative; z-index: 2; display: grid; grid-template-columns: 1.05fr .95fr; gap: 5vw; align-items: center; }
     .hero .eyebrow { color: var(--lime); }
+    .hero-copy { max-width: 730px; color: rgba(255,255,255,.68); font-size: clamp(1.05rem, 1.9vw, 1.26rem); }
     .hero-copy { max-width: 730px; color: rgba(255,255,255,.68); font-size: clamp(1.05rem, 1.9vw, 1.26rem); }
     .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 31px; }
     .system-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; margin-top: 72px; border: 1px solid rgba(255,255,255,.12); border-radius: 22px; overflow: hidden; background: rgba(255,255,255,.12); }
@@ -69,6 +69,9 @@
     .system-chip small { color: var(--lime); font-size: .67rem; font-weight: 850; letter-spacing: .12em; text-transform: uppercase; }
     .system-chip strong { display: block; margin: 25px 0 5px; font-family: Georgia, serif; font-size: 1.25rem; font-weight: 500; }
     .system-chip span { color: rgba(255,255,255,.48); font-size: .76rem; }
+    .hero-visual { display: grid; place-items: center; }
+    .hero-visual img { width: 100%; height: auto; border-radius: 24px; object-fit: cover; border: 1px solid rgba(189,217,120,.25); box-shadow: 0 0 30px rgba(189,217,120,.15), 0 0 60px rgba(189,217,120,.08), 0 25px 50px rgba(0,0,0,.4); }
+    .hero-system-row { margin-top: 72px; }
 
     .thesis { color: white; background: var(--forest); }
     .thesis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 9vw; align-items: center; }
@@ -134,6 +137,8 @@
       .nav-links { position: fixed; inset: 76px 0 auto; display: none; padding: 26px; flex-direction: column; align-items: flex-start; background: var(--night); }
       .nav-links.open { display: flex; }
       .menu { display: block; }
+      .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+      .hero-visual { max-width: 500px; margin-inline: auto; }
       .system-row { grid-template-columns: repeat(2, 1fr); }
       .thesis-grid, .proof-grid, .founder-grid { grid-template-columns: 1fr; }
       .proof-image { max-width: 760px; }
@@ -175,7 +180,8 @@
 
   <main id="top">
     <section class="hero">
-      <div class="wrap hero-inner">
+    <div class="wrap hero-inner">
+      <div class="hero-content">
         <p class="eyebrow">German-Kenyan engineering</p>
         <h1>We build sovereign systems.</h1>
         <p class="hero-copy">ST-Firm connects real-world operations with artificial intelligence, renewable infrastructure and disciplined resource management. We build systems designed to help organizations see clearly, operate intelligently and grow responsibly.</p>
@@ -187,6 +193,10 @@
           <article class="system-chip"><small>Economic layer</small><strong>Treasury systems</strong><span>Risk and resource intelligence</span></article>
         </div>
       </div>
+      <aside class="hero-visual">
+        <img src="assets/ssos-mvp.png" alt="SSOS MVP platform interface preview" width="1536" height="1024" loading="lazy" decoding="async">
+      </aside>
+    </div>
     </section>
 
     <section class="section thesis">
