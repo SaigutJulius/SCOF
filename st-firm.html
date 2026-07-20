@@ -57,21 +57,20 @@
     .nav-links .scof-link { padding: 9px 15px; border: 1px solid rgba(255,255,255,.24); border-radius: 999px; color: white; }
     .menu { display: none; min-width: 44px; min-height: 44px; border: 0; color: white; background: transparent; font: inherit; cursor: pointer; }
 
-    .hero { position: relative; min-height: 100svh; display: flex; align-items: center; overflow: hidden; padding: 145px 0 0; color: white; background: var(--night); }
+    .hero { position: relative; min-height: 100svh; display: flex; flex-direction: column; align-items: stretch; overflow: hidden; padding: 145px 0 48px; color: white; background: var(--night); }
     .hero::before { content: ""; position: absolute; inset: 0; opacity: .48; background: radial-gradient(circle at 80% 15%, rgba(189,217,120,.16), transparent 28%), linear-gradient(120deg, rgba(20,67,48,.32), transparent 48%); }
-    .hero-inner { position: relative; z-index: 2; display: grid; grid-template-columns: 1.05fr .95fr; gap: 5vw; align-items: center; }
+    .hero-inner { position: relative; z-index: 2; display: grid; grid-template-columns: 1.05fr .95fr; gap: 5vw; align-items: center; margin-block: auto; }
     .hero .eyebrow { color: var(--lime); }
     .hero-copy { max-width: 730px; color: rgba(255,255,255,.68); font-size: clamp(1.05rem, 1.9vw, 1.26rem); }
     .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 31px; }
-    .hero-system { position: absolute; bottom: 0; left: 0; z-index: 2; width: 100%; padding: 0 20px 36px; }
+    .hero-system { width: 100%; padding: 0 20px; }
     .system-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
     .system-chip { padding: 28px 24px; border-radius: 18px; background: var(--forest); border-top: 4px solid var(--lime); box-shadow: 0 6px 24px rgba(0,0,0,.2); transition: transform .3s ease, box-shadow .3s ease; }
     .system-chip:hover { transform: translateY(-3px); box-shadow: 0 12px 36px rgba(0,0,0,.3); }
     .system-chip small { display: block; color: var(--lime); font-size: .65rem; font-weight: 850; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 6px; }
     .system-chip strong { display: block; margin: 25px 0 5px; font-family: Georgia, serif; font-size: 1.25rem; font-weight: 500; color: white; }
     .system-chip span { color: rgba(255,255,255,.55); font-size: .76rem; }
-    .hero-visual { display: grid; place-items: center; align-self: stretch; }
-    .hero-visual img { width: 100%; height: 100%; border-radius: 24px; object-fit: cover; border: 1px solid rgba(189,217,120,.25); box-shadow: 0 0 30px rgba(189,217,120,.15), 0 0 60px rgba(189,217,120,.08), 0 25px 50px rgba(0,0,0,.4); }
+    .hero-visual { background-image: url('assets/ssos-mvp.png'); background-repeat: no-repeat; background-position: right center; background-size: cover; align-self: stretch; border-radius: 24px; border: 1px solid rgba(189,217,120,.25); box-shadow: 0 0 30px rgba(189,217,120,.15), 0 0 60px rgba(189,217,120,.08), 0 25px 50px rgba(0,0,0,.4); }
 
     .thesis { color: white; background: var(--forest); }
     .thesis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 9vw; align-items: center; }
@@ -138,7 +137,7 @@
       .nav-links.open { display: flex; }
       .menu { display: block; }
       .hero-inner { grid-template-columns: 1fr; gap: 48px; }
-      .hero-visual { max-width: 500px; margin-inline: auto; }
+      .hero-visual { max-width: 500px; margin-inline: auto; aspect-ratio: 1536/1024; }
       .system-row { grid-template-columns: repeat(2, 1fr); }
       .thesis-grid, .proof-grid, .founder-grid { grid-template-columns: 1fr; }
       .proof-image { max-width: 760px; }
@@ -159,7 +158,7 @@
       .footer-inner { display: block; }
       .footer-inner span { display: block; margin-top: 8px; }
       .brand-logo { width: 42px; height: 42px; }
-      .hero-system { padding: 0 14px 36px; }
+      .hero-system { padding: 0 14px; }
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
@@ -188,9 +187,7 @@
         <p class="hero-copy">ST-Firm connects real-world operations with artificial intelligence, renewable infrastructure and disciplined resource management. We build systems designed to help organizations see clearly, operate intelligently and grow responsibly.</p>
         <div class="hero-actions"><a class="btn btn-primary" href="#systems">Explore the ecosystem <span aria-hidden="true">→</span></a><a class="btn btn-outline" href="index.html">See SCOF in action</a></div>
       </div>
-      <aside class="hero-visual">
-        <img src="assets/ssos-mvp.png" alt="SSOS MVP platform interface preview" width="1536" height="1024" loading="lazy" decoding="async">
-      </aside>
+      <aside class="hero-visual" aria-label="SSOS MVP platform preview"></aside>
     </div>
     <div class="hero-system">
       <div class="system-row" aria-label="ST-Firm ecosystem overview">
