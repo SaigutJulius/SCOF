@@ -90,6 +90,10 @@ function validatePage(file) {
   check((html.match(/class="whatsapp-float"/g) || []).length === 1, `${file}: exactly one floating WhatsApp control`);
   if (file === "index.html") {
     check((html.match(/class="partner-action"/g) || []).length === 8, `${file}: eight contextual partnership actions`);
+  } else {
+    check((html.match(/class="ssos-slide(?:\s|\")/g) || []).length === 5, `${file}: five SSOS carousel slides`);
+    check((html.match(/role="tab"/g) || []).length === 5, `${file}: five accessible SSOS slide selectors`);
+    check(/data-ssos-carousel/.test(html), `${file}: SSOS carousel controller is present`);
   }
 }
 
@@ -108,6 +112,23 @@ function validateSharedAssets() {
   } catch {
     check(false, "footer-system.js: script parses");
   }
+
+  const carouselCss = read("assets/ssos-carousel.css");
+  const carouselJs = read("assets/ssos-carousel.js");
+  const strippedCarouselCss = carouselCss.replace(/\/\*[\s\S]*?\*\//g, "").replace(/"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'/g, "");
+  check((strippedCarouselCss.match(/{/g) || []).length === (strippedCarouselCss.match(/}/g) || []).length, "ssos-carousel.css: balanced declaration blocks");
+  check((carouselCss.match(/@keyframes\s+ssos-/g) || []).length === 10, "ssos-carousel.css: five paired transition systems");
+  check(/aspect-ratio:\s*3\s*\/\s*2/.test(carouselCss), "ssos-carousel.css: stable 3:2 display ratio");
+  check(/touch-action:\s*pan-y/.test(carouselCss), "ssos-carousel.css: mobile swipe preserves vertical scrolling");
+  check(/prefers-reduced-motion/.test(carouselCss), "ssos-carousel.css: reduced-motion treatment exists");
+  try {
+    new Function(carouselJs);
+    check(true, "ssos-carousel.js: script parses");
+  } catch {
+    check(false, "ssos-carousel.js: script parses");
+  }
+  check(/pointerdown/.test(carouselJs) && /pointerup/.test(carouselJs), "ssos-carousel.js: pointer swipe controls exist");
+  check(/ArrowLeft/.test(carouselJs) && /ArrowRight/.test(carouselJs), "ssos-carousel.js: keyboard navigation exists");
 }
 
 const mimeTypes = {
@@ -140,6 +161,10 @@ async function validateHttpSmoke() {
     ["/st-firm.html", "text/html"],
     ["/assets/footer-system.css", "text/css"],
     ["/assets/footer-system.js", "text/javascript"],
+    ["/assets/ssos-carousel.css", "text/css"],
+    ["/assets/ssos-carousel.js", "text/javascript"],
+    ["/assets/ssos-carousel/sovereign-ai.png", "image/png"],
+    ["/assets/ssos-carousel/scof-intelligence.png", "image/png"],
     ["/assets/scof-coin-powered-by.png", "image/png"],
   ];
 

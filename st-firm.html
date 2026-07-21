@@ -227,10 +227,6 @@
     .featured .tags span { border-color:rgba(255,255,255,.14); color:rgba(255,255,255,.72); }
 
     .ssos-showcase { overflow:hidden; background:linear-gradient(145deg,#eff9f2,#f8fbff); }
-    .ssos-grid { display:grid; grid-template-columns:.95fr 1.05fr; gap:clamp(50px,7vw,90px); align-items:center; }
-    .ssos-frame { position:relative; padding:10px; border:1px solid rgba(0,166,81,.2); border-radius:27px; background:white; box-shadow:var(--shadow); }
-    .ssos-frame::before { content:"MVP PREVIEW"; position:absolute; z-index:2; top:20px; right:20px; padding:7px 10px; border-radius:999px; color:white; background:var(--forest); font-size:.58rem; font-weight:900; letter-spacing:.1em; }
-    .ssos-frame img { border-radius:19px; }
     .capability-list { display:grid; margin-top:28px; }
     .capability { display:grid; grid-template-columns:40px 1fr; gap:15px; padding:17px 0; border-top:1px solid var(--line); }
     .capability span { display:grid; width:34px; height:34px; place-items:center; border-radius:10px; color:white; background:var(--green); font-size:.68rem; font-weight:900; }
@@ -286,7 +282,7 @@
       .nav-links { inset:82px 16px auto; padding:24px; border:1px solid var(--line); border-radius:22px; background:rgba(255,255,255,.97); box-shadow:var(--shadow); }
       .nav-links .scof-link { width:100%; text-align:center; }
       .hero { padding:112px 0 40px; }
-      .hero-inner,.thesis-grid,.ssos-grid,.proof-grid,.founder-grid { grid-template-columns:1fr; }
+      .hero-inner,.thesis-grid,.proof-grid,.founder-grid { grid-template-columns:1fr; }
       .hero-content { text-align:center; }
       .hero-content .eyebrow,.hero-actions,.hero-note { justify-content:center; }
       .hero-copy,.hero-subcopy { margin-inline:auto; }
@@ -328,7 +324,9 @@
     }
   </style>
   <link rel="stylesheet" href="assets/footer-system.css">
+  <link rel="stylesheet" href="assets/ssos-carousel.css">
   <script src="assets/footer-system.js" defer></script>
+  <script src="assets/ssos-carousel.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -386,12 +384,59 @@
     </section>
 
     <section class="section ssos-showcase" id="ssos">
-      <div class="wrap ssos-grid">
-        <figure class="ssos-frame reveal"><img src="assets/ssos-mvp.png" alt="SSOS Workflow Intelligence MVP dashboard and operational capabilities" width="1536" height="1024" loading="lazy" decoding="async"></figure>
-        <div class="reveal">
+      <div class="wrap">
+        <div class="ssos-intro reveal">
           <p class="eyebrow">03 · Sovereign intelligence</p>
           <h2>Operational intelligence that remains under your control.</h2>
           <p class="lead">SSOS is the digital brain of the ST‑Firm ecosystem—designed to connect workflows, organizational knowledge and accountable decisions without separating intelligence from operational reality.</p>
+        </div>
+
+        <div class="ssos-carousel reveal" data-ssos-carousel role="region" aria-roledescription="carousel" aria-label="SSOS product ecosystem previews" tabindex="0">
+          <div class="ssos-screen">
+            <div class="ssos-screen-chrome" aria-hidden="true"><span></span><span></span><span></span><b>SSOS · PRODUCT VISION</b></div>
+            <div class="ssos-slides" aria-live="polite">
+              <article class="ssos-slide is-active" data-title="Workflow Intelligence" data-kicker="MVP · Operations" data-description="One operational view for workflows, knowledge, accountability and decision support." data-transition="Cover flow" aria-hidden="false">
+                <img src="assets/ssos-mvp.png" alt="SSOS Workflow Intelligence MVP dashboard and operational capabilities" width="1536" height="1024" loading="eager" fetchpriority="high" decoding="async">
+              </article>
+              <article class="ssos-slide" data-title="Humanitarian Operations" data-kicker="SSOS · Public impact" data-description="A connected operations concept for humanitarian coordination, health, education and accountable delivery." data-transition="Page turn" aria-hidden="true">
+                <img src="assets/Humanitarian SSOS.png" alt="Humanitarian SSOS concept connecting coordinated public-impact operations" width="1536" height="1024" loading="lazy" decoding="async">
+              </article>
+              <article class="ssos-slide ssos-slide--contain" style="--slide-art:url('assets/Green AI Future.png')" data-title="Green AI Future" data-kicker="Berlin · Responsible infrastructure" data-description="A German engineering vision for AI, energy intelligence and resilient mid-sized enterprise." data-transition="Depth zoom" aria-hidden="true">
+                <img src="assets/Green AI Future.png" alt="Green AI Future concept for German industry and responsible intelligent infrastructure" width="1254" height="1254" loading="lazy" decoding="async">
+              </article>
+              <article class="ssos-slide" data-title="Sovereign AI" data-kicker="SSOS · Controlled intelligence" data-description="Documents, workflows, human approval and institutional knowledge connected around a secure intelligence core." data-transition="Glass dissolve" aria-hidden="true">
+                <img src="assets/ssos-carousel/sovereign-ai.png" alt="Concept visualization of a secure sovereign AI intelligence core connecting organizational operations" width="1536" height="1024" loading="lazy" decoding="async">
+              </article>
+              <article class="ssos-slide" data-title="SCOF Intelligence" data-kicker="Kitale · Field to decision" data-description="Coffee production, traceability and responsible AI connected across a real Kenyan agricultural operation." data-transition="Cube turn" aria-hidden="true">
+                <img src="assets/ssos-carousel/scof-intelligence.png" alt="Kenyan coffee farming connected with sensors, traceability and responsible decision intelligence" width="1536" height="1024" loading="lazy" decoding="async">
+              </article>
+            </div>
+            <button class="ssos-arrow ssos-arrow--previous" type="button" data-carousel-previous aria-label="Show previous SSOS preview"><span aria-hidden="true">←</span></button>
+            <button class="ssos-arrow ssos-arrow--next" type="button" data-carousel-next aria-label="Show next SSOS preview"><span aria-hidden="true">→</span></button>
+            <div class="ssos-swipe-cue" aria-hidden="true">Drag or swipe</div>
+          </div>
+
+          <div class="ssos-carousel-console">
+            <div class="ssos-carousel-copy">
+              <p class="ssos-carousel-kicker" data-carousel-kicker>MVP · Operations</p>
+              <h3 data-carousel-title>Workflow Intelligence</h3>
+              <p data-carousel-description>One operational view for workflows, knowledge, accountability and decision support.</p>
+            </div>
+            <div class="ssos-carousel-nav">
+              <button class="ssos-play" type="button" data-carousel-play aria-label="Pause automatic slide rotation" aria-pressed="false"><span aria-hidden="true">Ⅱ</span></button>
+              <div class="ssos-dots" role="tablist" aria-label="Choose an SSOS preview">
+                <button class="is-active" type="button" role="tab" aria-selected="true" aria-label="1 of 5: Workflow Intelligence"></button>
+                <button type="button" role="tab" aria-selected="false" aria-label="2 of 5: Humanitarian Operations"></button>
+                <button type="button" role="tab" aria-selected="false" aria-label="3 of 5: Green AI Future"></button>
+                <button type="button" role="tab" aria-selected="false" aria-label="4 of 5: Sovereign AI"></button>
+                <button type="button" role="tab" aria-selected="false" aria-label="5 of 5: SCOF Intelligence"></button>
+              </div>
+              <p class="ssos-counter"><strong data-carousel-current>01</strong><span>/ 05</span></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="ssos-capabilities reveal">
           <div class="capability-list">
             <article class="capability"><span>01</span><div><h3>Workflow intelligence</h3><p>Connect documents, processes, responsibilities and accountable actions.</p></div></article>
             <article class="capability"><span>02</span><div><h3>Knowledge intelligence</h3><p>Transform organizational information into searchable, useful context.</p></div></article>
