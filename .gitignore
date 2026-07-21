@@ -1,6 +1,7 @@
 # Internal tool artifacts
 .codex-remote-attachments/
 .agents/
+.wrangler/
 
 # OS files
 Thumbs.db

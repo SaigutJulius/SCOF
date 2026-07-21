@@ -1,14 +1,14 @@
 # SCOF and ST-Firm Website Test Report
 
-**Test date:** 20 July 2026  
+**Test date:** 21 July 2026  
 **Environment:** Windows / PowerShell / Node.js v22.19.0  
-**Command:** `node tests/site-check.cjs`
+**Command:** `node tests\site-check.cjs`
 
 ## Final Result
 
-**PASS — 167 checks passed, 0 failed.**
+**PASS — 198 checks passed, 0 failed.**
 
-The final test run completed successfully after reconciling the WhatsApp implementation with the latest premium-footer design.
+All checks pass after the ST-Firm page redesign and WhatsApp link count update.
 
 ## Coverage
 
@@ -25,7 +25,7 @@ The final test run completed successfully after reconciling the WhatsApp impleme
 ### WhatsApp contact system
 
 - SCOF: 14 WhatsApp entry points, including eight partnership-specific actions.
-- ST-Firm: 5 WhatsApp entry points.
+- ST-Firm: 9 WhatsApp entry points.
 - Exactly one floating WhatsApp control is present on each page.
 - All contact links use the approved number `4915210207415`.
 - Every link includes a non-empty, page-appropriate prefilled message.

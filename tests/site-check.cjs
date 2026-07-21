@@ -34,7 +34,7 @@ function localTargetExists(target, currentFile) {
 function validatePage(file) {
   const html = read(file);
   const brand = file === "index.html" ? "SCOF" : "ST-Firm";
-  const expectedWhatsAppLinks = file === "index.html" ? 14 : 5;
+  const expectedWhatsAppLinks = file === "index.html" ? 14 : 9;
 
   check(/<!doctype html>/i.test(html), `${file}: HTML5 doctype`);
   check(/<html\s+lang="en"/i.test(html), `${file}: language declared`);
