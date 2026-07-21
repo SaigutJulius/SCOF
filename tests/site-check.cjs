@@ -94,6 +94,10 @@ function validatePage(file) {
     check((html.match(/class="ssos-slide(?:\s|\")/g) || []).length === 5, `${file}: five SSOS carousel slides`);
     check((html.match(/role="tab"/g) || []).length === 5, `${file}: five accessible SSOS slide selectors`);
     check(/data-ssos-carousel/.test(html), `${file}: SSOS carousel controller is present`);
+    check(/Operational · Configurable/.test(html), `${file}: SSOS operational status is declared`);
+    check(/SSOS · OPERATIONAL PLATFORM/.test(html), `${file}: SSOS carousel is labeled as an operational platform`);
+    check(/SSOS Green KI is a functioning, local-first sovereign intelligence platform/.test(html), `${file}: SSOS platform status is evidence-based`);
+    check(!/SSOS is currently in development/.test(html), `${file}: outdated SSOS development disclaimer is absent`);
   }
 }
 
