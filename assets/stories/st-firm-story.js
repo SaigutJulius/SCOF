@@ -17,32 +17,51 @@
   const timeLabel = root.querySelector('[data-story-time]');
   const caption = root.querySelector('[data-story-caption]');
   const chapterButtons = [...root.querySelectorAll('[data-story-seek]')];
+  const openingCues = [...root.querySelectorAll('[data-story-at]')];
+  const akademieParticles = root.querySelector('[data-akademie-particles]');
+  const ecosystemScene = root.querySelector('.story-ecosystem-scene');
   const appreciate = root.querySelector('[data-story-appreciate]');
   const share = root.querySelector('[data-story-share]');
   const shareDialog = document.querySelector('[data-story-share-dialog]');
   const duration = 70;
+  const tempo = 113;
+  const beatDuration = 60 / tempo;
   const sceneStarts = [0, 4, 8, 12, 22, 33, 45, 58];
   const captions = {
     en: [
       'ST‑Firm presents.',
-      'Jenga… jenga… Powered by SSOS.',
+      'Powered by SSOS. Sovereign intelligence. Business continuity.',
       'Learn. Build. Share. Empower.',
       'Ravine to the World! Twende pamoja! 29 active online members.',
       'The World to Ravine! Tunajenga! Kenya to Deutschland—beyond the border!',
       'Nilibeba ndoto, notebook na laptop. Mombasa runway—safari ikaanza.',
-      'Akademie opens doors. SSOS turns intelligence into action. SCOF connects the farm to the world.',
+      'Akädemie opens doors. SSOS turns intelligence into action. SCOF connects the farm to the world.',
       'Taking Ravine to the World and bringing the World to Eldama Ravine. Engineer Saigut Julius Kipkorir, AKA KingKunta.'
     ],
     sw: [
       'ST‑Firm inawasilisha.',
-      'Jenga… jenga… Inaendeshwa na SSOS.',
+      'Inaendeshwa na SSOS. Akili huru. Mwendelezo wa biashara.',
       'Jifunze. Jenga. Shiriki. Wezesha.',
       'Ravine hadi Duniani! Twende pamoja! Wanachama 29 wanaoshiriki mtandaoni.',
       'Dunia hadi Ravine! Tunajenga! Kenya hadi Deutschland—kuvuka mipaka!',
       'Nilibeba ndoto, notebook na laptop. Mombasa runway—safari ikaanza.',
-      'Akademie inafungua milango. SSOS inaweka akili kwa vitendo. SCOF inaunganisha shamba na dunia.',
+      'Akädemie inafungua milango. SSOS inaweka akili kwa vitendo. SCOF inaunganisha shamba na dunia.',
       'Taking Ravine to the World and bringing the World to Eldama Ravine. Engineer Saigut Julius Kipkorir, AKA KingKunta.'
     ]
+  };
+  const ecosystemCaptions = {
+    en: {
+      intro: 'Every strong ecosystem begins with people. Akädemie awakens knowledge, confidence and capability.',
+      network: 'Knowledge becomes sovereign engineering, operational intelligence and connected agriculture.',
+      powered: 'SCOF turns intelligence into real-world value—and value flows back into people.',
+      bridge: 'One living loop connects capability and opportunity between Kenya and Deutschland.'
+    },
+    sw: {
+      intro: 'Mfumo imara huanza na watu. Akädemie inaamsha maarifa, ujasiri na uwezo.',
+      network: 'Maarifa yanakuwa uhandisi huru, akili ya uendeshaji na kilimo kilichounganishwa.',
+      powered: 'SCOF inageuza akili kuwa thamani halisi—na thamani inawarudia watu.',
+      bridge: 'Mzunguko mmoja hai unaunganisha uwezo na fursa kati ya Kenya na Deutschland.'
+    }
   };
 
   let elapsed = 0;
@@ -52,6 +71,32 @@
   let muted = true;
   let language = 'en';
   let activeScene = -1;
+  let activeEcosystemPhase = 'idle';
+  let ecosystemPointerFrame = 0;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  function resetEcosystemTilt() {
+    if (ecosystemPointerFrame) cancelAnimationFrame(ecosystemPointerFrame);
+    ecosystemPointerFrame = 0;
+    screen.style.removeProperty('--ecosystem-tilt-x');
+    screen.style.removeProperty('--ecosystem-tilt-y');
+  }
+
+  function moveEcosystemTilt(event) {
+    if (activeScene !== 6 || reducedMotion.matches || event.pointerType === 'touch') return;
+    const { left, top, width, height } = screen.getBoundingClientRect();
+    const horizontal = Math.max(-1, Math.min(1, ((event.clientX - left) / width - .5) * 2));
+    const vertical = Math.max(-1, Math.min(1, ((event.clientY - top) / height - .5) * 2));
+    if (ecosystemPointerFrame) cancelAnimationFrame(ecosystemPointerFrame);
+    ecosystemPointerFrame = requestAnimationFrame(() => {
+      screen.style.setProperty('--ecosystem-tilt-x', `${(-vertical * 1.8).toFixed(2)}deg`);
+      screen.style.setProperty('--ecosystem-tilt-y', `${(horizontal * 2.4).toFixed(2)}deg`);
+      ecosystemPointerFrame = 0;
+    });
+  }
+
+  screen.addEventListener('pointermove', moveEcosystemTilt);
+  screen.addEventListener('pointerleave', resetEcosystemTilt);
 
   class StorySoundtrack {
     constructor() {
@@ -116,21 +161,84 @@
     return 0;
   }
 
+  function ecosystemPhaseForTime(value) {
+    if (value < 45 || value >= 58) return 'idle';
+    if (value < 48) return 'intro';
+    if (value < 52) return 'network';
+    if (value < 56) return 'powered';
+    return 'bridge';
+  }
+
+  function currentCaptionText() {
+    if (activeScene === 6 && activeEcosystemPhase !== 'idle') {
+      return ecosystemCaptions[language][activeEcosystemPhase];
+    }
+    return captions[language][activeScene < 0 ? 0 : activeScene];
+  }
+
+  function renderOpeningRhythm() {
+    const openingActive = activeScene === 0 || activeScene === 1;
+    const akademieActive = activeScene === 2;
+    const cinematicActive = openingActive || akademieActive;
+    openingCues.forEach(cue => {
+      const cueTime = Number(cue.dataset.storyAt);
+      cue.classList.toggle('is-cued', elapsed >= cueTime && elapsed < 12);
+    });
+    screen.classList.toggle('is-opening-active', openingActive);
+    screen.classList.toggle('is-akademie-active', akademieActive);
+    if (!cinematicActive) {
+      screen.classList.remove('is-strong-beat');
+      screen.removeAttribute('data-opening-beat');
+      screen.style.removeProperty('--story-glow-opacity');
+      screen.style.removeProperty('--story-glow-scale');
+      screen.style.removeProperty('--story-wave-scale');
+      screen.style.removeProperty('--story-signal-offset');
+      return;
+    }
+    const sceneOrigin = activeScene === 2 ? 8 : activeScene === 1 ? 4 : 0;
+    const localBeat = Math.max(0, (elapsed - sceneOrigin) / beatDuration);
+    const beatIndex = Math.floor(localBeat);
+    const beatPhase = localBeat - beatIndex;
+    const pulse = reducedMotion.matches ? .16 : Math.pow(1 - beatPhase, 3.4);
+    const strongBeat = beatIndex % 4 === 0;
+    const glowStrength = .2 + pulse * (strongBeat ? .58 : .38);
+    const glowScale = 1.018 + pulse * (strongBeat ? .052 : .032);
+    const waveScale = .86 + pulse * (strongBeat ? .18 : .11);
+    const signalPhase = reducedMotion.matches ? 0 : 1 - ((localBeat / 4) % 1);
+    screen.dataset.openingBeat = String(beatIndex);
+    screen.classList.toggle('is-strong-beat', !reducedMotion.matches && strongBeat && beatPhase < .42);
+    screen.style.setProperty('--story-glow-opacity', glowStrength.toFixed(3));
+    screen.style.setProperty('--story-glow-scale', glowScale.toFixed(3));
+    screen.style.setProperty('--story-wave-scale', waveScale.toFixed(3));
+    screen.style.setProperty('--story-signal-offset', signalPhase.toFixed(4));
+  }
+
   function render() {
     const nextScene = sceneForTime(elapsed);
+    const nextEcosystemPhase = ecosystemPhaseForTime(elapsed);
+    let captionChanged = false;
     if (nextScene !== activeScene) {
       activeScene = nextScene;
+      captionChanged = true;
       scenes.forEach((scene, index) => {
         const selected = index === activeScene;
         scene.classList.toggle('is-active', selected);
         scene.setAttribute('aria-hidden', String(!selected));
       });
+      screen.classList.toggle('is-ecosystem-active', activeScene === 6);
+      if (activeScene !== 6) resetEcosystemTilt();
       chapterButtons.forEach((button, index) => {
         const nextStart = Number(chapterButtons[index + 1]?.dataset.storySeek ?? duration + 1);
         button.classList.toggle('is-active', elapsed >= Number(button.dataset.storySeek) && elapsed < nextStart);
       });
-      caption.textContent = captions[language][activeScene];
     }
+    if (nextEcosystemPhase !== activeEcosystemPhase) {
+      activeEcosystemPhase = nextEcosystemPhase;
+      ecosystemScene?.setAttribute('data-ecosystem-phase', activeEcosystemPhase);
+      captionChanged = true;
+    }
+    renderOpeningRhythm();
+    if (captionChanged) caption.textContent = currentCaptionText();
     progress.value = String(Math.round(elapsed * 10));
     timeLabel.textContent = `${formatTime(elapsed)} / ${formatTime(duration)}`;
   }
@@ -245,6 +353,17 @@
     }
   }
 
+  if (akademieParticles) {
+    const particleColors = ['#45c979', '#c8ed72', '#d6a63b', '#7854cb', '#218fc2'];
+    for (let index = 0; index < 29; index += 1) {
+      const dot = document.createElement('i');
+      dot.style.setProperty('--angle', `${index * (360 / 29)}deg`);
+      dot.style.setProperty('--particle-delay', `${(index % 8) * .018}s`);
+      dot.style.setProperty('--particle-color', particleColors[index % particleColors.length]);
+      akademieParticles.append(dot);
+    }
+  }
+
   async function enableAnthem() {
     muted = false;
     setSoundUi(true);
@@ -300,7 +419,7 @@
     language = language === 'en' ? 'sw' : 'en';
     languageButton.innerHTML = `<span aria-hidden="true">${language.toUpperCase()}</span>`;
     languageButton.setAttribute('aria-label', language === 'en' ? 'Switch captions to Kiswahili' : 'Switch captions to English');
-    caption.textContent = captions[language][activeScene < 0 ? 0 : activeScene];
+    caption.textContent = currentCaptionText();
   });
 
   fullscreen.addEventListener('click', async () => {
@@ -330,7 +449,7 @@
   });
 
   const storyUrl = `${location.href.split('#')[0]}#akademie-story`;
-  const shareText = 'Discover how ST‑Firm Akademie connects Kenya 🇰🇪 and Deutschland 🇩🇪 to build beyond borders.';
+  const shareText = 'Discover how ST‑Firm Akädemie connects Kenya 🇰🇪 and Deutschland 🇩🇪 to build beyond borders.';
   const encodedUrl = encodeURIComponent(storyUrl);
   const encodedText = encodeURIComponent(shareText);
   const shareLinks = {

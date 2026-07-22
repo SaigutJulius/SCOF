@@ -5,6 +5,7 @@
   "source_start_seconds": 42,
   "source_end_seconds": 112,
   "tempo_bpm": 113,
+  "beat_duration_seconds": 0.530973,
   "languages": ["en", "sw"],
   "lead_vocal": "female_mezzo_alto",
   "geographic_terms": {
@@ -19,7 +20,7 @@
       "source_start": 42,
       "source_end": 46,
       "chapter": "ST-Firm",
-      "visual": "st_firm_logo_white_illuminated_plate"
+      "visual": "st_firm_brandenburg_ravine_digital_twin_launch"
     },
     {
       "start": 4,
@@ -27,15 +28,15 @@
       "source_start": 46,
       "source_end": 50,
       "chapter": "SSOS",
-      "visual": "ssos_circuit_morph"
+      "visual": "ssos_sovereign_signal_business_continuity"
     },
     {
       "start": 8,
       "end": 12,
       "source_start": 50,
       "source_end": 54,
-      "chapter": "Akademie",
-      "visual": "akademie_shield_bright_reveal"
+      "chapter": "Akädemie",
+      "visual": "akademie_full_identity_dancing_values_and_29_member_handoff"
     },
     {
       "start": 12,

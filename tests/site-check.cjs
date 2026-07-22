@@ -105,18 +105,37 @@ function validatePage(file) {
     check(!/SSOS is the digital brain/.test(html), `${file}: generic SSOS digital-brain copy is absent`);
     check(!/SSOS is currently in development/.test(html), `${file}: outdated SSOS development disclaimer is absent`);
     check(/data-st-firm-story/.test(html), `${file}: cinematic ST-Firm story is present`);
-    check(/Knowledge Without Borders/.test(html), `${file}: Akademie story title is present`);
-    check(/29 active online members/i.test(html), `${file}: active Akademie membership is declared`);
+    check(/Knowledge Without Borders/.test(html), `${file}: Akädemie story title is present`);
+    check(/29 active online members/i.test(html), `${file}: active Akädemie membership is declared`);
     check((html.match(/data-story-scene=/g) || []).length === 8, `${file}: eight cinematic story scenes`);
     check((html.match(/data-story-seek=/g) || []).length === 6, `${file}: six story chapter controls`);
     check(/data-story-appreciate/.test(html) && /data-story-share/.test(html), `${file}: appreciate and share controls are present`);
     const storyStart = html.indexOf('<section class="section partnerships story-section"');
     const storyEnd = html.indexOf('<dialog class="story-share-dialog"', storyStart);
     const storyBlock = storyStart >= 0 && storyEnd > storyStart ? html.slice(storyStart, storyEnd) : "";
+    const publicStoryText = storyBlock.replace(/\b(?:id|class|src|href|data-[\w-]+)="[^"]*"/g, "");
+    check(/AKÄDEMIE/.test(storyBlock) && /Akädemie/.test(storyBlock), `${file}: official Akädemie spelling is visible in title and sentence case`);
+    check(!/AKADEMIE|Akademie|AKADËMIE|Akadëmie/.test(publicStoryText), `${file}: outdated public Akädemie spellings are absent`);
     check(!/Germany|GERMANY/.test(storyBlock), `${file}: story uses Deutschland terminology exclusively`);
     check(/Moi International Airport/.test(storyBlock), `${file}: Mombasa departure story is present`);
     check(/Engineer Saigut Julius Kipkorir/.test(storyBlock) && /KingKunta/.test(storyBlock), `${file}: founder film credit is present`);
     check(/st-firm-watcher-gold-seal\.jpg/.test(storyBlock), `${file}: Watcher Gold Seal is included`);
+    check((storyBlock.match(/st-firm-akademie-identity-720\.jpg/g) || []).length === 3 && /ecosystem-core/.test(storyBlock), `${file}: corrected full Akädemie identity and its reveal aura appear at 00:08 and Chapter 06`);
+    check(/st-engineering-layer/.test(storyBlock) && /st-tech-laptop/.test(storyBlock) && /st-tech-ai/.test(storyBlock) && /st-tech-kenya/.test(storyBlock), `${file}: ST-Firm opening contains the engineering, AI and Kenya linkage layer`);
+    check(/story-akademie-scene/.test(storyBlock) && /knowledge-ribbon/.test(storyBlock) && /data-akademie-particles/.test(storyBlock), `${file}: Akädemie reveal contains its knowledge ribbon and member handoff`);
+    check(/data-story-at="9\.062">LEARN/.test(storyBlock) && /data-story-at="9\.593">BUILD/.test(storyBlock) && /data-story-at="10\.124">SHARE/.test(storyBlock) && /data-story-at="10\.655">EMPOWER/.test(storyBlock), `${file}: four Akädemie values follow the approved beat sequence`);
+    check((storyBlock.match(/scof-identity-640\.jpg/g) || []).length === 2, `${file}: real SCOF identity appears in Chapter 06 and the finale`);
+    check((storyBlock.match(/scof-powered-by-720\.jpg/g) || []).length === 2, `${file}: SCOF Powered By identity appears in Chapter 06 and the finale`);
+    check(!/story-bean/.test(storyBlock), `${file}: fake CSS SCOF bean is absent`);
+    check(/ecosystem-pedestal-light/.test(storyBlock) && /ecosystem-pedestal-mint/.test(storyBlock) && /ecosystem-pedestal-dark/.test(storyBlock) && /ecosystem-pedestal-gold/.test(storyBlock), `${file}: every ecosystem logo has a proportion-safe visibility treatment`);
+    check((storyBlock.match(/story-opening-scene/g) || []).length === 2, `${file}: Chapter 01 uses dedicated ST-Firm and SSOS product-launch scenes`);
+    check(!/class="story-beam"/.test(storyBlock), `${file}: opening beam no longer blocks the ST-Firm S`);
+    check(/st-logo-aura/.test(storyBlock) && /ssos-logo-aura/.test(storyBlock), `${file}: both opening identities have shape-following glow layers`);
+    check(/ssos-cinema-word/.test(storyBlock) && /SOVEREIGN INTELLIGENCE/.test(storyBlock) && /BUSINESS CONTINUITY/.test(storyBlock), `${file}: SSOS title and product promises are retained`);
+    check(/sovereign-wave-energy/.test(storyBlock) && /data-story-at="7\.717"/.test(storyBlock), `${file}: sovereign signal choreography reaches the final music cue`);
+    check((storyBlock.match(/class="ecosystem-route /g) || []).length === 5, `${file}: Chapter 06 uses a complete five-stage living value loop`);
+    check((storyBlock.match(/data-ecosystem-status=/g) || []).length === 4, `${file}: Chapter 06 phase stories are visible inside the ecosystem stage`);
+    check(!/class="ecosystem-orbit"/.test(storyBlock), `${file}: static organizational-chart orbit is removed`);
   }
 }
 
@@ -176,15 +195,44 @@ function validateSharedAssets() {
   check(!/class StoryBeat/.test(storyJs), "st-firm-story.js: temporary generated beat is removed");
   check(/class StorySoundtrack/.test(storyJs) && /st-firm-tunajenga-website\.mp3/.test(storyJs), "st-firm-story.js: mastered anthem is the production soundtrack");
   check(!/method:'HEAD'/.test(storyJs) && /new Audio\(\)/.test(storyJs) && /location\.protocol !== 'file:'/.test(storyJs), "st-firm-story.js: production audio supports direct Windows file playback");
-  check(/st-firm-story\.js\?v=20260722-continuous70s/.test(read("st-firm.html")), "st-firm.html: continuous 70-second story controller has a cache-busting release version");
+  check(/st-firm-story\.js\?v=20260722-film2/.test(read("st-firm.html")) && /st-firm-story\.css\?v=20260722-film2/.test(read("st-firm.html")), "st-firm.html: story assets have a synchronized cache-busting release version");
   check(/localStorage/.test(storyJs) && /navigator\.clipboard/.test(storyJs), "st-firm-story.js: appreciation and link-copy behavior exists");
   check(/const duration = 70/.test(storyJs), "st-firm-story.js: 70-second story timing exists");
+  check(/const tempo = 113/.test(storyJs) && /beatDuration = 60 \/ tempo/.test(storyJs), "st-firm-story.js: opening visuals use the mastered 113 BPM timing");
+  check(/function renderOpeningRhythm/.test(storyJs) && /--story-glow-opacity/.test(storyJs) && /--story-signal-offset/.test(storyJs), "st-firm-story.js: logo glow and signal motion derive from soundtrack time");
+  check(/elapsed < 12/.test(storyJs) && /activeScene === 2 \? 8/.test(storyJs), "st-firm-story.js: soundtrack-driven opening choreography continues through Akädemie at 12 seconds");
+  check(/particleColors/.test(storyJs) && /data-akademie-particles/.test(read("st-firm.html")) && (storyJs.match(/index < 29/g) || []).length >= 2, "st-firm-story.js: Akädemie releases exactly 29 deterministic member particles");
   check(/sceneStarts = \[0, 4, 8, 12, 22, 33, 45, 58\]/.test(storyJs), "st-firm-story.js: eight scenes use the approved 70-second cue map");
   check(/00:00 \/ 01:10/.test(read("st-firm.html")) && /max="700"/.test(read("st-firm.html")), "st-firm.html: time display and seek range cover 01:10");
   check(!/threshold:\.35/.test(storyJs) && !/pausedByViewport/.test(storyJs), "st-firm-story.js: scrolling cannot interrupt the anthem");
   check(/soundtrack\.onended = finishStory/.test(storyJs) && /elapsed = Math\.min\(duration, soundtrackTime\)/.test(storyJs), "st-firm-story.js: film timing follows the anthem through completion");
   check(/Start film with sound/.test(read("st-firm.html")) && /Film \+ anthem · 01:10/.test(read("st-firm.html")), "st-firm.html: deliberate sound-first 70-second start is clear");
   check(/data-story-volume/.test(read("st-firm.html")) && /setVolume/.test(storyJs), "st-firm-story.js: adjustable stronger soundtrack exists");
+  check(/function ecosystemPhaseForTime/.test(storyJs) && /value < 48/.test(storyJs) && /value < 52/.test(storyJs) && /value < 56/.test(storyJs) && /value >= 58/.test(storyJs), "st-firm-story.js: Chapter 06 phases follow the 45–58 second audio timeline");
+  check(/data-ecosystem-phase/.test(read("st-firm.html")) && /data-ecosystem-phase=/.test(storyCss), "ST-Firm story: seek-safe ecosystem phases connect JavaScript and CSS");
+  check(/is-ecosystem-active/.test(storyJs) && /story-screen\.is-ecosystem-active::after/.test(storyCss), "ST-Firm story: Chapter 06 receives its own luminous player treatment");
+  check(/ecosystem-energy-flow/.test(storyCss) && /ecosystem-route-return/.test(storyCss), "st-firm-story.css: directional energy completes the value-return loop");
+  check(/container-type:inline-size/.test(storyCss), "st-firm-story.css: ecosystem sizing follows the film container instead of the viewport");
+  check(/aspect-ratio:724\/780/.test(storyCss) && /aspect-ratio:731\/725/.test(storyCss), "st-firm-story.css: ST-Firm and SSOS retain their supplied logo proportions");
+  check(/story-player:not\(\.is-started\) \.story-watch/.test(storyCss), "st-firm-story.css: compact start control is separated from the opening identity");
+  check(/Chapter 01 responsive composition/.test(storyCss) && /ssos-cinema-word/.test(storyCss), "st-firm-story.css: sovereign opening has responsive product-launch styling");
+  check(/brandenburg-ravine-tech-1600\.jpg/.test(storyCss) && /st-engineering-layer/.test(storyCss), "st-firm-story.css: grounded Brandenburg digital-twin environment is active");
+  check(/story-akademie-scene/.test(storyCss) && /akademie-word-alive/.test(storyCss) && /akademie-particle-release/.test(storyCss), "st-firm-story.css: Akädemie words remain alive and hand off the member network");
+  check(/ecosystem-pedestal-light/.test(storyCss) && /ecosystem-pedestal-mint/.test(storyCss) && /ecosystem-pedestal-dark/.test(storyCss) && /ecosystem-pedestal-gold/.test(storyCss), "st-firm-story.css: transparent and opaque brands use dedicated contrast surfaces");
+  check(/@media\(max-width:650px\)[\s\S]*ecosystem-core/.test(storyCss) && /@media\(max-width:390px\)[\s\S]*ecosystem-pedestal/.test(storyCss), "st-firm-story.css: ecosystem has phone and small-phone compositions");
+
+  const ecosystemAssets = [
+    "assets/stories/ecosystem/st-firm-akademie-identity-720.jpg",
+    "assets/stories/ecosystem/scof-identity-640.jpg",
+    "assets/stories/ecosystem/scof-powered-by-720.jpg",
+  ];
+  for (const asset of ecosystemAssets) {
+    const bytes = fs.statSync(path.join(root, asset)).size;
+    check(bytes > 50_000 && bytes < 200_000, `ecosystem asset: ${path.basename(asset)} is sharp and performance-sized`);
+  }
+  const openingBackdrop = "assets/stories/brandenburg-ravine-tech-1600.jpg";
+  const openingBytes = fs.statSync(path.join(root, openingBackdrop)).size;
+  check(openingBytes > 180_000 && openingBytes < 350_000, "story backdrop: Brandenburg digital twin is sharp and performance-sized");
 }
 
 function validateSongPackage() {
@@ -222,6 +270,8 @@ function validateSongPackage() {
   check(cues.duration_seconds === 70, "song package: website edit is exactly 70 seconds");
   check(cues.source_start_seconds === 42 && cues.source_end_seconds === 112, "song package: cue map uses the approved 00:42–01:52 source window");
   check(cues.tempo_bpm === 113, "song package: production tempo is 113 BPM");
+  check(Math.abs(cues.beat_duration_seconds - (60 / 113)) < .000001, "song package: visual beat duration matches the mastered tempo");
+  check(cues.cues?.[0]?.visual === "st_firm_brandenburg_ravine_digital_twin_launch" && cues.cues?.[1]?.visual === "ssos_sovereign_signal_business_continuity", "song package: opening cue map documents the Brandenburg digital-twin launch");
   check(cues.lead_vocal === "female_mezzo_alto", "song package: female lead-vocal direction is explicit");
   check(cues.cues?.[0]?.start === 0 && cues.cues?.at(-1)?.end === 70, "song package: cue map covers the complete film");
   check(cues.cues?.every((cue, index, list) => cue.start < cue.end && (!index || cue.start === list[index - 1].end)), "song package: cue timings are contiguous");
@@ -335,6 +385,8 @@ async function validateHttpSmoke() {
     ["/assets/stories/st-firm-story.css", "text/css"],
     ["/assets/stories/st-firm-story.js", "text/javascript"],
     ["/assets/stories/akademie-shield.png", "image/png"],
+    ["/assets/stories/ecosystem/st-firm-akademie-identity-720.jpg", "image/jpeg"],
+    ["/assets/stories/brandenburg-ravine-tech-1600.jpg", "image/jpeg"],
     ["/assets/stories/audio/st-firm-tunajenga-website.mp3", "audio/mpeg"],
     ["/assets/stories/audio/artwork/tunajenga-cover-web.jpg", "image/jpeg"],
     ["/assets/ssos-carousel/sovereign-ai.png", "image/png"],

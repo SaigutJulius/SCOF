@@ -14,4 +14,4 @@ Replace only the destination skyline with an unmistakably authentic Berlin, Deut
 
 ## Deterministic overlay
 
-The final 3000 × 3000 composition is produced by `scripts/build-tunajenga-cover.ps1` using the real ST-Firm, SSOS and Akademie assets, programmatically constructed Kenya and Deutschland flags, and exact release typography.
+The final 3000 × 3000 composition is produced by `scripts/build-tunajenga-cover.ps1` using the real ST-Firm, SSOS and Akädemie assets, programmatically constructed Kenya and Deutschland flags, and exact release typography.

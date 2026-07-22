@@ -87,7 +87,7 @@ Keep this section percussion-led: signature log drum, Gengetone response, commun
 
 ## 1:29–1:55 · Verse two: the ecosystem
 
-> Akademie—tunafungua milango,  
+> Akädemie—tunafungua milango,
 > SSOS—akili inaingia kwa vitendo.  
 > SCOF—kutoka shambani hadi dunia,  
 > ST-Firm—tunaunganisha kila njia.  
@@ -171,7 +171,7 @@ Keep this section percussion-led: signature log drum, Gengetone response, commun
 
 ### 0:35–0:44
 
-> Akademie—tunafungua milango,  
+> Akädemie—tunafungua milango,
 > SSOS—akili inaingia kwa vitendo.  
 > SCOF—kutoka shambani hadi dunia.
 
