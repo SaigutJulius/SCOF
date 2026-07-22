@@ -1,4 +1,39 @@
 (() => {
+  const theatreMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  document.querySelectorAll('[data-ssos-theatre]').forEach((intro) => {
+    const theatre = intro.closest('.ssos-showcase');
+    if (!theatre) return;
+    theatre.classList.add('is-theatre-ready');
+    let ambientTimer = 0;
+
+    const revealTheatre = () => {
+      theatre.classList.add('is-theatre-visible', 'is-theatre-in-view');
+      if (!theatreMotion.matches && !theatre.classList.contains('is-theatre-ambient')) {
+        window.clearTimeout(ambientTimer);
+        ambientTimer = window.setTimeout(() => theatre.classList.add('is-theatre-ambient'), 1450);
+      }
+    };
+    const updatePageVisibility = () => theatre.classList.toggle('is-page-hidden', document.hidden);
+    updatePageVisibility();
+    document.addEventListener('visibilitychange', updatePageVisibility);
+
+    if (theatreMotion.matches || !('IntersectionObserver' in window)) {
+      revealTheatre();
+      return;
+    }
+
+    const theatreObserver = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) revealTheatre();
+      else theatre.classList.remove('is-theatre-in-view');
+    }, { threshold: 0.18, rootMargin: '0px 0px -8% 0px' });
+    theatreObserver.observe(intro);
+
+    theatreMotion.addEventListener?.('change', () => {
+      if (theatreMotion.matches) theatre.classList.remove('is-theatre-ambient');
+      else if (theatre.classList.contains('is-theatre-in-view')) revealTheatre();
+    });
+  });
+
   const roots = document.querySelectorAll('[data-ssos-carousel]');
   if (!roots.length) return;
 
@@ -15,6 +50,7 @@
     const currentLabel = root.querySelector('[data-carousel-current]');
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     const effects = ['cover', 'page', 'depth', 'glass', 'cube'];
+    const theatreGlows = ['88, 208, 122', '64, 177, 154', '153, 204, 90', '46, 156, 205', '191, 101, 64'];
     const interval = 7000;
     let active = 0;
     let timer = 0;
@@ -23,6 +59,7 @@
     let animating = false;
     let pointerId = null;
     let pointerStart = 0;
+    let isNearViewport = false;
 
     const updatePlayControl = () => {
       const paused = userPaused || reduceMotion.matches;
@@ -38,13 +75,19 @@
 
     const schedule = () => {
       clearTimer();
-      if (userPaused || interactionPaused || reduceMotion.matches || document.hidden) return;
+      if (userPaused || interactionPaused || reduceMotion.matches || document.hidden || !isNearViewport) return;
       timer = window.setTimeout(() => show(active + 1, 1), interval);
     };
 
     const preloadFollowingSlide = () => {
+      const current = slides[active]?.querySelector('img');
       const following = slides[(active + 1) % slides.length]?.querySelector('img');
+      if (current) current.loading = 'eager';
       if (following) following.loading = 'eager';
+    };
+
+    const updateTheatreAtmosphere = () => {
+      root.closest('.ssos-showcase')?.style.setProperty('--theatre-glow', theatreGlows[active]);
     };
 
     const finishTransition = (outgoing, incoming) => {
@@ -97,6 +140,7 @@
       kicker.textContent = incoming.dataset.kicker;
       description.textContent = incoming.dataset.description;
       currentLabel.textContent = String(active + 1).padStart(2, '0');
+      updateTheatreAtmosphere();
       preloadFollowingSlide();
 
       const duration = reduceMotion.matches ? 30 : 700;
@@ -166,7 +210,23 @@
     reduceMotion.addEventListener?.('change', () => { updatePlayControl(); schedule(); });
     dots.forEach((dot, index) => { dot.tabIndex = index === 0 ? 0 : -1; });
     updatePlayControl();
-    preloadFollowingSlide();
-    schedule();
+    updateTheatreAtmosphere();
+
+    if ('IntersectionObserver' in window) {
+      const carouselObserver = new IntersectionObserver((entries) => {
+        isNearViewport = entries[0].isIntersecting;
+        if (isNearViewport) {
+          preloadFollowingSlide();
+          schedule();
+        } else {
+          clearTimer();
+        }
+      }, { rootMargin: '280px 0px', threshold: 0.01 });
+      carouselObserver.observe(root);
+    } else {
+      isNearViewport = true;
+      preloadFollowingSlide();
+      schedule();
+    }
   });
 })();

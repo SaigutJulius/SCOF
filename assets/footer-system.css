@@ -279,6 +279,103 @@
 .whatsapp-float:focus-visible { outline: 3px solid var(--pf-accent); outline-offset: 3px; }
 .whatsapp-float svg { flex: 0 0 26px; width: 26px; height: 26px; fill: currentColor; }
 
+/* SCOF uses a warm, daylight presentation that rises over the dark farm closing image. */
+.pf-footer--scof {
+  --pf-accent: #79ad31;
+  --pf-accent-rgb: 121, 173, 49;
+  margin-top: -42px;
+  padding-top: 142px;
+  border-radius: 44px 44px 0 0;
+  color: #153c2d;
+  background:
+    radial-gradient(circle at 13% 18%, rgba(183,220,93,.25), transparent 26rem),
+    radial-gradient(circle at 88% 24%, rgba(218,171,77,.13), transparent 25rem),
+    linear-gradient(180deg, #fbf8ef 0%, #ffffff 37%, #eff7f1 100%);
+  box-shadow: 0 -24px 70px rgba(2,19,13,.2);
+}
+
+.pf-footer--scof::before {
+  top: -510px;
+  right: -260px;
+  border-color: rgba(25,99,67,.08);
+  box-shadow: 0 0 0 105px rgba(25,99,67,.025), 0 0 0 210px rgba(25,99,67,.018);
+}
+
+.pf-footer--scof::after { background: rgba(121,173,49,.1); }
+
+.pf-footer--scof .pf-stage {
+  border-color: rgba(20,83,57,.13);
+  background:
+    linear-gradient(140deg, rgba(255,255,255,.98), rgba(255,255,255,.72) 54%, rgba(240,248,240,.82)),
+    rgba(255,255,255,.88);
+  box-shadow: 0 35px 90px rgba(22,70,49,.14), inset 0 1px 0 white;
+}
+
+.pf-footer--scof .pf-stage::before {
+  background:
+    radial-gradient(circle at var(--card-x, 76%) var(--card-y, 8%), rgba(121,173,49,.16), transparent 31%),
+    linear-gradient(112deg, transparent 22%, rgba(255,255,255,.72) 45%, transparent 58%);
+}
+
+.pf-footer--scof .pf-stage::after {
+  background: linear-gradient(90deg, transparent, rgba(121,173,49,.62), transparent);
+  box-shadow: 0 0 20px rgba(121,173,49,.18);
+}
+
+.pf-footer--scof .pf-orb {
+  border-color: rgba(184,135,47,.2);
+  background:
+    radial-gradient(circle at 35% 24%, white, transparent 22%),
+    radial-gradient(circle at 50% 66%, rgba(218,171,77,.15), transparent 54%),
+    rgba(255,255,255,.72);
+  box-shadow: 0 30px 68px rgba(50,73,53,.16), 0 0 70px rgba(218,171,77,.1), inset 0 1px 0 white;
+}
+
+.pf-footer--scof .pf-orb::after { background: rgba(35,63,45,.18); }
+.pf-footer--scof .pf-kicker { color: #57871e; }
+.pf-footer--scof .pf-message h2 { color: #0b3525; }
+.pf-footer--scof .pf-message > p { color: #5b6e64; }
+.pf-footer--scof .pf-button { color: #174633; border-color: rgba(18,79,53,.18); background: rgba(255,255,255,.8); box-shadow: 0 10px 28px rgba(27,73,51,.08), inset 0 1px 0 white; }
+.pf-footer--scof .pf-button:hover { border-color: rgba(18,79,53,.3); background: white; }
+.pf-footer--scof .pf-button--primary { color: #102a1e; border-color: transparent; background: #b7dc5d; box-shadow: 0 14px 34px rgba(100,145,39,.2), inset 0 1px 0 rgba(255,255,255,.65); }
+.pf-footer--scof .pf-button--primary:hover { background: #c7e77b; }
+
+.pf-footer--scof .pf-dock {
+  border-color: rgba(22,82,57,.13);
+  background: rgba(255,255,255,.88);
+  box-shadow: 0 24px 58px rgba(21,65,47,.14), inset 0 1px 0 white;
+}
+
+.pf-footer--scof .pf-dock-card + .pf-dock-card::before { background: rgba(22,82,57,.1); }
+.pf-footer--scof .pf-dock-card:hover,
+.pf-footer--scof .pf-dock-card.is-current { border-color: rgba(121,173,49,.2); background: rgba(183,220,93,.12); }
+.pf-footer--scof .pf-dock-copy strong { color: #123d2d; }
+.pf-footer--scof .pf-dock-copy small { color: #718078; }
+.pf-footer--scof .pf-dock-icon:has(img) { border-color: rgba(22,82,57,.1); box-shadow: inset 0 1px 4px white, 0 10px 24px rgba(24,68,49,.13); }
+.pf-footer--scof .pf-dock-coin { border-color: rgba(184,135,47,.22) !important; background: radial-gradient(circle at 38% 22%, #fffdf7, #f6eedb 70%) !important; box-shadow: inset 0 1px 0 white, 0 10px 24px rgba(123,91,29,.13) !important; }
+
+.pf-footer--scof .pf-dock-card:has(.pf-dock-icon--stfirm) { grid-template-columns: 88px minmax(0,1fr); }
+.pf-footer--scof .pf-dock-icon--stfirm {
+  width: 82px;
+  height: 82px;
+  border-radius: 21px;
+  background: white;
+  box-shadow: inset 0 1px 4px white, 0 0 20px rgba(33,167,235,.12), 0 12px 27px rgba(20,55,76,.13);
+  animation: pf-tile-float 3.5s ease-in-out .8s infinite;
+}
+.pf-footer--scof .pf-dock-icon--stfirm img { width: 66px; height: 70px; animation: none; filter: drop-shadow(0 5px 9px rgba(13,42,67,.16)); }
+
+.pf-footer--scof .pf-location small,
+.pf-footer--scof .pf-owner small { color: #77867e; }
+.pf-footer--scof .pf-location strong,
+.pf-footer--scof .pf-owner strong { color: #123d2d; }
+.pf-footer--scof .pf-quicklinks a { color: #5c7065; }
+.pf-footer--scof .pf-quicklinks a:hover { color: #123d2d; }
+.pf-footer--scof .pf-owner p { color: #708078; }
+.pf-footer--scof .pf-legal { border-top-color: rgba(22,82,57,.1); color: #68796f; }
+.pf-footer--scof .pf-legal a { color: #4c6759; }
+.pf-footer--scof .pf-legal a:hover { color: #123d2d; }
+
 @media (max-width: 900px) {
   .whatsapp-float { bottom: calc(22px + env(safe-area-inset-bottom)); }
   .pf-stage { grid-template-columns: 1fr; gap: 22px; padding: 42px 42px 118px; text-align: center; }
@@ -290,12 +387,16 @@
   .pf-dock-card { grid-template-columns: 58px minmax(0,1fr); padding-inline: 11px; }
   .pf-dock-icon { width: 56px; height: 56px; }
   .pf-dock-icon img { width: 51px; height: 53px; }
+  .pf-footer--scof .pf-dock-card:has(.pf-dock-icon--stfirm) { grid-template-columns: 72px minmax(0,1fr); }
+  .pf-footer--scof .pf-dock-icon--stfirm { width: 66px; height: 66px; border-radius: 18px; }
+  .pf-footer--scof .pf-dock-icon--stfirm img { width: 52px; height: 56px; }
   .pf-info { grid-template-columns: 1fr 1fr; }
   .pf-quicklinks { grid-column: 1 / 3; grid-row: 2; }
 }
 
 @media (max-width: 650px) {
   .pf-footer { padding-top: 70px; }
+  .pf-footer--scof { margin-top: -24px; padding-top: 92px; border-radius: 28px 28px 0 0; }
   .pf-wrap { width: min(100% - 20px, 1180px); }
   .pf-stage { padding: 36px 20px 76px; border-radius: 28px; }
   .pf-visual { min-height: 230px; }
@@ -328,10 +429,15 @@
   50% { transform: perspective(400px) rotateY(6deg) rotateX(-3deg) translateY(-8px); }
 }
 
+@keyframes pf-tile-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .pf-footer *, .pf-footer *::before, .pf-footer *::after { transition-duration: .01ms !important; }
   .pf-button:hover, .pf-dock-card:hover { transform: none; }
-  .pf-hero-logo, .pf-dock-icon img, .pf-orb--scof-logo .pf-hero-logo { animation: none !important; }
+  .pf-hero-logo, .pf-dock-icon, .pf-dock-icon img, .pf-orb--scof-logo .pf-hero-logo { animation: none !important; }
 }
 
 @media (forced-colors: active) {

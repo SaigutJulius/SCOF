@@ -1,0 +1,20 @@
+{
+  "title": "Tunajenga — Ravine to the World (Website Film Edit)",
+  "artist": "#KingKunta😎🇩🇪",
+  "source_file": "st-firm-tunajenga-release.mp3",
+  "output_file": "st-firm-tunajenga-website.mp3",
+  "source_start": "00:00:42.000",
+  "source_start_seconds": 42,
+  "source_end": "00:01:52.000",
+  "source_end_seconds": 112,
+  "planned_duration_seconds": 70,
+  "encoded_duration_seconds": 70.03,
+  "audio_bitrate_kbps": 192,
+  "sample_rate_hz": 44100,
+  "channels": 2,
+  "cover": "artwork/tunajenga-cover-web.jpg",
+  "file_size_bytes": 1755669,
+  "sha256": "825EE0CF0BFAA2C8AA67C60BCF9BF0D69F2CFB5B1B53ECF7A1D1BAA29D04569E",
+  "ending_fade_seconds": 1,
+  "created_on": "2026-07-22"
+}

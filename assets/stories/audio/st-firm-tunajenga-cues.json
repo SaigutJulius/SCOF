@@ -1,0 +1,81 @@
+{
+  "title": "Tunajenga — Ravine to the World",
+  "version": "website-70s-from-00:42",
+  "duration_seconds": 70,
+  "source_start_seconds": 42,
+  "source_end_seconds": 112,
+  "tempo_bpm": 113,
+  "languages": ["en", "sw"],
+  "lead_vocal": "female_mezzo_alto",
+  "geographic_terms": {
+    "origin": "Eldama Ravine, Kenya 🇰🇪",
+    "departure": "Moi International Airport · Mombasa, Kenya 🇰🇪",
+    "destination": "Berlin, Deutschland 🇩🇪"
+  },
+  "cues": [
+    {
+      "start": 0,
+      "end": 4,
+      "source_start": 42,
+      "source_end": 46,
+      "chapter": "ST-Firm",
+      "visual": "st_firm_logo_white_illuminated_plate"
+    },
+    {
+      "start": 4,
+      "end": 8,
+      "source_start": 46,
+      "source_end": 50,
+      "chapter": "SSOS",
+      "visual": "ssos_circuit_morph"
+    },
+    {
+      "start": 8,
+      "end": 12,
+      "source_start": 50,
+      "source_end": 54,
+      "chapter": "Akademie",
+      "visual": "akademie_shield_bright_reveal"
+    },
+    {
+      "start": 12,
+      "end": 22,
+      "source_start": 54,
+      "source_end": 64,
+      "chapter": "29 members",
+      "visual": "kenya_deutschland_route_and_29_member_network"
+    },
+    {
+      "start": 22,
+      "end": 33,
+      "source_start": 64,
+      "source_end": 75,
+      "chapter": "Capability",
+      "visual": "akademie_skills_and_capability_badges"
+    },
+    {
+      "start": 33,
+      "end": 45,
+      "source_start": 75,
+      "source_end": 87,
+      "chapter": "Journey",
+      "visual": "moi_airport_to_berlin_arrival_crossfade"
+    },
+    {
+      "start": 45,
+      "end": 58,
+      "source_start": 87,
+      "source_end": 100,
+      "chapter": "Ecosystem and generations",
+      "visual": "engineer_workspace_ecosystem_and_future_generations"
+    },
+    {
+      "start": 58,
+      "end": 70,
+      "source_start": 100,
+      "source_end": 112,
+      "chapter": "Founder finale",
+      "visual": "founder_credit_watcher_seal_and_ecosystem_logos"
+    }
+  ]
+}

@@ -102,11 +102,30 @@
       align-items: flex-end;
       padding: 170px 0 82px;
       color: white;
-      background: var(--forest-deep) url("images coffe farm/1000053894.jpg") center 55% / cover no-repeat;
+      background: var(--forest-deep);
       isolation: isolate;
+      overflow: hidden;
     }
-    .hero::before { content: ""; position: absolute; inset: 0; z-index: -2; background: linear-gradient(90deg, rgba(4,24,17,.91) 0%, rgba(4,24,17,.68) 47%, rgba(4,24,17,.18) 78%), linear-gradient(0deg, rgba(4,24,17,.72), transparent 55%); }
-    .hero::after { content: ""; position: absolute; inset: auto 0 0; z-index: -1; height: 120px; background: linear-gradient(transparent, rgba(4,24,17,.58)); }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: -2%;
+      z-index: -2;
+      background: url("images coffe farm/1000053894.jpg") center 55% / cover no-repeat;
+      filter: brightness(1.2) saturate(1.18) contrast(1.04);
+      transform: scale(1.025);
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background:
+        radial-gradient(circle at 76% 39%, rgba(255,245,199,.16), transparent 30%),
+        linear-gradient(90deg, rgba(4,24,17,.88) 0%, rgba(4,24,17,.62) 42%, rgba(4,24,17,.12) 76%, rgba(4,24,17,.24) 100%),
+        linear-gradient(0deg, rgba(4,24,17,.74) 0%, transparent 48%, rgba(4,24,17,.18) 100%);
+      box-shadow: inset 0 -110px 100px -90px rgba(2,15,10,.92);
+    }
     .hero .eyebrow { color: var(--lime); }
     .hero-copy { max-width: 930px; }
     .hero-copy > p { max-width: 650px; margin-bottom: 32px; color: rgba(255,255,255,.78); font-size: clamp(1.05rem, 2vw, 1.34rem); }
@@ -350,8 +369,13 @@
     @media (max-width: 650px) {
       .wrap { width: min(100% - 28px, 1180px); }
       section { padding: 96px 0; }
-      .hero { padding: 138px 0 54px; background-position: 46% center; }
-      .hero::before { background: linear-gradient(90deg, rgba(4,24,17,.91), rgba(4,24,17,.55)), linear-gradient(0deg, rgba(4,24,17,.82), transparent); }
+      .hero { padding: 138px 0 54px; }
+      .hero::before { background-position: 46% center; filter: brightness(1.14) saturate(1.14) contrast(1.03); }
+      .hero::after {
+        background:
+          linear-gradient(90deg, rgba(4,24,17,.84), rgba(4,24,17,.42)),
+          linear-gradient(0deg, rgba(4,24,17,.88) 0%, rgba(4,24,17,.28) 62%, rgba(4,24,17,.34) 100%);
+      }
       h1 { font-size: clamp(3rem, 15vw, 4.8rem); }
       .hero-foot { grid-template-columns: 1fr; width: 100%; margin-top: 52px; }
       .hero-proof, .hero-proof + .hero-proof { padding: 14px 0; border-left: 0; border-bottom: 1px solid rgba(255,255,255,.16); }
@@ -709,7 +733,7 @@
 
       <nav class="pf-dock" data-footer-glass aria-label="SCOF connected ecosystem">
         <a class="pf-dock-card is-current" href="#farm">
-          <span class="pf-dock-icon pf-dock-coin"><img src="assets/scof-coin-powered-by.png" alt="SCOF concept coin" width="1254" height="1254" loading="lazy" decoding="async"></span>
+          <span class="pf-dock-icon pf-dock-coin"><img src="assets/scof-logo.png" alt="SCOF logo" width="1254" height="1254" loading="lazy" decoding="async"></span>
           <span class="pf-dock-copy"><strong>SCOF</strong><small>Coffee ecosystem · Kitale</small></span>
         </a>
         <a class="pf-dock-card" href="#technology">
@@ -717,7 +741,7 @@
           <span class="pf-dock-copy"><strong>Intelligence</strong><small>AI and operational software</small></span>
         </a>
         <a class="pf-dock-card" href="st-firm.html">
-          <span class="pf-dock-icon"><img src="assets/ST-Firm Logo Transparent.png" alt="ST-Firm supplied logo" width="724" height="780" loading="lazy" decoding="async"></span>
+          <span class="pf-dock-icon pf-dock-icon--stfirm"><img src="assets/ST-Firm Logo Transparent.png" alt="ST-Firm logo" width="724" height="780" loading="lazy" decoding="async"></span>
           <span class="pf-dock-copy"><strong>ST-Firm</strong><small>Engineering backbone · Berlin</small></span>
         </a>
       </nav>

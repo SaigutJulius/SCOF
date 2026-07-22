@@ -151,7 +151,7 @@
     }
   </style>
   <style id="stfirm-2026-refresh">
-    :root { --night:#041b16; --navy:#071b35; --forest:#075b36; --green:#00a651; --leaf:#46b94f; --lime:#bce65a; --paper:#f8fbf8; --ink:#10241a; --muted:#627067; --line:rgba(7,91,54,.14); --radius:28px; --shadow:0 28px 80px rgba(4,45,28,.14); }
+    :root { --night:#041b16; --navy:#071b35; --forest:#075b36; --green:#00a651; --leaf:#46b94f; --lime:#bce65a; --paper:#f8fbf8; --ink:#10241a; --muted:#627067; --line:rgba(7,91,54,.14); --radius:28px; --shadow:0 28px 80px rgba(4,45,28,.14); --section-space:clamp(88px,8vw,104px); --section-head-gap:clamp(36px,4vw,44px); }
     html { scroll-padding-top:92px; }
     body { background:var(--paper); }
     a:focus-visible, button:focus-visible { outline:3px solid var(--lime); outline-offset:4px; }
@@ -162,8 +162,9 @@
     h1 { max-width:760px; color:var(--navy); font-size:clamp(3.6rem,7vw,6.8rem); }
     h1 em { color:var(--green); font-style:normal; }
     h2 { max-width:790px; font-size:clamp(2.45rem,5vw,4.7rem); }
-    .section { position:relative; padding:120px 0; }
-    .section-head { gap:54px; margin-bottom:56px; }
+    .section { position:relative; padding:var(--section-space) 0; }
+    .section-head { gap:46px; margin-bottom:var(--section-head-gap); }
+    .section.ssos-showcase { padding-block:clamp(96px,8.5vw,110px); }
     .btn { min-height:52px; padding-inline:23px; border:1px solid transparent; font-weight:850; transition:transform .2s,box-shadow .2s,background .2s,color .2s; }
     .btn:hover { transform:translateY(-3px); }
     .btn-primary { color:white; background:linear-gradient(135deg,var(--green),#008d46); box-shadow:0 13px 30px rgba(0,166,81,.24); }
@@ -244,10 +245,65 @@
     .proof-point h3 { margin-top:18px; }
     .proof-point p { font-size:.8rem; }
 
-    .model { overflow:hidden; background:radial-gradient(circle at 70% 0,rgba(0,166,81,.18),transparent 28%),var(--night); }
-    .flow article::before { width:13px; height:13px; top:-7px; background:var(--lime); box-shadow:0 0 0 6px var(--night),0 0 20px var(--lime); }
-    .flow small { font-weight:900; }
-    .model-statement { max-width:800px; margin:60px auto 0; color:rgba(255,255,255,.75); font-family:Georgia,serif; font-size:clamp(1.35rem,2.4vw,2rem); text-align:center; }
+    .model {
+      --model-green:#279a55;
+      --model-purple:#7657c8;
+      overflow:hidden;
+      color:var(--ink);
+      background:
+        radial-gradient(circle at 9% 17%,rgba(55,180,95,.19),transparent 26rem),
+        radial-gradient(circle at 72% 34%,rgba(126,82,211,.25),transparent 31rem),
+        radial-gradient(circle at 92% 69%,rgba(91,54,177,.15),transparent 24rem),
+        linear-gradient(180deg,#f8fbf8 0%,#ffffff 16%,#f7f2ff 56%,#f1ebff 76%,#eef8f1 100%);
+      isolation:isolate;
+    }
+    .model::before { content:""; position:absolute; z-index:-1; inset:0; opacity:.58; pointer-events:none; background-image:linear-gradient(rgba(45,108,72,.034) 1px,transparent 1px),linear-gradient(90deg,rgba(105,74,177,.05) 1px,transparent 1px); background-size:58px 58px; mask-image:linear-gradient(to bottom,transparent,#000 15%,#000 78%,transparent); }
+    .model::after { content:""; position:absolute; z-index:-1; right:-13rem; top:5%; width:40rem; height:40rem; border:1px solid rgba(118,87,200,.16); border-radius:50%; box-shadow:0 0 0 90px rgba(118,87,200,.045),0 0 0 180px rgba(104,69,184,.025); pointer-events:none; }
+    .model > .wrap { position:relative; z-index:1; isolation:isolate; }
+    .model > .wrap::before { content:""; position:absolute; z-index:-1; top:25%; right:-7%; width:66%; height:54%; border:1px solid rgba(119,82,201,.12); border-radius:46% 12% 42% 18% / 18% 40% 20% 44%; background:linear-gradient(135deg,rgba(217,203,251,.2),rgba(133,91,217,.17) 48%,rgba(101,65,184,.1)); box-shadow:0 34px 90px rgba(91,54,177,.09),inset 0 1px 0 rgba(255,255,255,.7); transform:rotate(-2deg); pointer-events:none; }
+    .model .eyebrow { color:var(--model-green); }
+    .model .section-head h2 { color:var(--navy); }
+    .model .section-head > p { color:#607169; }
+    .model-intelligent { color:transparent; background:linear-gradient(105deg,#18804a 0%,#557a78 22%,#815bd0 48%,#6740bd 72%,#4d2c9e 100%); background-size:190% 100%; background-clip:text; -webkit-background-clip:text; filter:drop-shadow(0 10px 24px rgba(104,64,186,.14)); }
+    .flow { position:relative; grid-template-columns:repeat(5,minmax(0,1fr)); gap:10px; margin-top:40px; border-top:0; }
+    .flow::before,.flow::after { content:""; position:absolute; z-index:0; top:8px; left:10%; width:80%; height:3px; border-radius:99px; transform-origin:left center; }
+    .flow::before { background:linear-gradient(90deg,#279a55 0%,#22a779 26%,#5d75b0 55%,#7657c8 78%,#8665ce 100%); box-shadow:0 0 18px rgba(70,126,95,.16); }
+    .flow::after { width:20%; background:linear-gradient(90deg,transparent,rgba(255,255,255,.95),transparent); filter:drop-shadow(0 0 8px rgba(103,91,203,.45)); opacity:0; }
+    .flow article { --step-color:#279a55; --step-rgb:39,154,85; position:relative; z-index:1; min-width:0; min-height:215px; margin-top:29px; padding:24px 20px 22px; border:1px solid rgba(var(--step-rgb),.19); border-radius:22px; background:linear-gradient(150deg,rgba(255,255,255,.98),rgba(247,253,248,.84)); box-shadow:0 18px 48px rgba(23,69,47,.09),inset 0 1px 0 #fff; backdrop-filter:blur(14px); transition:transform .28s ease,box-shadow .28s ease,border-color .28s ease; }
+    .flow article:nth-child(2) { --step-color:#1ca276; --step-rgb:28,162,118; }
+    .flow article:nth-child(3) { --step-color:#7059ba; --step-rgb:112,89,186; border-color:rgba(112,89,186,.27); background:linear-gradient(150deg,rgba(255,255,255,.97),rgba(230,222,250,.88)); box-shadow:0 20px 52px rgba(93,67,159,.14),inset 0 1px 0 #fff; }
+    .flow article:nth-child(4) { --step-color:#7650ca; --step-rgb:118,80,202; border-color:rgba(118,80,202,.32); background:linear-gradient(150deg,rgba(250,247,255,.98),rgba(214,198,247,.9)); box-shadow:0 22px 58px rgba(91,54,177,.18),inset 0 1px 0 #fff; }
+    .flow article:nth-child(5) { --step-color:#6338b7; --step-rgb:99,56,183; border-color:rgba(99,56,183,.36); background:linear-gradient(150deg,rgba(246,241,255,.98),rgba(197,175,241,.92)); box-shadow:0 24px 64px rgba(82,43,161,.21),inset 0 1px 0 rgba(255,255,255,.92); }
+    .flow article:hover { transform:translateY(-7px); border-color:rgba(var(--step-rgb),.34); box-shadow:0 28px 64px rgba(var(--step-rgb),.16),inset 0 1px 0 #fff; }
+    .flow article::before { width:17px; height:17px; top:-29px; left:calc(50% - 8px); border:3px solid white; background:var(--step-color); box-shadow:0 0 0 6px rgba(var(--step-rgb),.13),0 0 24px rgba(var(--step-rgb),.36); }
+    .flow small { display:inline-flex; min-width:35px; min-height:27px; align-items:center; justify-content:center; padding:0 9px; border-radius:999px; color:var(--step-color); background:rgba(var(--step-rgb),.09); font-weight:900; letter-spacing:.06em; }
+    .flow h3 { margin:20px 0 8px; color:var(--navy); font-family:Georgia,serif; font-size:1.45rem; }
+    .flow p { margin:0; color:#64736c; font-size:.79rem; line-height:1.55; }
+    .model-statement { position:relative; max-width:850px; margin:46px auto 0; padding:clamp(25px,3.5vw,36px); border:1px solid rgba(105,67,190,.25); border-radius:28px; color:var(--navy); background:linear-gradient(135deg,rgba(255,255,255,.96),rgba(229,218,250,.93)); box-shadow:0 24px 68px rgba(82,48,154,.16),inset 0 1px 0 #fff; font-family:Georgia,serif; font-size:clamp(1.35rem,2.4vw,2rem); text-align:center; }
+    .model-statement::before { content:""; display:block; width:54px; height:4px; margin:0 auto 20px; border-radius:99px; background:linear-gradient(90deg,var(--model-green),var(--model-purple)); box-shadow:0 0 16px rgba(94,89,176,.2); }
+    .model-statement span { color:var(--model-green); }
+    .model-statement span:last-child { color:var(--model-purple); }
+    .model.is-model-ready .flow::before { transform:scaleX(0); }
+    .model.is-model-ready .flow article { opacity:0; transform:translateY(24px) scale(.97); }
+    .model.is-model-visible .flow::before { animation:model-path-draw 1.15s cubic-bezier(.2,.8,.2,1) .12s forwards; }
+    .model.is-model-visible .flow article { animation:model-stage-enter .55s cubic-bezier(.2,.8,.2,1) forwards; }
+    .model.is-model-visible .flow article:nth-child(1) { animation-delay:.16s; }
+    .model.is-model-visible .flow article:nth-child(2) { animation-delay:.32s; }
+    .model.is-model-visible .flow article:nth-child(3) { animation-delay:.48s; }
+    .model.is-model-visible .flow article:nth-child(4) { animation-delay:.64s; }
+    .model.is-model-visible .flow article:nth-child(5) { animation-delay:.8s; }
+    .model.is-model-ambient.is-model-in-view:not(.is-page-hidden) .flow::after { animation:model-path-light 7s ease-in-out infinite; }
+    .model.is-model-ambient.is-model-in-view:not(.is-page-hidden) .flow article::before { animation:model-node-breathe 5.8s ease-in-out infinite; }
+    .model.is-model-ambient.is-model-in-view:not(.is-page-hidden) .flow article:nth-child(2)::before { animation-delay:.7s; }
+    .model.is-model-ambient.is-model-in-view:not(.is-page-hidden) .flow article:nth-child(3)::before { animation-delay:1.4s; }
+    .model.is-model-ambient.is-model-in-view:not(.is-page-hidden) .flow article:nth-child(4)::before { animation-delay:2.1s; }
+    .model.is-model-ambient.is-model-in-view:not(.is-page-hidden) .flow article:nth-child(5)::before { animation-delay:2.8s; }
+    .model.is-model-ambient.is-model-in-view:not(.is-page-hidden) .model-intelligent { animation:model-title-light 8s ease-in-out infinite; }
+    @keyframes model-path-draw { to { transform:scaleX(1); } }
+    @keyframes model-stage-enter { to { opacity:1; transform:none; } }
+    @keyframes model-path-light { 0%,12% { opacity:0; transform:translateX(0); } 24% { opacity:.9; } 70% { opacity:.72; transform:translateX(400%); } 82%,100% { opacity:0; transform:translateX(400%); } }
+    @keyframes model-node-breathe { 0%,100% { box-shadow:0 0 0 6px rgba(var(--step-rgb),.12),0 0 18px rgba(var(--step-rgb),.22); } 50% { box-shadow:0 0 0 9px rgba(var(--step-rgb),.08),0 0 28px rgba(var(--step-rgb),.42); } }
+    @keyframes model-title-light { 0%,100% { background-position:0% 50%; } 58% { background-position:100% 50%; } }
 
     .partnerships { background:#eef8f1; }
     .partner-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
@@ -279,6 +335,8 @@
       .poster-shell img { height:400px; }
     }
     @media (max-width:900px) {
+      .section { padding:82px 0; }
+      .section.ssos-showcase { padding-block:88px; }
       .nav-links { inset:82px 16px auto; padding:24px; border:1px solid var(--line); border-radius:22px; background:rgba(255,255,255,.97); box-shadow:var(--shadow); }
       .nav-links .scof-link { width:100%; text-align:center; }
       .hero { padding:112px 0 40px; }
@@ -292,10 +350,19 @@
       .credibility-grid { grid-template-columns:repeat(2,1fr); }
       .credibility article:nth-child(3) { border-top:1px solid var(--line); border-left:0; }
       .credibility article:nth-child(4) { border-top:1px solid var(--line); }
+      .model > .wrap::before { top:39%; right:-14%; width:92%; height:52%; border-radius:42% 10% 38% 14% / 15% 38% 18% 42%; transform:rotate(-1deg); }
+      .model .flow { grid-template-columns:1fr; gap:10px; margin-top:34px; padding-left:58px; }
+      .model .flow::before,.model .flow::after { top:18px; bottom:18px; left:22px; width:3px; height:auto; transform-origin:center top; }
+      .model .flow::before { background:linear-gradient(180deg,#279a55 0%,#22a779 26%,#5d75b0 55%,#7657c8 78%,#8665ce 100%); }
+      .model .flow::after { width:8px; height:20%; margin-left:-2px; background:linear-gradient(180deg,transparent,rgba(255,255,255,.96),transparent); }
+      .model .flow article { min-height:0; margin-top:0; padding:25px 25px; }
+      .model .flow article::before { top:31px; left:-45px; }
+      .model.is-model-ambient.is-model-in-view:not(.is-page-hidden) .flow::after { animation-name:model-path-light-mobile; }
     }
     @media (max-width:650px) {
       .wrap { width:min(100% - 28px,1200px); }
-      .section { padding:92px 0; }
+      .section { padding:72px 0; }
+      .section.ssos-showcase { padding-block:78px; }
       header,.nav { min-height:72px; }
       .brand-logo { width:46px; height:46px; }
       .brand small { display:none; }
@@ -314,6 +381,15 @@
       .principles { grid-template-columns:1fr; }
       .division { min-height:300px; }
       .proof-image img { height:500px; }
+      .model::before { background-size:38px 38px; opacity:.38; }
+      .model::after { right:-18rem; top:11%; width:32rem; height:32rem; }
+      .model > .wrap::before { top:40%; right:-24%; width:108%; height:51%; background:linear-gradient(155deg,rgba(224,211,252,.18),rgba(128,83,210,.2) 52%,rgba(93,54,176,.11)); }
+      .model .section-head h2 { font-size:clamp(2.55rem,12vw,4rem); }
+      .model .flow { padding-left:48px; }
+      .model .flow::before,.model .flow::after { left:17px; }
+      .model .flow article { padding:23px 20px; border-radius:19px; }
+      .model .flow article::before { left:-40px; }
+      .model-statement { margin-top:36px; padding:23px 19px; border-radius:23px; }
       .partner-card { grid-template-columns:44px 1fr; padding:23px; }
       .partner-number { width:42px; height:42px; }
       .closing .btn { width:100%; }
@@ -321,12 +397,17 @@
     @media (prefers-reduced-motion:reduce) {
       *,*::before,*::after { animation:none!important; }
       .poster-shell { transform:none; }
+      .model.is-model-ready .flow::before { transform:none; }
+      .model.is-model-ready .flow article { opacity:1; transform:none; }
     }
+    @keyframes model-path-light-mobile { 0%,12% { opacity:0; transform:translateY(0); } 24% { opacity:.9; } 70% { opacity:.72; transform:translateY(400%); } 82%,100% { opacity:0; transform:translateY(400%); } }
   </style>
   <link rel="stylesheet" href="assets/footer-system.css">
   <link rel="stylesheet" href="assets/ssos-carousel.css">
+  <link rel="stylesheet" href="assets/stories/st-firm-story.css">
   <script src="assets/footer-system.js" defer></script>
   <script src="assets/ssos-carousel.js" defer></script>
+  <script src="assets/stories/st-firm-story.js?v=20260722-continuous70s" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -385,10 +466,37 @@
 
     <section class="section ssos-showcase" id="ssos">
       <div class="wrap">
-        <div class="ssos-intro reveal">
-          <p class="eyebrow">03 · Sovereign intelligence</p>
-          <h2>Operational intelligence that remains under your control.</h2>
-          <p class="lead">SSOS is the digital brain of the ST‑Firm ecosystem—connecting workflows, organizational knowledge and accountable decisions without separating intelligence from operational reality. Its modular architecture can be configured for organizations, industries, community operations and personal workflows.</p>
+        <div class="ssos-theatre-intro" data-ssos-theatre>
+          <div class="ssos-theatre-copy">
+            <p class="eyebrow">03 · SSOS / Sovereign intelligence</p>
+            <h2 class="ssos-statement" aria-label="Your operations. Your intelligence. Your control.">
+              <span class="ssos-statement-line ssos-statement-line--operations" aria-hidden="true"><span class="ssos-line-motion"><small>Your</small> operations.</span></span>
+              <span class="ssos-statement-line ssos-statement-line--intelligence" aria-hidden="true"><span class="ssos-line-motion"><small>Your</small> intelligence.</span></span>
+              <span class="ssos-statement-line ssos-statement-line--control" aria-hidden="true"><span class="ssos-line-motion"><small>Your</small> control.</span></span>
+            </h2>
+            <p class="ssos-summary" aria-label="SSOS turns fragmented documents, workflows and decisions into one locally controlled intelligence layer—keeping operational knowledge close and human accountability visible.">SSOS turns <span class="ssos-summary-emphasis ssos-summary-emphasis--one">fragmented documents</span>, workflows and decisions into <span class="ssos-summary-emphasis ssos-summary-emphasis--two">one locally controlled intelligence layer</span>—keeping operational knowledge close and <span class="ssos-summary-emphasis ssos-summary-emphasis--three">human accountability visible</span>.</p>
+            <div class="ssos-principles" aria-label="SSOS platform principles">
+              <span>Local-first</span><span>Modular</span><span>Human-governed</span><span>Configurable</span>
+            </div>
+          </div>
+
+          <aside class="ssos-identity" aria-label="SSOS operational platform identity">
+            <div class="ssos-identity-top">
+              <img src="assets/SSOS-Logo-Transparent.png" alt="SSOS" width="731" height="725" loading="lazy" decoding="async">
+              <span class="ssos-live-status"><i aria-hidden="true"></i>Operational platform</span>
+            </div>
+            <p class="ssos-identity-label">One core. Many operating realities.</p>
+            <h3>Configure intelligence around the operation—not the other way around.</h3>
+            <div class="ssos-deployments" aria-label="Configurable SSOS deployments">
+              <span>Business</span><span>Industry</span><span>Agriculture</span><span>Humanitarian</span><span>Community</span><span>Personal</span>
+            </div>
+          </aside>
+        </div>
+
+        <div class="ssos-evidence" aria-label="Verified SSOS platform evidence">
+          <article><strong>06</strong><span>Intelligence agents</span></article>
+          <article><strong>Local</strong><span>Sovereign architecture</span></article>
+          <article><strong>215</strong><span>Collected platform tests</span></article>
         </div>
 
         <div class="ssos-carousel reveal" data-ssos-carousel role="region" aria-roledescription="carousel" aria-label="SSOS product ecosystem previews" tabindex="0">
@@ -396,7 +504,7 @@
             <div class="ssos-screen-chrome" aria-hidden="true"><span></span><span></span><span></span><b>SSOS · OPERATIONAL PLATFORM</b></div>
             <div class="ssos-slides" aria-live="polite">
               <article class="ssos-slide is-active" data-title="Workflow Intelligence" data-kicker="Platform · Operations" data-description="One operational view for workflows, knowledge, accountability and decision support." data-transition="Cover flow" aria-hidden="false">
-                <img src="assets/ssos-mvp.png" alt="SSOS Workflow Intelligence dashboard and operational capabilities" width="1536" height="1024" loading="eager" fetchpriority="high" decoding="async">
+                <img src="assets/ssos-mvp.png" alt="SSOS Workflow Intelligence dashboard and operational capabilities" width="1536" height="1024" loading="lazy" decoding="async">
               </article>
               <article class="ssos-slide" data-title="Humanitarian Operations" data-kicker="SSOS · Public impact" data-description="A connected operations concept for humanitarian coordination, health, education and accountable delivery." data-transition="Page turn" aria-hidden="true">
                 <img src="assets/Humanitarian SSOS.png" alt="Humanitarian SSOS concept connecting coordinated public-impact operations" width="1536" height="1024" loading="lazy" decoding="async">
@@ -417,7 +525,7 @@
           </div>
 
           <div class="ssos-carousel-console">
-            <div class="ssos-carousel-copy">
+            <div class="ssos-carousel-copy" aria-live="polite" aria-atomic="true">
               <p class="ssos-carousel-kicker" data-carousel-kicker>Platform · Operations</p>
               <h3 data-carousel-title>Workflow Intelligence</h3>
               <p data-carousel-description>One operational view for workflows, knowledge, accountability and decision support.</p>
@@ -443,7 +551,7 @@
             <article class="capability"><span>03</span><div><h3>Executive intelligence</h3><p>Give leadership clearer operational visibility and disciplined decision support.</p></div></article>
             <article class="capability"><span>04</span><div><h3>Business continuity</h3><p>Preserve institutional knowledge beyond individual employees and isolated files.</p></div></article>
           </div>
-          <p class="development-note"><strong>Platform status:</strong> SSOS Green KI is a functioning, local-first sovereign intelligence platform developed by ST‑Firm. Its modular architecture can be configured and replicated across businesses, industries, community operations and personal workflows. Each deployment is adapted to its users, data, governance requirements and operating environment.</p>
+          <p class="development-note"><strong>Deployment model:</strong> Each SSOS installation is configured around its users, operating processes, data boundaries, governance requirements and operating environment.</p>
         </div>
       </div>
     </section>
@@ -457,23 +565,163 @@
 
     <section class="section model" id="model">
       <div class="wrap">
-        <div class="section-head reveal"><div><p class="eyebrow">05 · How we build</p><h2>From real activity to intelligent growth.</h2></div><p>The ecosystem begins with useful operations and builds each digital layer only where it strengthens visibility, resilience or long-term value.</p></div>
-        <div class="flow reveal"><article><small>01</small><h3>Operate</h3><p>Start with a real farm, organization or infrastructure need.</p></article><article><small>02</small><h3>Connect</h3><p>Capture workflows, records, assets and accountable actions.</p></article><article><small>03</small><h3>Understand</h3><p>Use SSOS to create context, reporting and decision support.</p></article><article><small>04</small><h3>Strengthen</h3><p>Build resilient energy, computing and operating infrastructure.</p></article><article><small>05</small><h3>Allocate</h3><p>Direct resources toward disciplined expansion and shared capacity.</p></article></div>
-        <p class="model-statement reveal">Technology enters only where it improves clarity, resilience or responsible growth.</p>
+        <div class="section-head reveal"><div><p class="eyebrow">05 · How we build</p><h2>From real activity to <span class="model-intelligent">intelligent growth.</span></h2></div><p>The ecosystem begins with useful operations and builds each digital layer only where it strengthens visibility, resilience or long-term value.</p></div>
+        <div class="flow reveal" data-model-path><article><small>01</small><h3>Operate</h3><p>Start with a real farm, organization or infrastructure need.</p></article><article><small>02</small><h3>Connect</h3><p>Capture workflows, records, assets and accountable actions.</p></article><article><small>03</small><h3>Understand</h3><p>Use SSOS to create context, reporting and decision support.</p></article><article><small>04</small><h3>Strengthen</h3><p>Build resilient energy, computing and operating infrastructure.</p></article><article><small>05</small><h3>Allocate</h3><p>Direct resources toward disciplined expansion and shared capacity.</p></article></div>
+        <p class="model-statement reveal">Technology enters only where it improves <span>clarity</span>, <span>resilience</span> or <span>responsible growth</span>.</p>
       </div>
     </section>
 
-    <section class="section partnerships" id="partnerships">
+    <section class="section partnerships story-section" id="partnerships" data-st-firm-story>
       <div class="wrap">
-        <div class="section-head reveal"><div><p class="eyebrow">06 · Building through partnership</p><h2>Strong systems require strong linkages.</h2></div><p>We welcome relationships that connect operating knowledge, engineering capability, resilient infrastructure and responsible routes to market.</p></div>
-        <div class="partner-grid">
+        <div class="story-heading reveal">
+          <div><p class="eyebrow">06 · ST‑Firm Stories</p><span class="story-original">ST‑FIRM ORIGINAL</span><h2>Knowledge Without <em>Borders.</em></h2></div>
+          <p>Meet the people layer of the ecosystem: practical education connecting Kenya 🇰🇪 and Deutschland 🇩🇪 with intelligent systems, enterprise and real opportunity.</p>
+        </div>
+
+        <article class="story-player reveal" id="akademie-story" aria-labelledby="story-film-title">
+          <div class="story-screen" data-story-screen tabindex="0" aria-label="Knowledge Without Borders interactive film. Press Space to play or pause.">
+            <div class="story-atmosphere" aria-hidden="true"><i></i><i></i><i></i></div>
+            <div class="story-grain" aria-hidden="true"></div>
+
+            <section class="story-scene is-active" data-story-scene="0" aria-hidden="false">
+              <div class="studio-ident">
+                <span class="story-beam" aria-hidden="true"></span>
+                <img src="assets/ST-Firm Logo Transparent.png" alt="" width="724" height="780">
+                <p>ST‑FIRM</p><small>PRESENTS</small>
+              </div>
+            </section>
+
+            <section class="story-scene" data-story-scene="1" aria-hidden="true">
+              <div class="intelligence-ident">
+                <span class="circuit-field" aria-hidden="true"></span>
+                <img src="assets/SSOS-Logo-Transparent.png" alt="" width="731" height="725">
+                <div><small>POWERED BY</small><strong>SSOS</strong><p>Sovereign intelligence · Human control</p></div>
+              </div>
+            </section>
+
+            <section class="story-scene" data-story-scene="2" aria-hidden="true">
+              <div class="akademie-ident">
+                <img src="assets/stories/akademie-shield.png" alt="" width="520" height="511">
+                <div><small>AN ST‑FIRM AKADEMIE STORY</small><strong>Learn · Build · Share · Empower</strong></div>
+              </div>
+            </section>
+
+            <section class="story-scene story-title-scene" data-story-scene="3" aria-hidden="true">
+              <div class="border-route" aria-hidden="true"><span class="route-kenya">KENYA 🇰🇪</span><i></i><b></b><span class="route-deutschland">DEUTSCHLAND 🇩🇪</span></div>
+              <p class="story-kicker">Kenya 🇰🇪 <span>↔</span> Deutschland 🇩🇪</p>
+              <h3 id="story-film-title">Knowledge Without Borders</h3>
+              <p class="story-subtitle">How learning becomes skill, opportunity and generational impact.</p>
+              <div class="member-count"><strong>29</strong><span>active online<br>members</span></div>
+              <div class="member-orbit" data-member-orbit aria-hidden="true"></div>
+            </section>
+
+            <section class="story-scene story-skills-scene" data-story-scene="4" aria-hidden="true">
+              <p class="story-kicker">ST‑FIRM AKADEMIE · PRACTICAL CAPABILITY</p>
+              <h3>Knowledge becomes something you can use.</h3>
+              <div class="skill-cloud" aria-label="Akademie areas of learning">
+                <span>Artificial intelligence</span><span>Python</span><span>Automation</span><span>Cybersecurity</span><span>Entrepreneurship</span><span>Leadership</span><span>Financial literacy</span><span>Sustainability</span>
+              </div>
+            </section>
+
+            <section class="story-scene story-journey-scene" data-story-scene="5" aria-hidden="true">
+              <div class="journey-visuals" aria-hidden="true"><img src="assets/stories/journey-moi-airport.jpg" alt=""><img src="assets/stories/journey-berlin-arrival.jpg" alt=""></div>
+              <p class="story-kicker">ELIMU INAFUNGUA MIPAKA</p>
+              <h3>From Mombasa 🇰🇪 to Deutschland 🇩🇪.</h3>
+              <div class="journey-track" aria-label="Learner transformation journey"><span>Learner</span><i></i><span>Builder</span><i></i><span>Innovator</span><i></i><span>Entrepreneur</span><i></i><span>Global collaborator</span></div>
+              <p>Moi International Airport becomes the departure point for a young engineer carrying his roots into a larger world.</p>
+            </section>
+
+            <section class="story-scene story-ecosystem-scene" data-story-scene="6" aria-hidden="true">
+              <div class="engineering-backdrop" aria-hidden="true"></div>
+              <p class="story-kicker">ONE CONNECTED ECOSYSTEM</p>
+              <h3>Learn here. Build everywhere.</h3>
+              <div class="ecosystem-wheel">
+                <div class="ecosystem-core"><img src="assets/stories/akademie-shield.png" alt="" width="520" height="511"><span>People</span></div>
+                <div class="ecosystem-node node-st"><img src="assets/ST-Firm Logo Transparent.png" alt="" width="724" height="780"><span>Engineering</span></div>
+                <div class="ecosystem-node node-ssos"><img src="assets/SSOS-Logo-Transparent.png" alt="" width="731" height="725"><span>Intelligence</span></div>
+                <div class="ecosystem-node node-scof"><span class="story-bean" aria-hidden="true"></span><b>SCOF</b><span>Agriculture</span></div>
+                <div class="ecosystem-node node-market"><b>↗</b><span>Enterprise</span></div>
+              </div>
+            </section>
+
+            <section class="story-scene story-finale-scene" data-story-scene="7" aria-hidden="true">
+              <div class="finale-logos"><img src="assets/ST-Firm Logo Transparent.png" alt="ST‑Firm" width="724" height="780"><span>×</span><img src="assets/SSOS-Logo-Transparent.png" alt="SSOS" width="731" height="725"><span>×</span><img src="assets/stories/akademie-shield.png" alt="ST‑Firm Akademie" width="520" height="511"><img class="watcher-seal" src="assets/stories/st-firm-watcher-gold-seal.jpg" alt="ST‑Firm Watcher Gold Seal" width="1536" height="1024"></div>
+              <p class="story-kicker">TAKING RAVINE TO THE WORLD 🌍 · BRINGING THE WORLD TO ELDAMA RAVINE 🇰🇪</p>
+              <h3>Engineer Saigut Julius Kipkorir</h3>
+              <p>AKA KingKunta · Kenya 🇰🇪 ↔ Deutschland 🇩🇪</p>
+              <a href="https://wa.me/4915210207415?text=Hello%20ST-Firm%20team%2C%20I%20would%20like%20to%20build%20beyond%20borders%20with%20ST-Firm%20Akademie." target="_blank" rel="noopener noreferrer">Build beyond borders <span aria-hidden="true">→</span></a>
+            </section>
+
+            <button class="story-watch" type="button" data-story-watch aria-label="Start Knowledge Without Borders with sound"><span aria-hidden="true">♫</span><strong>Start film with sound</strong><small>Film + anthem · 01:10</small></button>
+            <div class="story-caption" data-story-caption aria-live="polite">ST‑Firm presents.</div>
+          </div>
+
+          <div class="story-controls" aria-label="Story controls">
+            <button type="button" data-story-toggle aria-label="Play story"><span aria-hidden="true">▶</span></button>
+            <button type="button" data-story-sound aria-label="Enable soundtrack" aria-pressed="true"><span aria-hidden="true">♩</span></button>
+            <button type="button" data-story-language aria-label="Switch captions to Kiswahili"><span aria-hidden="true">EN</span></button>
+            <span class="story-time" data-story-time>00:00 / 01:10</span>
+            <label class="story-volume-label" hidden><span class="sr-only">Soundtrack volume</span><input data-story-volume type="range" min="0" max="1" value="0.8" step="0.05"></label>
+            <label class="story-progress-label"><span class="sr-only">Story progress</span><input data-story-progress type="range" min="0" max="700" value="0" step="1"></label>
+            <button type="button" data-story-replay aria-label="Replay story"><span aria-hidden="true">↻</span></button>
+            <button type="button" data-story-fullscreen aria-label="View story full screen"><span aria-hidden="true">⛶</span></button>
+          </div>
+
+          <div class="story-meta">
+            <div><span class="story-original">ST‑FIRM ORIGINAL</span><h3>Knowledge Without Borders</h3><p>ST‑Firm Akademie · 29 active online members · Kenya 🇰🇪 ↔ Deutschland 🇩🇪</p></div>
+            <div class="story-actions">
+              <button type="button" data-story-appreciate aria-pressed="false"><span aria-hidden="true">♡</span> Appreciate</button>
+              <button type="button" data-story-share><span aria-hidden="true">↗</span> Share</button>
+            </div>
+          </div>
+
+          <nav class="story-chapters" aria-label="Story chapters">
+            <button type="button" data-story-seek="0" class="is-active"><span>01</span>ST‑Firm</button>
+            <button type="button" data-story-seek="8"><span>02</span>Akademie</button>
+            <button type="button" data-story-seek="12"><span>03</span>29 members</button>
+            <button type="button" data-story-seek="22"><span>04</span>Skills</button>
+            <button type="button" data-story-seek="33"><span>05</span>Beyond borders</button>
+            <button type="button" data-story-seek="45"><span>06</span>Ecosystem</button>
+          </nav>
+        </article>
+
+        <div class="story-afterword reveal">
+          <p class="eyebrow">Build with the ecosystem</p>
+          <h3>Strong stories become real through strong linkages.</h3>
+          <p>Choose where your capability connects with ST‑Firm.</p>
+        </div>
+        <div class="partner-grid story-partner-grid">
           <article class="partner-card reveal"><span class="partner-number">01</span><div><h3>Operational partners</h3><p>Farms, cooperatives, processors and growing organizations working through real constraints.</p><a href="https://wa.me/4915210207415?text=Hello%20ST-Firm%20team%2C%20I%20would%20like%20to%20discuss%20an%20operational%20partnership." target="_blank" rel="noopener noreferrer">Discuss an operational partnership →</a></div></article>
           <article class="partner-card reveal"><span class="partner-number">02</span><div><h3>Technology collaborators</h3><p>AI, software, data, cybersecurity and infrastructure specialists building useful systems.</p><a href="https://wa.me/4915210207415?text=Hello%20ST-Firm%20team%2C%20I%20would%20like%20to%20explore%20a%20technology%20collaboration." target="_blank" rel="noopener noreferrer">Explore technology collaboration →</a></div></article>
           <article class="partner-card reveal"><span class="partner-number">03</span><div><h3>Energy and infrastructure</h3><p>Renewable power, edge computing and resilient-connectivity partners for future deployments.</p><a href="https://wa.me/4915210207415?text=Hello%20ST-Firm%20team%2C%20I%20would%20like%20to%20discuss%20an%20energy%20or%20infrastructure%20linkage." target="_blank" rel="noopener noreferrer">Discuss an infrastructure linkage →</a></div></article>
           <article class="partner-card reveal"><span class="partner-number">04</span><div><h3>Market and knowledge partners</h3><p>Buyers, researchers, training institutions and development networks connecting capability to opportunity.</p><a href="https://wa.me/4915210207415?text=Hello%20ST-Firm%20team%2C%20I%20would%20like%20to%20build%20a%20market%20or%20knowledge%20partnership." target="_blank" rel="noopener noreferrer">Build a market relationship →</a></div></article>
         </div>
+
+        <div class="story-rail reveal" aria-labelledby="story-rail-title">
+          <div class="story-rail-head"><h3 id="story-rail-title">Explore the ecosystem</h3><span>Swipe or scroll →</span></div>
+          <div class="story-rail-track">
+            <a href="#ssos" class="story-rail-card story-rail-ssos"><span>01 · Intelligence</span><strong>Your operations.<br>Your intelligence.<br>Your control.</strong><small>Explore SSOS →</small></a>
+            <a href="index.html" class="story-rail-card story-rail-scof"><span>02 · Real operations</span><strong>From Kenyan coffee farms to a digital ecosystem.</strong><small>Enter SCOF →</small></a>
+            <a href="#story" class="story-rail-card story-rail-founder"><span>03 · Founder story</span><strong>From Kenya 🇰🇪 to Deutschland 🇩🇪. From a farm to a systems company.</strong><small>Meet the founder →</small></a>
+          </div>
+        </div>
       </div>
     </section>
+
+    <dialog class="story-share-dialog" data-story-share-dialog aria-labelledby="story-share-title">
+      <form method="dialog"><button class="story-share-close" value="close" aria-label="Close sharing options">×</button></form>
+      <span class="story-original">SHARE THE STORY</span>
+      <h2 id="story-share-title">Knowledge Without Borders</h2>
+      <p>Invite someone to see how learning connects Kenya 🇰🇪, Deutschland 🇩🇪 and the wider ST‑Firm ecosystem.</p>
+      <div class="story-share-grid">
+        <a data-share-whatsapp target="_blank" rel="noopener noreferrer">WhatsApp</a>
+        <a data-share-linkedin target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a data-share-x target="_blank" rel="noopener noreferrer">X</a>
+        <a data-share-email>Email</a>
+      </div>
+      <button class="story-copy-link" type="button" data-share-copy>Copy story link</button>
+      <p class="story-share-status" data-share-status aria-live="polite"></p>
+    </dialog>
 
     <section class="section founder" id="story">
       <div class="wrap founder-grid">
@@ -553,6 +801,35 @@
     document.getElementById('year').textContent = new Date().getFullYear();
     const observer = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } }), { threshold: .12 });
     document.querySelectorAll('.reveal').forEach(element => observer.observe(element));
+    const modelPath = document.querySelector('[data-model-path]');
+    if (modelPath) {
+      const modelSection = modelPath.closest('.model');
+      const modelMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      let modelAmbientTimer = 0;
+      modelSection.classList.add('is-model-ready');
+      const activateModel = () => {
+        modelSection.classList.add('is-model-visible', 'is-model-in-view');
+        if (!modelMotion.matches && !modelSection.classList.contains('is-model-ambient')) {
+          clearTimeout(modelAmbientTimer);
+          modelAmbientTimer = setTimeout(() => modelSection.classList.add('is-model-ambient'), 1450);
+        }
+      };
+      const updateModelVisibility = () => modelSection.classList.toggle('is-page-hidden', document.hidden);
+      updateModelVisibility();
+      document.addEventListener('visibilitychange', updateModelVisibility);
+      if (modelMotion.matches || !('IntersectionObserver' in window)) activateModel();
+      else {
+        const modelObserver = new IntersectionObserver(entries => {
+          if (entries[0].isIntersecting) activateModel();
+          else modelSection.classList.remove('is-model-in-view');
+        }, { threshold: .16, rootMargin: '0px 0px -8% 0px' });
+        modelObserver.observe(modelPath);
+        modelMotion.addEventListener?.('change', () => {
+          if (modelMotion.matches) modelSection.classList.remove('is-model-ambient');
+          else if (modelSection.classList.contains('is-model-in-view')) activateModel();
+        });
+      }
+    }
   </script>
 </body>
 </html>
