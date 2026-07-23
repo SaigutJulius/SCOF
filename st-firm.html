@@ -404,10 +404,14 @@
   </style>
   <link rel="stylesheet" href="assets/footer-system.css">
   <link rel="stylesheet" href="assets/ssos-carousel.css">
-  <link rel="stylesheet" href="assets/stories/st-firm-story.css?v=20260722-film2">
+  <link rel="stylesheet" href="assets/stories/st-firm-story.css?v=20260723-stagehod1">
+  <script src="assets/env-guard.js" defer></script>
   <script src="assets/footer-system.js" defer></script>
   <script src="assets/ssos-carousel.js" defer></script>
-  <script src="assets/stories/st-firm-story.js?v=20260722-film2" defer></script>
+  <script src="assets/stories/story-program.js?v=20260723-stagehod1" defer></script>
+  <script src="assets/stories/st-firm-stage-hod.js?v=20260723-stagehod1" defer></script>
+  <script src="assets/stories/st-firm-watchman.js?v=20260723-stagehod1" defer></script>
+  <script src="assets/stories/st-firm-story.js?v=20260723-stagehod1" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -509,7 +513,7 @@
               <article class="ssos-slide" data-title="Humanitarian Operations" data-kicker="SSOS · Public impact" data-description="A connected operations concept for humanitarian coordination, health, education and accountable delivery." data-transition="Page turn" aria-hidden="true">
                 <img src="assets/Humanitarian SSOS.png" alt="Humanitarian SSOS concept connecting coordinated public-impact operations" width="1536" height="1024" loading="lazy" decoding="async">
               </article>
-              <article class="ssos-slide ssos-slide--contain" style="--slide-art:url('assets/Green AI Future.png')" data-title="Green AI Future" data-kicker="Berlin · Responsible infrastructure" data-description="A German engineering vision for AI, energy intelligence and resilient mid-sized enterprise." data-transition="Depth zoom" aria-hidden="true">
+              <article class="ssos-slide ssos-slide--contain" style="background-image:url('assets/Green AI Future.png')" data-title="Green AI Future" data-kicker="Berlin · Responsible infrastructure" data-description="A German engineering vision for AI, energy intelligence and resilient mid-sized enterprise." data-transition="Depth zoom" aria-hidden="true">
                 <img src="assets/Green AI Future.png" alt="Green AI Future concept for German industry and responsible intelligent infrastructure" width="1254" height="1254" loading="lazy" decoding="async">
               </article>
               <article class="ssos-slide" data-title="Sovereign AI" data-kicker="SSOS · Controlled intelligence" data-description="Documents, workflows, human approval and institutional knowledge connected around a secure intelligence core." data-transition="Glass dissolve" aria-hidden="true">
@@ -701,31 +705,122 @@
               <div class="member-orbit" data-member-orbit aria-hidden="true"></div>
             </section>
 
-            <section class="story-scene story-skills-scene" data-story-scene="4" aria-hidden="true">
-              <p class="story-kicker">ST‑FIRM AKÄDEMIE · PRACTICAL CAPABILITY</p>
-              <h3>Knowledge becomes something you can use.</h3>
-              <div class="skill-cloud" aria-label="Akädemie areas of learning">
-                <span>Artificial intelligence</span><span>Python</span><span>Automation</span><span>Cybersecurity</span><span>Entrepreneurship</span><span>Leadership</span><span>Financial literacy</span><span>Sustainability</span>
+            <section class="story-scene story-skills-scene" data-story-scene="4" data-capability-phase="idle" aria-hidden="true">
+              <div class="capability-backdrop" aria-hidden="true"><i></i><i></i><i></i><span></span></div>
+              <div class="capability-stage">
+                <p class="story-kicker">ST‑FIRM AKÄDEMIE · PRACTICAL CAPABILITY</p>
+                <h3>Knowledge becomes <em>something you can use.</em></h3>
+                <div class="capability-waves" aria-label="Akädemie areas of learning">
+                  <div class="capability-wave capability-wave-one">
+                    <span><i aria-hidden="true">AI</i>Artificial intelligence</span>
+                    <span><i aria-hidden="true">PY</i>Python</span>
+                    <span><i aria-hidden="true">AU</i>Automation</span>
+                    <span><i aria-hidden="true">CY</i>Cybersecurity</span>
+                  </div>
+                  <div class="capability-wave capability-wave-two">
+                    <span><i aria-hidden="true">EN</i>Entrepreneurship</span>
+                    <span><i aria-hidden="true">LE</i>Leadership</span>
+                    <span><i aria-hidden="true">FI</i>Financial literacy</span>
+                    <span><i aria-hidden="true">SU</i>Sustainability</span>
+                  </div>
+                </div>
+                <div class="capability-convergence" aria-hidden="true"><strong>KNOWLEDGE</strong><b>→</b><strong>CAPABILITY</strong></div>
               </div>
             </section>
 
-            <section class="story-scene story-journey-scene" data-story-scene="5" aria-hidden="true">
-              <div class="journey-visuals" aria-hidden="true"><img src="assets/stories/journey-moi-airport.jpg" alt=""><img src="assets/stories/journey-berlin-arrival.jpg" alt=""></div>
-              <p class="story-kicker">ELIMU INAFUNGUA MIPAKA</p>
-              <h3>From Mombasa 🇰🇪 to Deutschland 🇩🇪.</h3>
-              <div class="journey-track" aria-label="Learner transformation journey"><span>Learner</span><i></i><span>Builder</span><i></i><span>Innovator</span><i></i><span>Entrepreneur</span><i></i><span>Global collaborator</span></div>
-              <p>Moi International Airport becomes the departure point for a young engineer carrying his roots into a larger world.</p>
+            <section class="story-scene story-journey-scene" data-story-scene="5" data-journey-phase="idle" aria-hidden="true">
+              <div class="journey-visuals" aria-hidden="true">
+                <img class="journey-frame journey-frame-ravine" src="assets/stories/journey-ravine-before-master.png" alt="" width="1672" height="940">
+                <img class="journey-frame journey-frame-mombasa" src="assets/stories/journey-mombasa-before-1600.jpg" alt="" width="1600" height="900">
+                <img class="journey-frame journey-frame-berlin-arrival" src="assets/stories/journey-berlin-arrival-1600.jpg" alt="" width="1600" height="900">
+                <img class="journey-frame journey-frame-berlin-established" src="assets/stories/journey-berlin-established-1600.jpg" alt="" width="1600" height="900">
+                <div class="journey-color-wash"></div>
+                <div class="journey-runway-lights"></div>
+                <div class="journey-cloud-wipe"><i></i><i></i><i></i></div>
+                <div class="journey-landing-smoke"><i></i><i></i><i></i><i></i></div>
+                <div class="journey-camera-flash"></div>
+                <div class="journey-laptop-signal"></div>
+              </div>
+              <svg class="journey-flight-route" viewBox="0 0 1000 520" preserveAspectRatio="none" data-journey-at="33.300" data-journey-until="35.600" aria-hidden="true">
+                <defs><linearGradient id="journey-route-gradient" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#43c978"/><stop offset=".52" stop-color="#e8c057"/><stop offset="1" stop-color="#8b69df"/></linearGradient></defs>
+                <path class="journey-route-track" d="M 102 414 C 285 328, 392 399, 527 303 S 757 174, 919 121"/>
+                <path class="journey-route-energy" pathLength="1" d="M 102 414 C 285 328, 392 399, 527 303 S 757 174, 919 121"/>
+                <circle class="journey-route-origin" cx="102" cy="414" r="7"/>
+                <circle class="journey-route-destination" cx="919" cy="121" r="7"/>
+              </svg>
+              <div class="journey-aircraft journey-aircraft-takeoff" aria-hidden="true">
+                <span class="journey-contrail journey-contrail-one"></span><span class="journey-contrail journey-contrail-two"></span>
+                <img src="assets/stories/flight/aircraft-takeoff.png" alt="" width="1693" height="929">
+              </div>
+              <div class="journey-aircraft journey-aircraft-landing" aria-hidden="true"><img src="assets/stories/flight/aircraft-landing.png" alt="" width="1536" height="1024"></div>
+              <div class="journey-flight-map" aria-hidden="true"><span>KENYA 🇰🇪</span><i><b>✦</b></i><span>DEUTSCHLAND 🇩🇪</span></div>
+              <div class="journey-location journey-location-ravine"><span>THE BEGINNING</span><strong>ELDAMA RAVINE · KENYA 🇰🇪</strong></div>
+              <div class="journey-location journey-location-mombasa"><span>MOI INTERNATIONAL AIRPORT</span><strong>MOMBASA · KENYA 🇰🇪</strong></div>
+              <div class="journey-location journey-location-berlin-arrival"><span>ARRIVAL · NEW CHAPTER</span><strong>BERLIN · DEUTSCHLAND 🇩🇪</strong></div>
+              <div class="journey-location journey-location-berlin-established"><span>ESTABLISHED · ENGINEERING</span><strong>BERLIN · DEUTSCHLAND 🇩🇪</strong></div>
+              <div class="journey-kinetic-copy" aria-live="polite">
+                <strong class="journey-line journey-line-foundation" data-journey-at="26.000" data-journey-until="27.500">NILITOKA ELDAMA.</strong>
+                <strong class="journey-line journey-line-blueprint" data-journey-at="27.500" data-journey-until="28.900">NDOTO MFUKONI.</strong>
+                <strong class="journey-line journey-line-foundation" data-journey-at="28.900" data-journey-until="30.150">MOI INTERNATIONAL.</strong>
+                <strong class="journey-line journey-line-board" data-journey-at="30.150" data-journey-until="31.500">MOMBASA RUNWAY.</strong>
+                <strong class="journey-line journey-line-takeoff" data-journey-at="31.500" data-journey-until="33.300">NDEGE IKAPAA! <span aria-hidden="true">✈</span></strong>
+                <strong class="journey-line journey-line-flight" data-journey-at="33.300" data-journey-until="34.300">KENYA <b>→</b> DEUTSCHLAND</strong>
+                <strong class="journey-line journey-line-touchdown" data-journey-at="34.300" data-journey-until="35.600">TOUCHDOWN.</strong>
+                <strong class="journey-line journey-line-arrival" data-journey-at="35.600" data-journey-until="36.850">LANDED IN BERLIN.</strong>
+                <strong class="journey-line journey-line-blueprint" data-journey-at="36.850" data-journey-until="38.100">A NEW CHAPTER BEGINS.</strong>
+                <strong class="journey-line journey-line-established" data-journey-at="38.100" data-journey-until="39.250">BERLIN CITY LIGHTS.</strong>
+                <strong class="journey-line journey-line-expand" data-journey-at="39.250" data-journey-until="40.450">BUILDING SOVEREIGN SYSTEMS.</strong>
+                <strong class="journey-line journey-line-engineer" data-journey-at="40.450" data-journey-until="41.700"><span>ENGINEER SAIGUT JULIUS KIPKORIR</span><span>BERLIN · ELDAMA RAVINE</span></strong>
+                <strong class="journey-line journey-line-handoff" data-journey-at="41.700" data-journey-until="43.000">JOURNEY <b>→</b> SYSTEM</strong>
+              </div>
+              <p class="journey-handoff-copy" data-journey-at="41.700" data-journey-until="43.000">Knowledge becomes sovereign intelligence.</p>
             </section>
 
-            <section class="story-scene story-ecosystem-scene" data-story-scene="6" data-ecosystem-phase="idle" aria-hidden="true">
+            <section class="story-scene story-ecosystem-scene" data-story-scene="6" data-ecosystem-phase="idle" data-akademie-beat="idle" aria-hidden="true">
               <div class="engineering-backdrop" aria-hidden="true">
                 <i class="ecosystem-aurora ecosystem-aurora-green"></i>
                 <i class="ecosystem-aurora ecosystem-aurora-purple"></i>
                 <i class="ecosystem-aurora ecosystem-aurora-gold"></i>
               </div>
+              <div class="ecosystem-vocal ecosystem-vocal-ssos" aria-label="Sema SSOS — sovereign intelligence and business continuity">
+                <svg class="ecosystem-ssos-wave" viewBox="0 0 1000 520" preserveAspectRatio="none" aria-hidden="true">
+                  <defs><linearGradient id="ecosystem-ssos-call-gradient" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#22a765"/><stop offset=".44" stop-color="#bde96e"/><stop offset=".72" stop-color="#159aca"/><stop offset="1" stop-color="#8260d4"/></linearGradient></defs>
+                  <path class="ecosystem-ssos-wave-glass" d="M -60 328 C 90 145, 225 438, 390 258 S 675 104, 820 286 S 970 346, 1060 196"/>
+                  <path class="ecosystem-ssos-wave-energy" pathLength="1" d="M -60 328 C 90 145, 225 438, 390 258 S 675 104, 820 286 S 970 346, 1060 196"/>
+                </svg>
+                <div class="ecosystem-ssos-call-copy">
+                  <span>SEMA…</span>
+                  <strong aria-label="SSOS"><i>S</i><i>S</i><i>O</i><i>S</i></strong>
+                  <p>SOVEREIGN INTELLIGENCE <b>·</b> BUSINESS CONTINUITY</p>
+                </div>
+                <div class="ecosystem-ssos-call-product">
+                  <span class="ecosystem-call-aura" aria-hidden="true"><img src="assets/SSOS-Logo-Transparent.png" alt="" width="731" height="725"></span>
+                  <div class="ecosystem-ssos-call-plate"><img src="assets/SSOS-Logo-Transparent.png" alt="SSOS sovereign intelligence" width="731" height="725"><span aria-hidden="true"></span></div>
+                </div>
+              </div>
+              <div class="ecosystem-vocal ecosystem-vocal-akademie" aria-label="ST-Firm Akädemie — Learn, Build, Share, Empower">
+                <div class="ecosystem-akademie-theatre" aria-hidden="true">
+                  <span>ST‑FIRM PRESENTS</span>
+                  <strong class="ecosystem-akademie-vocal-word"><i data-akademie-syllable="aka">AKÄ</i><i data-akademie-syllable="de">DE</i><i data-akademie-syllable="mie">MIE</i></strong>
+                  <small>KNOWLEDGE WITHOUT BORDERS</small>
+                </div>
+                <div class="ecosystem-akademie-lockup">
+                  <div class="ecosystem-akademie-call-product">
+                    <span class="ecosystem-call-aura" aria-hidden="true"><img src="assets/stories/ecosystem/st-firm-akademie-identity-720.jpg" alt="" width="720" height="720"></span>
+                    <div class="ecosystem-akademie-square"><img src="assets/stories/ecosystem/st-firm-akademie-identity-720.jpg" alt="Full ST-Firm Akädemie identity — Learn, Build, Share, Empower — Berlin and Eldama Ravine City" width="720" height="720"><span class="ecosystem-akademie-shine" aria-hidden="true"></span></div>
+                    <span class="ecosystem-akademie-ring" aria-hidden="true"></span>
+                  </div>
+                  <div class="ecosystem-akademie-call-copy">
+                    <span>ST‑FIRM</span>
+                    <strong>AKÄDEMIE</strong>
+                    <div><b>LEARN</b><b>BUILD</b><b>SHARE</b><b>EMPOWER</b></div>
+                    <p>KNOWLEDGE WITHOUT BORDERS <em>·</em> 29 MEMBERS ONLINE</p>
+                  </div>
+                </div>
+              </div>
               <div class="ecosystem-copy">
                 <p class="story-kicker">ONE CONNECTED ECOSYSTEM</p>
-                <h3>Learn here. <span>Build everywhere.</span></h3>
+                <h3>Capability becomes a <span>living system.</span></h3>
               </div>
               <div class="ecosystem-stage">
                 <svg class="ecosystem-connections" viewBox="0 0 1000 520" preserveAspectRatio="none" aria-hidden="true">
@@ -758,18 +853,11 @@
                   </g>
                 </svg>
 
-                <div class="ecosystem-particles" aria-hidden="true">
-                  <i style="--particle-x:18%;--particle-y:18%;--particle-delay:-.8s"></i>
-                  <i style="--particle-x:78%;--particle-y:14%;--particle-delay:-1.9s"></i>
-                  <i style="--particle-x:88%;--particle-y:63%;--particle-delay:-2.7s"></i>
-                  <i style="--particle-x:25%;--particle-y:82%;--particle-delay:-3.5s"></i>
-                  <i style="--particle-x:52%;--particle-y:72%;--particle-delay:-4.2s"></i>
-                </div>
+                <div class="ecosystem-particles" data-ecosystem-members aria-hidden="true"></div>
 
                 <figure class="ecosystem-core">
                   <div class="ecosystem-device">
-                    <div class="ecosystem-device-bar" aria-hidden="true"><i></i><span>CAPABILITY CORE</span><i></i></div>
-                    <img src="assets/stories/ecosystem/st-firm-akademie-identity-720.jpg" alt="ST-Firm Akädemie — Learn, Build, Share, Empower — Berlin and Eldama Ravine City" width="720" height="720">
+                    <img src="assets/stories/ecosystem/st-firm-akademie-identity-720.jpg" alt="Full ST-Firm Akädemie identity — Learn, Build, Share, Empower — Berlin and Eldama Ravine City" width="720" height="720">
                     <span class="ecosystem-device-shine" aria-hidden="true"></span>
                   </div>
                 </figure>
@@ -795,14 +883,15 @@
                 </figure>
 
                 <div class="ecosystem-status" aria-live="polite">
-                  <span data-ecosystem-status="intro"><b>01</b> People awaken possibility</span>
-                  <span data-ecosystem-status="network"><b>02</b> Knowledge becomes capability</span>
-                  <span data-ecosystem-status="powered"><b>03</b> Intelligence strengthens real operations</span>
-                  <span data-ecosystem-status="bridge"><b>04</b> Value builds the next generation</span>
+                  <span data-ecosystem-status="st-link"><b>01</b> Capability becomes engineering</span>
+                  <span data-ecosystem-status="intelligence-link"><b>02</b> Engineering connects intelligence</span>
+                  <span data-ecosystem-status="operations-link"><b>03</b> Intelligence strengthens real operations</span>
+                  <span data-ecosystem-status="value-link"><b>04</b> Operations create real-world value</span>
+                  <span data-ecosystem-status="return-link"><b>05</b> Value returns to people</span>
                 </div>
 
                 <div class="ecosystem-reach">
-                  <span>KENYA 🇰🇪</span><i aria-hidden="true"></i><strong>Knowledge → capability → opportunity</strong><i aria-hidden="true"></i><span>DEUTSCHLAND 🇩🇪</span>
+                  <span>LEARN</span><i aria-hidden="true"></i><strong>ENGINEER → INTELLIGENCE → OPERATE → CREATE VALUE</strong><i aria-hidden="true"></i><span>EMPOWER</span>
                 </div>
               </div>
             </section>
@@ -811,7 +900,7 @@
               <div class="finale-logos" aria-label="ST-Firm connected ecosystem">
                 <div class="finale-brand finale-brand-light"><img src="assets/ST-Firm Logo Transparent.png" alt="ST‑Firm" width="724" height="780"><span>Engineering</span></div>
                 <div class="finale-brand finale-brand-mint"><img src="assets/SSOS-Logo-Transparent.png" alt="SSOS" width="731" height="725"><span>Intelligence</span></div>
-                <div class="finale-brand finale-brand-akademie"><img src="assets/stories/akademie-shield.png" alt="ST‑Firm Akädemie" width="520" height="511"><span>Akädemie</span></div>
+                <div class="finale-brand finale-brand-akademie"><img src="assets/stories/ecosystem/st-firm-akademie-identity-720.jpg" alt="Full ST‑Firm Akädemie identity" width="720" height="720"><span>Akädemie</span></div>
                 <div class="finale-brand finale-brand-scof"><img src="assets/stories/ecosystem/scof-identity-640.jpg" alt="SCOF" width="640" height="640"><span>Agriculture</span></div>
                 <div class="finale-brand finale-brand-powered"><img src="assets/stories/ecosystem/scof-powered-by-720.jpg" alt="SCOF powered by SSOS and ST‑Firm" width="720" height="720"><span>Powered by</span></div>
                 <div class="finale-brand finale-brand-watcher"><img src="assets/stories/st-firm-watcher-gold-seal.jpg" alt="ST‑Firm Watcher Gold Seal" width="1536" height="1024"><span>Accountability</span></div>
@@ -850,8 +939,8 @@
             <button type="button" data-story-seek="8"><span>02</span>Akädemie</button>
             <button type="button" data-story-seek="12"><span>03</span>29 members</button>
             <button type="button" data-story-seek="22"><span>04</span>Skills</button>
-            <button type="button" data-story-seek="33"><span>05</span>Beyond borders</button>
-            <button type="button" data-story-seek="45"><span>06</span>Ecosystem</button>
+            <button type="button" data-story-seek="26"><span>05</span>Beyond borders</button>
+            <button type="button" data-story-seek="43"><span>06</span>Ecosystem</button>
           </nav>
         </article>
 

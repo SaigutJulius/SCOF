@@ -265,11 +265,23 @@ Then visit:
 http://localhost:8000/
 ```
 
-### Option 3: Node.js
+### Option 3: Node.js (bundled dev server, recommended)
+
+The repository ships a zero-dependency static server:
+
+```bash
+node scripts/dev-server.cjs
+```
+
+Then visit `http://localhost:8000/` (or `http://localhost:8000/st-firm.html`). Pass a port as the first argument (`node scripts/dev-server.cjs 5173`) if 8000 is busy.
+
+Or use any static server, e.g.:
 
 ```bash
 npx serve .
 ```
+
+> **Do not open the `.html` files directly from disk (`file://`).** Browsers treat every `file://` document as a unique security origin, which blocks image/audio loads and makes the cinematic story's audio seeking unreliable. If you open a page as `file://`, an on-page banner will remind you to use the server above.
 
 ## Deployment
 

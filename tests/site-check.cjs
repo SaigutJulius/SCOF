@@ -2,6 +2,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 const http = require("node:http");
 const crypto = require("node:crypto");
+const vm = require("node:vm");
 
 const root = path.resolve(__dirname, "..");
 const pages = ["index.html", "st-firm.html"];
@@ -117,10 +118,18 @@ function validatePage(file) {
     check(/AKÄDEMIE/.test(storyBlock) && /Akädemie/.test(storyBlock), `${file}: official Akädemie spelling is visible in title and sentence case`);
     check(!/AKADEMIE|Akademie|AKADËMIE|Akadëmie/.test(publicStoryText), `${file}: outdated public Akädemie spellings are absent`);
     check(!/Germany|GERMANY/.test(storyBlock), `${file}: story uses Deutschland terminology exclusively`);
-    check(/Moi International Airport/.test(storyBlock), `${file}: Mombasa departure story is present`);
+    const journeyImageOrder = ["journey-ravine-before-master.png", "journey-mombasa-before-1600.jpg", "journey-berlin-arrival-1600.jpg", "journey-berlin-established-1600.jpg"].map((asset) => storyBlock.indexOf(asset));
+    check(journeyImageOrder.every((position, index) => position >= 0 && (!index || position > journeyImageOrder[index - 1])) && /MOI INTERNATIONAL AIRPORT/.test(storyBlock), `${file}: Ravine, Mombasa, Berlin arrival and Berlin established frames use the approved order`);
     check(/Engineer Saigut Julius Kipkorir/.test(storyBlock) && /KingKunta/.test(storyBlock), `${file}: founder film credit is present`);
     check(/st-firm-watcher-gold-seal\.jpg/.test(storyBlock), `${file}: Watcher Gold Seal is included`);
-    check((storyBlock.match(/st-firm-akademie-identity-720\.jpg/g) || []).length === 3 && /ecosystem-core/.test(storyBlock), `${file}: corrected full Akädemie identity and its reveal aura appear at 00:08 and Chapter 06`);
+    check((storyBlock.match(/st-firm-akademie-identity-720\.jpg/g) || []).length === 6 && /ecosystem-akademie-square/.test(storyBlock) && /ecosystem-core/.test(storyBlock), `${file}: complete uncropped Akädemie identity appears in every film presentation`);
+    check(!/journey-mombasa-departure-1600\.jpg/.test(storyBlock), `${file}: obsolete suited-departure frame is retired from production`);
+    check((storyBlock.match(/data-journey-at=/g) || []).length === 15 && /NDEGE IKAPAA!/.test(storyBlock) && /LANDED IN BERLIN\./.test(storyBlock) && /data-story-seek="26"/.test(storyBlock) && /data-story-seek="43"/.test(storyBlock), `${file}: exact 26-second flight Journey and 43-second SSOS handoff are explicit`);
+    check(/journey-ravine-before-master\.png/.test(storyBlock) && !/journey-ravine-before-1600\.jpg/.test(storyBlock), `${file}: 26-second Ravine scene uses the approved master PNG`);
+    check((storyBlock.match(/class="capability-wave capability-wave-/g) || []).length === 2 && /Financial literacy/.test(storyBlock) && /Sustainability/.test(storyBlock) && /KNOWLEDGE/.test(storyBlock) && /CAPABILITY/.test(storyBlock), `${file}: all eight Akädemie capabilities use a two-wave sprint`);
+    check(/flight\/aircraft-takeoff\.png/.test(storyBlock) && /flight\/aircraft-landing\.png/.test(storyBlock) && /journey-cloud-wipe/.test(storyBlock) && /journey-landing-smoke/.test(storyBlock), `${file}: cinematic take-off, flight and landing layers are present`);
+    check(/ecosystem-vocal-ssos/.test(storyBlock) && /SEMA…/.test(storyBlock) && /ecosystem-ssos-wave/.test(storyBlock), `${file}: 43-second SSOS vocal-response presentation is present`);
+    check(/ecosystem-vocal-akademie/.test(storyBlock) && (storyBlock.match(/data-akademie-syllable=/g) || []).length === 3 && /data-akademie-syllable="mie">MIE/.test(storyBlock) && /<strong>AKÄDEMIE<\/strong>/.test(storyBlock) && !/ecosystem-device-bar/.test(storyBlock), `${file}: 47-second Akädemie theatre uses correct syllables and the full square identity`);
     check(/st-engineering-layer/.test(storyBlock) && /st-tech-laptop/.test(storyBlock) && /st-tech-ai/.test(storyBlock) && /st-tech-kenya/.test(storyBlock), `${file}: ST-Firm opening contains the engineering, AI and Kenya linkage layer`);
     check(/story-akademie-scene/.test(storyBlock) && /knowledge-ribbon/.test(storyBlock) && /data-akademie-particles/.test(storyBlock), `${file}: Akädemie reveal contains its knowledge ribbon and member handoff`);
     check(/data-story-at="9\.062">LEARN/.test(storyBlock) && /data-story-at="9\.593">BUILD/.test(storyBlock) && /data-story-at="10\.124">SHARE/.test(storyBlock) && /data-story-at="10\.655">EMPOWER/.test(storyBlock), `${file}: four Akädemie values follow the approved beat sequence`);
@@ -134,7 +143,8 @@ function validatePage(file) {
     check(/ssos-cinema-word/.test(storyBlock) && /SOVEREIGN INTELLIGENCE/.test(storyBlock) && /BUSINESS CONTINUITY/.test(storyBlock), `${file}: SSOS title and product promises are retained`);
     check(/sovereign-wave-energy/.test(storyBlock) && /data-story-at="7\.717"/.test(storyBlock), `${file}: sovereign signal choreography reaches the final music cue`);
     check((storyBlock.match(/class="ecosystem-route /g) || []).length === 5, `${file}: Chapter 06 uses a complete five-stage living value loop`);
-    check((storyBlock.match(/data-ecosystem-status=/g) || []).length === 4, `${file}: Chapter 06 phase stories are visible inside the ecosystem stage`);
+    check((storyBlock.match(/data-ecosystem-status=/g) || []).length === 5, `${file}: Chapter 06 phase stories are visible inside the ecosystem stage`);
+    check(/data-ecosystem-members/.test(storyBlock), `${file}: generational value loop has a dedicated 29-member field`);
     check(!/class="ecosystem-orbit"/.test(storyBlock), `${file}: static organizational-chart orbit is removed`);
   }
 }
@@ -180,6 +190,12 @@ function validateSharedAssets() {
 
   const storyCss = read("assets/stories/st-firm-story.css");
   const storyJs = read("assets/stories/st-firm-story.js");
+  const stageHodJs = read("assets/stories/st-firm-stage-hod.js");
+  const watchmanJs = read("assets/stories/st-firm-watchman.js");
+  const programTransportJs = read("assets/stories/story-program.js");
+  const storyProgram = JSON.parse(read("assets/stories/story-program.json"));
+  const programSandbox = { window: {} };
+  vm.runInNewContext(programTransportJs, programSandbox);
   const strippedStoryCss = storyCss.replace(/\/\*[\s\S]*?\*\//g, "").replace(/"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'/g, "");
   check((strippedStoryCss.match(/{/g) || []).length === (strippedStoryCss.match(/}/g) || []).length, "st-firm-story.css: balanced declaration blocks");
   check(/aspect-ratio:\s*16\s*\/\s*9/.test(storyCss), "st-firm-story.css: stable 16:9 film ratio");
@@ -193,22 +209,118 @@ function validateSharedAssets() {
     check(false, "st-firm-story.js: script parses");
   }
   check(!/class StoryBeat/.test(storyJs), "st-firm-story.js: temporary generated beat is removed");
-  check(/class StorySoundtrack/.test(storyJs) && /st-firm-tunajenga-website\.mp3/.test(storyJs), "st-firm-story.js: mastered anthem is the production soundtrack");
+  check(/class StorySoundtrack/.test(storyJs) && /program\.soundtrack\.src/.test(storyJs) && storyProgram.soundtrack.src === "assets/stories/audio/st-firm-tunajenga-website.mp3", "ST-Firm production: mastered anthem is the manifest-governed soundtrack");
   check(!/method:'HEAD'/.test(storyJs) && /new Audio\(\)/.test(storyJs) && /location\.protocol !== 'file:'/.test(storyJs), "st-firm-story.js: production audio supports direct Windows file playback");
-  check(/st-firm-story\.js\?v=20260722-film2/.test(read("st-firm.html")) && /st-firm-story\.css\?v=20260722-film2/.test(read("st-firm.html")), "st-firm.html: story assets have a synchronized cache-busting release version");
+  check((read("st-firm.html").match(/20260723-stagehod1/g) || []).length === 5, "st-firm.html: manifest, HOD, Watchman, story and CSS share the Stage HOD cache release");
   check(/localStorage/.test(storyJs) && /navigator\.clipboard/.test(storyJs), "st-firm-story.js: appreciation and link-copy behavior exists");
-  check(/const duration = 70/.test(storyJs), "st-firm-story.js: 70-second story timing exists");
-  check(/const tempo = 113/.test(storyJs) && /beatDuration = 60 \/ tempo/.test(storyJs), "st-firm-story.js: opening visuals use the mastered 113 BPM timing");
+  check(storyProgram.duration === 70 && /const duration = program\.duration/.test(storyJs), "Stage HOD program: 70-second story timing is authoritative");
+  check(storyProgram.tempo === 113 && /const tempo = program\.tempo/.test(storyJs) && /beatDuration = 60 \/ tempo/.test(storyJs), "Stage HOD program: opening visuals use the mastered 113 BPM timing");
   check(/function renderOpeningRhythm/.test(storyJs) && /--story-glow-opacity/.test(storyJs) && /--story-signal-offset/.test(storyJs), "st-firm-story.js: logo glow and signal motion derive from soundtrack time");
   check(/elapsed < 12/.test(storyJs) && /activeScene === 2 \? 8/.test(storyJs), "st-firm-story.js: soundtrack-driven opening choreography continues through Akädemie at 12 seconds");
   check(/particleColors/.test(storyJs) && /data-akademie-particles/.test(read("st-firm.html")) && (storyJs.match(/index < 29/g) || []).length >= 2, "st-firm-story.js: Akädemie releases exactly 29 deterministic member particles");
-  check(/sceneStarts = \[0, 4, 8, 12, 22, 33, 45, 58\]/.test(storyJs), "st-firm-story.js: eight scenes use the approved 70-second cue map");
+  check(JSON.stringify(storyProgram.sceneStarts) === JSON.stringify([0, 4, 8, 12, 22, 26, 43, 58]) && /const sceneStarts = program\.sceneStarts/.test(storyJs), "Stage HOD program: eight scenes use the exact 26-second Journey cue map");
   check(/00:00 \/ 01:10/.test(read("st-firm.html")) && /max="700"/.test(read("st-firm.html")), "st-firm.html: time display and seek range cover 01:10");
   check(!/threshold:\.35/.test(storyJs) && !/pausedByViewport/.test(storyJs), "st-firm-story.js: scrolling cannot interrupt the anthem");
   check(/soundtrack\.onended = finishStory/.test(storyJs) && /elapsed = Math\.min\(duration, soundtrackTime\)/.test(storyJs), "st-firm-story.js: film timing follows the anthem through completion");
   check(/Start film with sound/.test(read("st-firm.html")) && /Film \+ anthem · 01:10/.test(read("st-firm.html")), "st-firm.html: deliberate sound-first 70-second start is clear");
   check(/data-story-volume/.test(read("st-firm.html")) && /setVolume/.test(storyJs), "st-firm-story.js: adjustable stronger soundtrack exists");
-  check(/function ecosystemPhaseForTime/.test(storyJs) && /value < 48/.test(storyJs) && /value < 52/.test(storyJs) && /value < 56/.test(storyJs) && /value >= 58/.test(storyJs), "st-firm-story.js: Chapter 06 phases follow the 45–58 second audio timeline");
+  const capabilityProgram = storyProgram.scenes.find(scene => scene.id === "capability");
+  check(JSON.stringify(capabilityProgram.phases.map(phase => [phase.start, phase.end])) === JSON.stringify([[22, 22.9], [22.9, 24.2], [24.2, 25.35], [25.35, 26]]) && /function capabilityPhaseForTime/.test(storyJs), "Stage HOD program: four-second capability sprint follows its seek-safe timeline");
+  const journeyProgram = storyProgram.scenes.find(scene => scene.id === "journey");
+  check(JSON.stringify(journeyProgram.phases.map(phase => [phase.id, phase.start, phase.end, phase.primaryFrame])) === JSON.stringify([
+    ["ravine", 26, 28.9, "ravine"],
+    ["mombasa", 28.9, 31.5, "mombasa"],
+    ["takeoff", 31.5, 33.3, "mombasa"],
+    ["flight", 33.3, 34.3, "mombasa"],
+    ["landing", 34.3, 35.6, "berlin-arrival"],
+    ["berlin-arrival", 35.6, 38.1, "berlin-arrival"],
+    ["berlin-established", 38.1, 41.7, "berlin-established"],
+    ["handoff", 41.7, 43, "berlin-established"]
+  ]) && /function journeyPhaseForTime/.test(storyJs), "Stage HOD program: Journey follows the eight-stage Ravine-to-Berlin photo accountability map");
+  const ecosystemProgram = storyProgram.scenes.find(scene => scene.id === "ecosystem");
+  check(JSON.stringify(ecosystemProgram.parallelTracks.akademieVocal.map(phase => [phase.id, phase.start, phase.end])) === JSON.stringify([
+    ["prelude", 47, 47.45],
+    ["aka", 47.45, 47.95],
+    ["de", 47.95, 48.35],
+    ["stretch", 48.35, 49.15],
+    ["settle", 49.15, 49.55],
+    ["lockup", 49.55, 51.8],
+    ["morph", 51.8, 52.4]
+  ]) && /function akademieBeatForTime/.test(storyJs), "Stage HOD program: AKÄDEMIE vocal, extended product hold and identity morph are seek-safe");
+  check(JSON.stringify(ecosystemProgram.phases.map(phase => [phase.id, phase.start, phase.end])) === JSON.stringify([
+    ["ssos-call", 43, 47],
+    ["akademie-call", 47, 50.3],
+    ["st-link", 50.3, 51.8],
+    ["intelligence-link", 51.8, 53.3],
+    ["operations-link", 53.3, 55],
+    ["value-link", 55, 56.5],
+    ["return-link", 56.5, 58]
+  ]) && /function ecosystemPhaseForTime/.test(storyJs), "Stage HOD program: Chapter 06 follows the 43–58 second SSOS, Akädemie and value-loop timeline");
+  check(JSON.stringify(programSandbox.window.STFirmStoryProgram) === JSON.stringify(storyProgram), "story-program.js: direct-file transport matches the canonical JSON manifest");
+  check(storyProgram.chapters.length === 6 && storyProgram.chapters[0].start === 0 && storyProgram.chapters.at(-1).end === 70 && storyProgram.chapters.every((chapter, index) => !index || chapter.start === storyProgram.chapters[index - 1].end), "Stage HOD program: six accountable chapters cover all 70 seconds without gaps");
+  check(storyProgram.deviceProfiles.length >= 6 && storyProgram.deviceProfiles.some(profile => profile.id === "small-phone") && storyProgram.deviceProfiles.some(profile => profile.id === "laptop") && storyProgram.deviceProfiles.some(profile => profile.id === "cinema-desktop"), "Stage HOD program: chameleon profiles cover phones, laptops and cinema desktops");
+  check(storyProgram.preload.every(asset => fs.existsSync(path.join(root, asset))), "Stage HOD program: every governed preload asset exists");
+check(
+  storyProgram.scenes.every(
+    scene =>
+      scene.background ||
+      (Array.isArray(scene.phases) &&
+        scene.phases.length > 0 &&
+        scene.phases.every(phase => phase.background))
+  ),
+  "Stage HOD program: every internal scene declares its expected background"
+);
+  check(["product", "editorial", "label"].every(role => storyProgram.typography[role]?.family && storyProgram.typography[role]?.minimumHold), "Stage HOD program: product, editorial and label typography are governed");
+  check(storyProgram.overlapPolicy.maximumPrimaryFrames === 1 && storyProgram.overlapPolicy.maximumSoundtracks === 1 && storyProgram.overlapPolicy.undeclaredOverlap === "recover", "Stage HOD program: photo and soundtrack overlap accountability is explicit");
+  check([capabilityProgram, journeyProgram, ecosystemProgram].every(scene => scene.phases.every((phase, index) => !index || phase.start === scene.phases[index - 1].end)), "Stage HOD program: phase tracks are contiguous");
+  const runtimeWindow = {
+    matchMedia: () => ({ matches: false }),
+    visualViewport: null,
+    innerWidth: 900,
+    innerHeight: 506,
+    addEventListener() {}
+  };
+  const runtimeSandbox = {
+    window: runtimeWindow,
+    ResizeObserver: undefined,
+    CustomEvent: class {},
+    Image: class {}
+  };
+  vm.runInNewContext(stageHodJs, runtimeSandbox);
+  const fakeStyle = { setProperty() {} };
+  const fakeScreen = {
+    dataset: {},
+    style: fakeStyle,
+    getBoundingClientRect: () => ({ width: 900, height: 506 })
+  };
+  const fakeRoot = {
+    dataset: {},
+    querySelector: () => null,
+    dispatchEvent() {}
+  };
+  const runtimeHod = new runtimeWindow.STFirmStageHOD({ root: fakeRoot, screen: fakeScreen, program: storyProgram });
+  const timestampExpectations = [
+    [26.1, "journey", "ravine", "ravine"],
+    [29, "journey", "mombasa", "mombasa"],
+    [31.7, "journey", "takeoff", "mombasa"],
+    [34.5, "journey", "landing", "berlin-arrival"],
+    [35.8, "journey", "berlin-arrival", "berlin-arrival"],
+    [38.2, "journey", "berlin-established", "berlin-established"],
+    [42, "journey", "handoff", "berlin-established"]
+  ];
+  check(timestampExpectations.every(([time, scene, phase, frame]) => {
+    const state = runtimeHod.resolve(time);
+    return state.scene.id === scene && state.phase.id === phase && state.primaryFrame === frame;
+  }), "Stage HOD runtime: critical Journey timestamps resolve to the expected photograph");
+  check(runtimeHod.resolve(49.6).parallel.akademieVocal === "lockup" && runtimeHod.resolve(51.79).parallel.akademieVocal === "lockup" && runtimeHod.resolve(52).parallel.akademieVocal === "morph" && runtimeHod.resolve(52.4).parallel.akademieVocal === "idle", "Stage HOD runtime: extended AKÄDEMIE hold and morph resolve exactly");
+  check(/class STFirmStageHOD/.test(stageHodJs) && /stateAt\(time\)/.test(stageHodJs) && /prepare\(\)/.test(stageHodJs), "st-firm-stage-hod.js: production controller resolves time, state and asset readiness");
+  check(/class STFirmWatchman/.test(watchmanJs) && /recoverJourney/.test(watchmanJs) && /maximumPrimaryFrames/.test(watchmanJs), "st-firm-watchman.js: observer detects and recovers unauthorised photo state");
+  check(/\.story-journey-scene \.journey-visuals \.journey-frame\{animation:none\}/.test(storyCss) && /data-hod-controlled="true"[\s\S]*animation:none!important/.test(storyCss), "st-firm-story.css: legacy page-time crossfade cannot override HOD photo visibility");
+  check(/identity_to_ecosystem_core_morph/.test(read("assets/stories/audio/st-firm-tunajenga-cues.json")), "song package: extended Akädemie hold and morph are documented");
+  check(/renderJourneyRhythm/.test(storyJs) && /dataset\.journeyUntil/.test(storyJs), "st-firm-story.js: Journey wording is soundtrack-time and seek safe");
+  check(/--journey-takeoff-progress/.test(storyJs) && /--journey-landing-progress/.test(storyJs) && /--journey-flight-map-position/.test(storyJs) && /--journey-shake-x/.test(storyJs), "st-firm-story.js: aircraft, flight, touchdown and camera motion derive from soundtrack time");
+  check(/renderEcosystemRhythm/.test(storyJs) && /--ecosystem-wave-offset/.test(storyJs), "st-firm-story.js: SSOS and ecosystem motion derive from soundtrack time");
+  check(/data-ecosystem-members/.test(read("st-firm.html")) && /ecosystemMembers/.test(storyJs) && (storyJs.match(/index < 29/g) || []).length >= 3, "st-firm-story.js: the return loop creates exactly 29 deterministic member particles");
   check(/data-ecosystem-phase/.test(read("st-firm.html")) && /data-ecosystem-phase=/.test(storyCss), "ST-Firm story: seek-safe ecosystem phases connect JavaScript and CSS");
   check(/is-ecosystem-active/.test(storyJs) && /story-screen\.is-ecosystem-active::after/.test(storyCss), "ST-Firm story: Chapter 06 receives its own luminous player treatment");
   check(/ecosystem-energy-flow/.test(storyCss) && /ecosystem-route-return/.test(storyCss), "st-firm-story.css: directional energy completes the value-return loop");
@@ -233,6 +345,28 @@ function validateSharedAssets() {
   const openingBackdrop = "assets/stories/brandenburg-ravine-tech-1600.jpg";
   const openingBytes = fs.statSync(path.join(root, openingBackdrop)).size;
   check(openingBytes > 180_000 && openingBytes < 350_000, "story backdrop: Brandenburg digital twin is sharp and performance-sized");
+  const journeyAssets = [
+    "assets/stories/journey-mombasa-before-1600.jpg",
+    "assets/stories/journey-berlin-arrival-1600.jpg",
+    "assets/stories/journey-berlin-established-1600.jpg",
+  ];
+  for (const asset of journeyAssets) {
+    const bytes = fs.statSync(path.join(root, asset)).size;
+    check(bytes > 120_000 && bytes < 350_000, `journey asset: ${path.basename(asset)} is sharp and performance-sized`);
+  }
+  const ravineMaster = fs.readFileSync(path.join(root, "assets/stories/journey-ravine-before-master.png"));
+  check(ravineMaster.length > 1_000_000 && ravineMaster.length < 3_000_000 && ravineMaster.subarray(1, 4).toString("ascii") === "PNG", "journey asset: Ravine master is the high-quality production PNG");
+  const aircraftAssets = [
+    "assets/stories/flight/aircraft-takeoff.png",
+    "assets/stories/flight/aircraft-landing.png",
+  ];
+  for (const asset of aircraftAssets) {
+    const image = fs.readFileSync(path.join(root, asset));
+    check(image.length > 300_000 && image.length < 800_000 && image.subarray(1, 4).toString("ascii") === "PNG", `journey aircraft: ${path.basename(asset)} is transparent-production sized`);
+  }
+  check(/ecosystem-akademie-square[\s\S]*aspect-ratio:1[\s\S]*object-fit:contain/.test(storyCss), "st-firm-story.css: the 47-second Akädemie identity stays square and uncropped");
+  check(/ecosystem-akademie-vocal-word/.test(storyCss) && /--akademie-mie-scale/.test(storyCss) && /--akademie-mie-scale/.test(storyJs) && /ecosystem-ssos-letter/.test(storyCss), "st-firm-story.css: soundtrack-driven SSOS and Akädemie choreography exists");
+  check(/font-size:clamp\(1\.5rem,8vw,2\.35rem\)/.test(storyCss) && /ecosystem-akademie-call-copy>div b\{[^}]*font-size:\.42rem/.test(storyCss), "st-firm-story.css: Akädemie theatre remains readable on phones");
 }
 
 function validateSongPackage() {
@@ -276,6 +410,9 @@ function validateSongPackage() {
   check(cues.cues?.[0]?.start === 0 && cues.cues?.at(-1)?.end === 70, "song package: cue map covers the complete film");
   check(cues.cues?.every((cue, index, list) => cue.start < cue.end && (!index || cue.start === list[index - 1].end)), "song package: cue timings are contiguous");
   check(cues.cues?.every((cue) => cue.source_start === cue.start + 42 && cue.source_end === cue.end + 42), "song package: every visual cue maps to the 42-second source offset");
+  check(cues.cues?.[4]?.subcues?.length === 4 && cues.cues?.[4]?.end === 26 && cues.cues?.[4]?.subcues?.at(-1)?.phase === "knowledge_to_capability_bridge", "song package: four-second capability sprint documents both learning waves and the journey bridge");
+  check(cues.cues?.[5]?.subcues?.length === 8 && cues.cues?.[5]?.start === 26 && cues.cues?.[5]?.subcues?.[1]?.start === 28.9 && cues.cues?.[5]?.subcues?.[2]?.phase === "ndege_ikapaa_takeoff" && cues.cues?.[5]?.subcues?.[5]?.phase === "berlin_arrival" && cues.cues?.[5]?.subcues?.at(-1)?.end === 43, "song package: Journey subcues document the exact 26-second Ravine start through both Berlin identities");
+  check(cues.cues?.[6]?.subcues?.length === 12 && cues.cues?.[6]?.subcues?.[0]?.start === 43 && cues.cues?.[6]?.subcues?.[1]?.start === 47 && cues.cues?.[6]?.subcues?.[4]?.start === 48.35 && cues.cues?.[6]?.subcues?.[6]?.start === 49.55 && cues.cues?.[6]?.subcues?.at(-1)?.end === 58, "song package: ecosystem subcues document the SSOS call, Akädemie syllables, identity lockup and value loop");
   check(source.source === "Suno" && source.source_song_id === "0874228e-e6f6-4132-8bf0-fb9399deb9c4", "song package: Suno source identity is recorded");
   check(source.duration === "00:04:45" && source.bit_rate_kbps === 192, "song package: downloaded master metadata is recorded");
   const fullMaster = fs.readFileSync(path.join(audioRoot, "st-firm-tunajenga-full.mp3"));
@@ -353,6 +490,7 @@ const mimeTypes = {
   ".html": "text/html; charset=utf-8",
   ".css": "text/css; charset=utf-8",
   ".js": "text/javascript; charset=utf-8",
+  ".json": "application/json; charset=utf-8",
   ".png": "image/png",
   ".jpg": "image/jpeg",
   ".jpeg": "image/jpeg",
@@ -383,15 +521,27 @@ async function validateHttpSmoke() {
     ["/assets/ssos-carousel.css", "text/css"],
     ["/assets/ssos-carousel.js", "text/javascript"],
     ["/assets/stories/st-firm-story.css", "text/css"],
+    ["/assets/stories/story-program.json", "application/json"],
+    ["/assets/stories/story-program.js", "text/javascript"],
+    ["/assets/stories/st-firm-stage-hod.js", "text/javascript"],
+    ["/assets/stories/st-firm-watchman.js", "text/javascript"],
     ["/assets/stories/st-firm-story.js", "text/javascript"],
     ["/assets/stories/akademie-shield.png", "image/png"],
     ["/assets/stories/ecosystem/st-firm-akademie-identity-720.jpg", "image/jpeg"],
     ["/assets/stories/brandenburg-ravine-tech-1600.jpg", "image/jpeg"],
+    ["/assets/stories/journey-ravine-before-master.png", "image/png"],
+    ["/assets/stories/journey-mombasa-before-1600.jpg", "image/jpeg"],
+    ["/assets/stories/journey-berlin-arrival-1600.jpg", "image/jpeg"],
+    ["/assets/stories/journey-berlin-established-1600.jpg", "image/jpeg"],
+    ["/assets/stories/flight/aircraft-takeoff.png", "image/png"],
+    ["/assets/stories/flight/aircraft-landing.png", "image/png"],
     ["/assets/stories/audio/st-firm-tunajenga-website.mp3", "audio/mpeg"],
     ["/assets/stories/audio/artwork/tunajenga-cover-web.jpg", "image/jpeg"],
     ["/assets/ssos-carousel/sovereign-ai.png", "image/png"],
     ["/assets/ssos-carousel/scof-intelligence.png", "image/png"],
     ["/assets/scof-coin-powered-by.png", "image/png"],
+    ["/assets/Green%20AI%20Future.png", "image/png"],
+    ["/assets/env-guard.js", "text/javascript"],
   ];
 
   try {
@@ -407,10 +557,38 @@ async function validateHttpSmoke() {
   }
 }
 
+function validateStoryEngineHardening() {
+  const stFirm = read("st-firm.html");
+  const index = read("index.html");
+  const story = read("assets/stories/st-firm-story.js");
+
+  // Green AI carousel image: guard against the resolved-through-a-custom-property
+  // double-prefix bug (`assets/assets/...`). The slide must set the background
+  // directly inline so the url resolves against the document, cross-browser.
+  check(!/--slide-art\s*:\s*url\(['"]?assets\//.test(stFirm), "st-firm.html: no relative url() piped through the --slide-art custom property (would resolve to assets/assets/)");
+  check(/style="background-image:url\('assets\/Green AI Future\.png'\)"/.test(stFirm), "st-firm.html: Green AI slide sets background-image directly inline");
+  check(fs.existsSync(path.join(root, "assets/Green AI Future.png")), "assets/Green AI Future.png exists");
+
+  // Resilient transport engine: the film clock must survive audio stalls/seeks.
+  check(/addEventListener\(['"]seeked['"]/.test(story), "st-firm-story.js: wires a 'seeked' listener");
+  check(/settling\s*\(/.test(story) && /this\.seeking/.test(story), "st-firm-story.js: tracks a seeking/settling transport state");
+  check(/is-buffering/.test(story), "st-firm-story.js: surfaces a buffering state instead of freezing");
+  check(/clearSeek\s*\(/.test(story) && /seekWatchdog/.test(story), "st-firm-story.js: has a seek watchdog backstop for file://");
+  check(/requestScrub|scrubFrame/.test(story), "st-firm-story.js: throttles scrubber seeks to avoid media thrash");
+  check(/\.story-buffer-indicator/.test(read("assets/stories/st-firm-story.css")), "st-firm-story.css: defines the buffering indicator");
+
+  // file:// guard + dev server.
+  check(fs.existsSync(path.join(root, "scripts/dev-server.cjs")), "scripts/dev-server.cjs exists");
+  check(fs.existsSync(path.join(root, "assets/env-guard.js")), "assets/env-guard.js exists");
+  check(/src="assets\/env-guard\.js"/.test(stFirm), "st-firm.html: references env-guard.js");
+  check(/src="assets\/env-guard\.js"/.test(index), "index.html: references env-guard.js");
+}
+
 async function main() {
   pages.forEach(validatePage);
   validateSharedAssets();
   validateSongPackage();
+  validateStoryEngineHardening();
   await validateHttpSmoke();
   console.log(`\nSUMMARY: ${passes} passed, ${failures.length} failed`);
   if (failures.length) {

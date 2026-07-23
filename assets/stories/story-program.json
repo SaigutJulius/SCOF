@@ -1,0 +1,314 @@
+{
+  "version": "2026.07.23-stage-hod-1",
+  "title": "Knowledge Without Borders",
+  "duration": 70,
+  "tempo": 113,
+  "sceneStarts": [0, 4, 8, 12, 22, 26, 43, 58],
+  "soundtrack": {
+    "id": "tunajenga-master",
+    "src": "assets/stories/audio/st-firm-tunajenga-website.mp3",
+    "duration": 70,
+    "sourceWindow": {
+      "start": 42,
+      "end": 112
+    },
+    "playbackRate": 1,
+    "defaultVolume": 0.92,
+    "fadeIn": 0.2,
+    "fadeOutStart": 68.5,
+    "masterClock": true,
+    "maximumVisualDrift": 0.08
+  },
+  "typography": {
+    "product": {
+      "family": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Arial, sans-serif",
+      "weight": 900,
+      "desktopScale": 1,
+      "phoneScale": 0.68,
+      "minimumHold": 1.4
+    },
+    "editorial": {
+      "family": "Georgia, \"Times New Roman\", serif",
+      "weight": 500,
+      "desktopScale": 1,
+      "phoneScale": 0.72,
+      "minimumHold": 2.4
+    },
+    "label": {
+      "family": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Arial, sans-serif",
+      "weight": 850,
+      "desktopScale": 1,
+      "phoneScale": 0.76,
+      "minimumHold": 1.2
+    }
+  },
+  "transitions": {
+    "depth-bloom": { "duration": 0.75, "easing": "cubic-bezier(.17,.84,.22,1)" },
+    "signal-morph": { "duration": 0.65, "easing": "cubic-bezier(.18,.82,.2,1)" },
+    "knowledge-ribbon": { "duration": 0.7, "easing": "cubic-bezier(.18,.82,.2,1)" },
+    "particle-release": { "duration": 0.6, "easing": "ease-out" },
+    "capability-wave": { "duration": 0.45, "easing": "cubic-bezier(.17,.85,.22,1)" },
+    "photo-dissolve": { "duration": 0.45, "easing": "ease" },
+    "aircraft-sweep": { "duration": 0.35, "easing": "linear" },
+    "cloud-wipe": { "duration": 0.4, "easing": "ease-out" },
+    "landing-impact": { "duration": 0.35, "easing": "ease-out" },
+    "vocal-stretch": { "duration": 0.4, "easing": "cubic-bezier(.16,.9,.22,1.12)" },
+    "product-hold": { "duration": 2.25, "easing": "linear" },
+    "identity-morph": { "duration": 0.6, "easing": "cubic-bezier(.18,.82,.2,1)" },
+    "finale-settle": { "duration": 0.9, "easing": "cubic-bezier(.18,.82,.2,1)" }
+  },
+  "deviceProfiles": [
+    { "id": "landscape-phone", "when": { "maxHeight": 520, "landscape": true }, "effects": "balanced", "fontScale": 0.72 },
+    { "id": "small-phone", "when": { "maxWidth": 390 }, "effects": "light", "fontScale": 0.68 },
+    { "id": "phone", "when": { "maxWidth": 650 }, "effects": "light", "fontScale": 0.74 },
+    { "id": "tablet", "when": { "maxWidth": 900 }, "effects": "balanced", "fontScale": 0.86 },
+    { "id": "laptop", "when": { "maxWidth": 1439 }, "effects": "balanced", "fontScale": 0.94 },
+    { "id": "cinema-desktop", "when": { "minWidth": 1440 }, "effects": "full", "fontScale": 1 }
+  ],
+  "chapters": [
+    { "id": "st-firm", "number": 1, "label": "ST-Firm", "start": 0, "end": 8, "accountability": "German-Kenyan engineering and SSOS launch" },
+    { "id": "akademie", "number": 2, "label": "Akädemie", "start": 8, "end": 12, "accountability": "Full identity, values and knowledge ribbon" },
+    { "id": "members", "number": 3, "label": "29 members", "start": 12, "end": 22, "accountability": "Knowledge Without Borders and the active member network" },
+    { "id": "skills", "number": 4, "label": "Skills", "start": 22, "end": 26, "accountability": "Practical capability in two learning waves" },
+    { "id": "journey", "number": 5, "label": "Beyond borders", "start": 26, "end": 43, "accountability": "Eldama Ravine through Mombasa to an established Berlin engineering practice" },
+    { "id": "ecosystem", "number": 6, "label": "Ecosystem", "start": 43, "end": 70, "accountability": "SSOS, Akädemie, SCOF, value return and founder finale" }
+  ],
+  "scenes": [
+    {
+      "id": "st-firm-opening",
+      "index": 0,
+      "chapter": "st-firm",
+      "start": 0,
+      "end": 4,
+      "background": { "type": "image", "src": "assets/stories/brandenburg-ravine-tech-1600.jpg", "theme": "bright-blue-white-green" },
+      "typography": "product",
+      "transition": "depth-bloom"
+    },
+    {
+      "id": "ssos-opening",
+      "index": 1,
+      "chapter": "st-firm",
+      "start": 4,
+      "end": 8,
+      "background": { "type": "image", "src": "assets/stories/journey-engineering.jpg", "theme": "white-mint-blue-purple" },
+      "typography": "product",
+      "transition": "signal-morph"
+    },
+    {
+      "id": "akademie-opening",
+      "index": 2,
+      "chapter": "akademie",
+      "start": 8,
+      "end": 12,
+      "primaryAsset": "assets/stories/ecosystem/st-firm-akademie-identity-720.jpg",
+      "background": { "type": "generated", "theme": "ivory-navy-gold-green-purple" },
+      "typography": "product",
+      "transition": "knowledge-ribbon"
+    },
+    {
+      "id": "member-network",
+      "index": 3,
+      "chapter": "members",
+      "start": 12,
+      "end": 22,
+      "background": { "type": "generated", "theme": "bright-white-mint-purple-network" },
+      "typography": "editorial",
+      "transition": "particle-release"
+    },
+    {
+      "id": "capability",
+      "index": 4,
+      "chapter": "skills",
+      "start": 22,
+      "end": 26,
+      "background": { "type": "generated", "theme": "white-mint-purple-gold-grid" },
+      "typography": "product",
+      "transition": "capability-wave",
+      "phases": [
+        { "id": "intro", "start": 22, "end": 22.9 },
+        { "id": "wave-one", "start": 22.9, "end": 24.2 },
+        { "id": "wave-two", "start": 24.2, "end": 25.35 },
+        { "id": "bridge", "start": 25.35, "end": 26 }
+      ]
+    },
+    {
+      "id": "journey",
+      "index": 5,
+      "chapter": "journey",
+      "start": 26,
+      "end": 43,
+      "typography": "product",
+      "phases": [
+        {
+          "id": "ravine",
+          "start": 26,
+          "end": 28.9,
+          "primaryFrame": "ravine",
+          "primaryAsset": "assets/stories/journey-ravine-before-master.png",
+          "background": "ravine",
+          "transition": "photo-dissolve",
+          "allowedOverlaps": ["location-ravine", "journey-copy"],
+          "layout": {
+            "desktop": { "objectPosition": "center 48%", "textZone": "right-bottom" },
+            "phone": { "objectPosition": "36% center", "textZone": "bottom" }
+          }
+        },
+        {
+          "id": "mombasa",
+          "start": 28.9,
+          "end": 31.5,
+          "primaryFrame": "mombasa",
+          "primaryAsset": "assets/stories/journey-mombasa-before-1600.jpg",
+          "background": "mombasa-airport",
+          "transition": "photo-dissolve",
+          "allowedOverlaps": ["location-mombasa", "journey-copy"],
+          "layout": {
+            "desktop": { "objectPosition": "center 48%", "textZone": "right-bottom" },
+            "phone": { "objectPosition": "34% center", "textZone": "bottom" }
+          }
+        },
+        {
+          "id": "takeoff",
+          "start": 31.5,
+          "end": 33.3,
+          "primaryFrame": "mombasa",
+          "primaryAsset": "assets/stories/journey-mombasa-before-1600.jpg",
+          "background": "mombasa-runway",
+          "transition": "aircraft-sweep",
+          "allowedOverlaps": ["aircraft-takeoff", "contrail", "runway-lights", "journey-copy"]
+        },
+        {
+          "id": "flight",
+          "start": 33.3,
+          "end": 34.3,
+          "primaryFrame": "mombasa",
+          "primaryAsset": "assets/stories/journey-mombasa-before-1600.jpg",
+          "background": "flight-clouds",
+          "transition": "cloud-wipe",
+          "allowedOverlaps": ["cloud-wipe", "flight-map", "flight-route", "journey-copy"]
+        },
+        {
+          "id": "landing",
+          "start": 34.3,
+          "end": 35.6,
+          "primaryFrame": "berlin-arrival",
+          "primaryAsset": "assets/stories/journey-berlin-arrival-1600.jpg",
+          "background": "berlin-landing",
+          "transition": "landing-impact",
+          "allowedOverlaps": ["aircraft-landing", "landing-smoke", "camera-flash", "runway-lights", "journey-copy"]
+        },
+        {
+          "id": "berlin-arrival",
+          "start": 35.6,
+          "end": 38.1,
+          "primaryFrame": "berlin-arrival",
+          "primaryAsset": "assets/stories/journey-berlin-arrival-1600.jpg",
+          "background": "berlin-arrival",
+          "transition": "photo-dissolve",
+          "allowedOverlaps": ["location-berlin-arrival", "journey-copy"],
+          "layout": {
+            "desktop": { "objectPosition": "center 47%", "textZone": "right-bottom" },
+            "phone": { "objectPosition": "33% center", "textZone": "bottom" }
+          }
+        },
+        {
+          "id": "berlin-established",
+          "start": 38.1,
+          "end": 41.7,
+          "primaryFrame": "berlin-established",
+          "primaryAsset": "assets/stories/journey-berlin-established-1600.jpg",
+          "background": "berlin-sbahn-engineering",
+          "transition": "photo-dissolve",
+          "allowedOverlaps": ["location-berlin-established", "journey-copy"],
+          "layout": {
+            "desktop": { "objectPosition": "center 46%", "textZone": "right-bottom" },
+            "phone": { "objectPosition": "31% center", "textZone": "bottom" }
+          }
+        },
+        {
+          "id": "handoff",
+          "start": 41.7,
+          "end": 43,
+          "primaryFrame": "berlin-established",
+          "primaryAsset": "assets/stories/journey-berlin-established-1600.jpg",
+          "background": "berlin-to-ssos",
+          "transition": "signal-morph",
+          "allowedOverlaps": ["laptop-signal", "journey-copy", "handoff-copy"]
+        }
+      ]
+    },
+    {
+      "id": "ecosystem",
+      "index": 6,
+      "chapter": "ecosystem",
+      "start": 43,
+      "end": 58,
+      "background": { "type": "image", "src": "assets/stories/journey-engineering.jpg", "theme": "bright-pearl-green-purple-gold" },
+      "typography": "product",
+      "phases": [
+        { "id": "ssos-call", "start": 43, "end": 47, "transition": "signal-morph" },
+        { "id": "akademie-call", "start": 47, "end": 50.3, "transition": "vocal-stretch" },
+        { "id": "st-link", "start": 50.3, "end": 51.8, "transition": "signal-morph" },
+        { "id": "intelligence-link", "start": 51.8, "end": 53.3, "transition": "signal-morph" },
+        { "id": "operations-link", "start": 53.3, "end": 55, "transition": "signal-morph" },
+        { "id": "value-link", "start": 55, "end": 56.5, "transition": "signal-morph" },
+        { "id": "return-link", "start": 56.5, "end": 58, "transition": "particle-release" }
+      ],
+      "parallelTracks": {
+        "akademieVocal": [
+          { "id": "prelude", "start": 47, "end": 47.45 },
+          { "id": "aka", "start": 47.45, "end": 47.95 },
+          { "id": "de", "start": 47.95, "end": 48.35 },
+          { "id": "stretch", "start": 48.35, "end": 49.15 },
+          { "id": "settle", "start": 49.15, "end": 49.55 },
+          { "id": "lockup", "start": 49.55, "end": 51.8, "transition": "product-hold" },
+          { "id": "morph", "start": 51.8, "end": 52.4, "transition": "identity-morph" }
+        ]
+      },
+      "allowedOverlaps": [
+        { "start": 49.55, "end": 51.8, "layers": ["akademie-lockup", "ecosystem-backdrop"], "reason": "prominent product hold" },
+        { "start": 51.8, "end": 52.4, "layers": ["akademie-lockup", "akademie-core"], "reason": "identity-to-core morph" }
+      ]
+    },
+    {
+      "id": "finale",
+      "index": 7,
+      "chapter": "ecosystem",
+      "start": 58,
+      "end": 70,
+      "background": { "type": "generated", "theme": "premium-pearl-green-purple-gold" },
+      "typography": "editorial",
+      "transition": "finale-settle"
+    }
+  ],
+  "preload": [
+    "assets/stories/brandenburg-ravine-tech-1600.jpg",
+    "assets/stories/journey-engineering.jpg",
+    "assets/stories/ecosystem/st-firm-akademie-identity-720.jpg",
+    "assets/stories/journey-ravine-before-master.png",
+    "assets/stories/journey-mombasa-before-1600.jpg",
+    "assets/stories/journey-berlin-arrival-1600.jpg",
+    "assets/stories/journey-berlin-established-1600.jpg",
+    "assets/stories/flight/aircraft-takeoff.png",
+    "assets/stories/flight/aircraft-landing.png",
+    "assets/ST-Firm Logo Transparent.png",
+    "assets/SSOS-Logo-Transparent.png",
+    "assets/stories/ecosystem/scof-identity-640.jpg",
+    "assets/stories/ecosystem/scof-powered-by-720.jpg",
+    "assets/stories/st-firm-watcher-gold-seal.jpg"
+  ],
+  "overlapPolicy": {
+    "maximumPrimaryFrames": 1,
+    "maximumSoundtracks": 1,
+    "photoCrossfadeDuration": 0.45,
+    "undeclaredOverlap": "recover",
+    "duplicateSoundtrack": "pause-duplicate",
+    "authoritativeController": "stage-hod",
+    "observer": "watchman"
+  },
+  "diagnostics": {
+    "queryParameter": "storyDebug",
+    "enabledValue": "1",
+    "sampleInterval": 250
+  }
+}

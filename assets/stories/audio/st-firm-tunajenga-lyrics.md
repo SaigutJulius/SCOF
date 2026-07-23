@@ -144,43 +144,73 @@ Keep this section percussion-led: signature log drum, Gengetone response, commun
 
 > Idee Meets Tech.
 
-## 56-second website cut
+## 70-second website cut
 
-### 0:00–0:04
+The website film uses the approved source window from `00:00:42` to `00:01:52`. Its visual anchors are aligned to the mastered vocal as follows:
 
-> ST-Firm presents.
+### 0:00–0:22 · Brand and members
 
-### 0:04–0:09
+> ST-Firm presents. Powered by SSOS.
+> Learn. Build. Share. Empower.
+> Ravine to the World. The World to Ravine.
 
-> Jenga-jenga… twende—eh!
+### 0:22–0:26 · Practical capability sprint
 
-### 0:09–0:18
+All eight Akädemie learning areas appear in two soundtrack-driven waves before converging into `KNOWLEDGE → CAPABILITY`:
 
-> Ravine to the World! Twende pamoja!  
-> The World to Ravine! Tunajenga!
+- `0:22–0:22.9` — “Knowledge becomes something you can use.”
+- `0:22.9–0:24.2` — AI, Python, automation and cybersecurity.
+- `0:24.2–0:25.35` — entrepreneurship, leadership, financial literacy and sustainability.
+- `0:25.35–0:26` — knowledge-to-capability handoff.
 
-### 0:18–0:25
+### 0:26–0:43 · Ravine, Mombasa, flight and Berlin
 
-> Kenya to Deutschland! Beyond the border!  
-> ST-Firm—future ni yetu!
+The image sequence distinguishes the younger traveller, the first Berlin arrival and the established engineer:
 
-### 0:25–0:35
+- `0:26–0:28.9` — `journey-ravine-before-master.png`; fuller hair, casual jacket and backpack in Eldama Ravine.
+- `0:28.9–0:31.5` — the same younger traveller at Moi International Airport, Mombasa.
+- `0:31.5–0:33.3` — a metallic aircraft accelerates and crosses the screen on “Ndege ikapaa.”
+- `0:33.3–0:34.3` — clouds and a Kenya-to-Deutschland route carry the journey forward.
+- `0:34.3–0:35.6` — a separate aircraft descends; touchdown smoke reveals Berlin.
+- `0:35.6–0:38.1` — the younger traveller lands in Berlin with the backpack and laptop.
+- `0:38.1–0:41.7` — established in Berlin, Deutschland, carrying one laptop beside the S‑Bahn; no suitcase or airport cues.
+- `0:41.7–0:43` — the laptop signal becomes the SSOS intelligence layer.
 
-> Nilibeba ndoto, notebook na laptop,  
-> Mombasa runway—safari ikaanza.
+> Nilitoka Eldama na ndoto mfukoni.
+> Moi International, Mombasa runway.
+> Ndege ikapaa, tukaanza new day.
+> From the green hills to Berlin city lights.
 
-### 0:35–0:44
+### 0:43–0:47 · SSOS vocal call
 
-> Akädemie—tunafungua milango,
-> SSOS—akili inaingia kwa vitendo.  
-> SCOF—kutoka shambani hadi dunia.
+> Sema SSOS—sovereign intelligence and business continuity.
 
-### 0:44–0:49
+### 0:47–0:50.3 · Akädemie vocal call
 
-> Tunajenga kwa vizazi vijavyo.
+The on-screen spelling remains `AKÄDEMIE`; the held vocal is represented by stretching the `MIE` syllable visually:
 
-### 0:49–0:56
+- `0:47–0:47.45` — prelude.
+- `0:47.45–0:47.95` — `AKÄ`.
+- `0:47.95–0:48.35` — `DE`.
+- `0:48.35–0:49.15` — `MIE` vocal stretch.
+- `0:49.15–0:49.55` — the correct full word settles.
+- `0:49.55–0:51.8` — full Akädemie identity, values and 29-member product hold; the connected ecosystem begins behind it at `0:50.3`.
+- `0:51.8–0:52.4` — the full identity morphs continuously into the ecosystem core.
+- `0:52.4–0:58` — the Akädemie identity remains visible as the core while value connections develop.
 
-> Taking Ravine to the World and bringing the World to Eldama Ravine.  
+> Akädemie—Learn. Build. Share. Empower.
+
+### 0:50.3–0:58 · Connected ecosystem with persistent Akädemie core
+
+> Knowledge becomes engineering.
+> Intelligence strengthens real operations.
+> Value returns to people and future generations.
+
+### 0:58–1:05 · Ravine mission
+
+> Taking Ravine to the World and bringing the World to Eldama Ravine.
+
+### 1:05–1:10 · Founder signature
+
 > Engineer Saigut Julius Kipkorir—AKA KingKunta.
 

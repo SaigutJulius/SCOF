@@ -48,27 +48,62 @@
     },
     {
       "start": 22,
-      "end": 33,
+      "end": 26,
       "source_start": 64,
-      "source_end": 75,
+      "source_end": 68,
       "chapter": "Capability",
-      "visual": "akademie_skills_and_capability_badges"
+      "visual": "akademie_two_wave_capability_sprint",
+      "subcues": [
+        { "start": 22, "end": 22.9, "phase": "knowledge_intro" },
+        { "start": 22.9, "end": 24.2, "phase": "ai_python_automation_cybersecurity" },
+        { "start": 24.2, "end": 25.35, "phase": "entrepreneurship_leadership_finance_sustainability" },
+        { "start": 25.35, "end": 26, "phase": "knowledge_to_capability_bridge" }
+      ]
     },
     {
-      "start": 33,
-      "end": 45,
-      "source_start": 75,
-      "source_end": 87,
+      "start": 26,
+      "end": 43,
+      "source_start": 68,
+      "source_end": 85,
       "chapter": "Journey",
-      "visual": "moi_airport_to_berlin_arrival_crossfade"
+      "visual": "ravine_origin_mombasa_airport_aircraft_takeoff_flight_landing_berlin_arrival_established_sbahn_laptop_and_ssos_handoff",
+      "subcues": [
+        { "start": 26, "end": 28.9, "phase": "ravine_origin" },
+        { "start": 28.9, "end": 31.5, "phase": "mombasa_airport_departure" },
+        { "start": 31.5, "end": 33.3, "phase": "ndege_ikapaa_takeoff" },
+        { "start": 33.3, "end": 34.3, "phase": "kenya_to_deutschland_flight" },
+        { "start": 34.3, "end": 35.6, "phase": "berlin_touchdown" },
+        { "start": 35.6, "end": 38.1, "phase": "berlin_arrival" },
+        { "start": 38.1, "end": 41.7, "phase": "established_berlin_sbahn_and_laptop" },
+        { "start": 41.7, "end": 43, "phase": "laptop_to_ssos_handoff" }
+      ]
     },
     {
-      "start": 45,
+      "start": 43,
       "end": 58,
-      "source_start": 87,
+      "source_start": 85,
       "source_end": 100,
       "chapter": "Ecosystem and generations",
-      "visual": "engineer_workspace_ecosystem_and_future_generations"
+      "visual": "sema_ssos_full_akademie_vocal_bounce_and_connected_value_loop",
+      "subcues": [
+        { "start": 43, "end": 47, "phase": "sema_ssos" },
+        { "start": 47, "end": 47.45, "phase": "akademie_prelude" },
+        { "start": 47.45, "end": 47.95, "phase": "akademie_aka" },
+        { "start": 47.95, "end": 48.35, "phase": "akademie_de" },
+        { "start": 48.35, "end": 49.15, "phase": "akademie_mie_vocal_stretch" },
+        { "start": 49.15, "end": 49.55, "phase": "akademie_correct_word_settle" },
+        { "start": 49.55, "end": 50.3, "phase": "full_akademie_identity_lockup" },
+        { "start": 50.3, "end": 51.8, "phase": "akademie_to_st_firm" },
+        { "start": 51.8, "end": 53.3, "phase": "st_firm_to_ssos" },
+        { "start": 53.3, "end": 55, "phase": "ssos_to_scof" },
+        { "start": 55, "end": 56.5, "phase": "scof_to_value" },
+        { "start": 56.5, "end": 58, "phase": "value_returns_to_people" }
+      ],
+      "visual_overlays": [
+        { "start": 49.55, "end": 51.8, "phase": "full_akademie_identity_product_hold", "overlaps": ["akademie_to_st_firm"] },
+        { "start": 51.8, "end": 52.4, "phase": "akademie_identity_to_ecosystem_core_morph", "overlaps": ["st_firm_to_ssos"] },
+        { "start": 52.4, "end": 58, "phase": "akademie_identity_persists_as_ecosystem_core" }
+      ]
     },
     {
       "start": 58,
