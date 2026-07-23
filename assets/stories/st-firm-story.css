@@ -724,6 +724,11 @@
 .story-journey-scene[data-hod-controlled="true"] .journey-frame.is-hod-primary{opacity:1!important;transform:scale(1)}
 .story-journey-scene[data-hod-controlled="true"][data-journey-phase="flight"] .journey-frame.is-hod-primary{filter:saturate(.72) brightness(.78)}
 .story-journey-scene[data-hod-controlled="true"][data-journey-phase="handoff"] .journey-frame.is-hod-primary{filter:saturate(.88) contrast(1.05) brightness(.99)}
+/* Replay reset: when the journey scene is not the active scene, force every frame
+   (even a stuck primary) to a clean opacity:0 with no transition. Prevents the
+   last frame's frozen fade-out from carrying into a second play and covering the
+   Ravine->Mombasa->Berlin sequence. Placed after is-hod-primary to win on order. */
+.story-journey-scene:not(.is-active) .journey-frame,.story-journey-scene:not(.is-active) .journey-frame.is-hod-primary{opacity:0!important;transition:none!important}
 .story-journey-scene[data-asset-state="error"] .journey-visuals{background:radial-gradient(circle at 18% 38%,rgba(47,188,113,.28),transparent 32%),radial-gradient(circle at 82% 24%,rgba(123,83,210,.26),transparent 34%),linear-gradient(120deg,#0b2d25,#132a45 58%,#271b43)}
 
 /* The second AKÄDEMIE identity now holds as a product and morphs into the core. */

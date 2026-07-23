@@ -601,6 +601,10 @@ function validateStoryEngineHardening() {
   const stalePhases = cssPhases.filter((phase) => !validPhases.has(phase));
   check(stalePhases.length === 0, `st-firm-story.css: journey phase selectors all match manifest ids (stale: ${stalePhases.join(", ") || "none"})`);
 
+  // Replay-safety: an inactive journey scene must hard-reset its frames so the
+  // last (Berlin/suit) frame cannot carry a frozen fade into a second play.
+  check(/\.story-journey-scene:not\(\.is-active\) \.journey-frame[^{]*\{opacity:0!important;transition:none!important\}/.test(storyCss), "st-firm-story.css: journey frames hard-reset to opacity:0 when the scene is inactive (replay-safe)");
+
   // file:// guard + dev server.
   check(fs.existsSync(path.join(root, "scripts/dev-server.cjs")), "scripts/dev-server.cjs exists");
   check(fs.existsSync(path.join(root, "assets/env-guard.js")), "assets/env-guard.js exists");
