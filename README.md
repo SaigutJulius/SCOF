@@ -398,7 +398,17 @@ Run the dependency-free website quality gate with:
 node tests\site-check.cjs
 ```
 
-The suite validates both pages, local assets and links, WhatsApp routing, accessibility basics, script syntax, shared CSS, and local HTTP responses. See [TEST_REPORT.md](TEST_REPORT.md) for the latest recorded result.
+The suite validates both pages, local assets and links, WhatsApp routing, accessibility basics, script syntax, shared CSS, brand icons and social meta, and local HTTP responses. See [TEST_REPORT.md](TEST_REPORT.md) for the latest recorded result.
+
+## Brand assets
+
+Favicons, apple-touch icons, web-app manifests, and 1200×630 social-share cards live in `assets/brand/` and are generated from the master logos (`assets/SCOF MAIN LOGO.png`, `assets/ST-Firm Logo Transparent.png`). To regenerate them after a logo change (Windows, zero dependencies):
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/build-brand-icons.ps1
+```
+
+Each favicon is composed on a rounded brand plate so the mark stays visible in both light and dark browser themes.
 
 ## License
 

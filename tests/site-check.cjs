@@ -495,6 +495,7 @@ const mimeTypes = {
   ".jpg": "image/jpeg",
   ".jpeg": "image/jpeg",
   ".mp3": "audio/mpeg",
+  ".webmanifest": "application/manifest+json",
 };
 
 async function validateHttpSmoke() {
@@ -542,6 +543,14 @@ async function validateHttpSmoke() {
     ["/assets/scof-coin-powered-by.png", "image/png"],
     ["/assets/Green%20AI%20Future.png", "image/png"],
     ["/assets/env-guard.js", "text/javascript"],
+    ["/assets/brand/scof-icon-32.png", "image/png"],
+    ["/assets/brand/scof-icon-512.png", "image/png"],
+    ["/assets/brand/scof-og.png", "image/png"],
+    ["/assets/brand/scof.webmanifest", "application/manifest+json"],
+    ["/assets/brand/st-firm-icon-32.png", "image/png"],
+    ["/assets/brand/st-firm-icon-512.png", "image/png"],
+    ["/assets/brand/st-firm-og.png", "image/png"],
+    ["/assets/brand/st-firm.webmanifest", "application/manifest+json"],
   ];
 
   try {
@@ -584,11 +593,42 @@ function validateStoryEngineHardening() {
   check(/src="assets\/env-guard\.js"/.test(index), "index.html: references env-guard.js");
 }
 
+function validateBrandIdentity() {
+  const index = read("index.html");
+  const stFirm = read("st-firm.html");
+
+  const iconSizes = [32, 48, 180, 192, 512];
+  const brandFiles = [
+    ...iconSizes.map((s) => `assets/brand/scof-icon-${s}.png`),
+    ...iconSizes.map((s) => `assets/brand/st-firm-icon-${s}.png`),
+    "assets/brand/scof-og.png",
+    "assets/brand/st-firm-og.png",
+    "assets/brand/scof.webmanifest",
+    "assets/brand/st-firm.webmanifest",
+  ];
+  brandFiles.forEach((file) => check(fs.existsSync(path.join(root, file)), `brand asset exists: ${file}`));
+
+  const cases = [
+    { file: "index.html", html: index, slug: "scof-icon", og: "scof-og" },
+    { file: "st-firm.html", html: stFirm, slug: "st-firm-icon", og: "st-firm-og" },
+  ];
+  for (const { file, html, slug, og } of cases) {
+    check(new RegExp(`rel="icon"[^>]*href="assets/brand/${slug}-32\\.png"`).test(html), `${file}: 32px favicon uses ${slug}`);
+    check(new RegExp(`rel="apple-touch-icon"[^>]*href="assets/brand/${slug}-180\\.png"`).test(html), `${file}: apple-touch-icon present`);
+    check(/rel="manifest"[^>]*\.webmanifest"/.test(html), `${file}: references a web manifest`);
+    check(new RegExp(`property="og:image"[^>]*assets/brand/${og}\\.png`).test(html), `${file}: og:image points to ${og}.png`);
+    check(/name="twitter:card"[^>]*summary_large_image/.test(html), `${file}: twitter summary_large_image card`);
+    // The identity must be the main logo, never the "powered by" coin.
+    check(!/(og:image|rel="icon")[^>]*scof-coin-powered-by/.test(html), `${file}: favicon/og does not use the powered-by coin`);
+  }
+}
+
 async function main() {
   pages.forEach(validatePage);
   validateSharedAssets();
   validateSongPackage();
   validateStoryEngineHardening();
+  validateBrandIdentity();
   await validateHttpSmoke();
   console.log(`\nSUMMARY: ${passes} passed, ${failures.length} failed`);
   if (failures.length) {

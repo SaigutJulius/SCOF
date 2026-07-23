@@ -1,0 +1,14 @@
+{
+  "name": "ST-Firm — We Build Sovereign Systems",
+  "short_name": "ST-Firm",
+  "description": "Architecture, software and AI. Idee meets Tech.",
+  "start_url": "../../st-firm.html",
+  "scope": "../../",
+  "display": "standalone",
+  "background_color": "#f6f9fc",
+  "theme_color": "#ffffff",
+  "icons": [
+    { "src": "st-firm-icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "st-firm-icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable any" }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "SCOF — Kenyan Coffee Ecosystem",
+  "short_name": "SCOF",
+  "description": "From Kenyan farms to a global digital ecosystem.",
+  "start_url": "../../index.html",
+  "scope": "../../",
+  "display": "standalone",
+  "background_color": "#0b2d1f",
+  "theme_color": "#153d2d",
+  "icons": [
+    { "src": "scof-icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "scof-icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable any" }
+  ]
+}
