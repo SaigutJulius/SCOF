@@ -634,7 +634,13 @@
     // the seeking flag so the loop can re-sync instead of holding indefinitely.
     clearTimeout(seekWatchdog);
     seekWatchdog = setTimeout(() => soundtrack.clearSeek(), 1200);
+    // Instant-cut: suppress transitions, commit the jumped-to state with a forced
+    // reflow, then re-enable. Without this, rewind/restart cross-dissolves and
+    // scale-morphs between the old and new journey photo (the Mombasa distortion).
+    screen.classList.add('is-seeking');
     render();
+    void screen.offsetWidth;
+    screen.classList.remove('is-seeking');
   }
 
   async function toggleStory() {

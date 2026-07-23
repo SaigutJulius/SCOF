@@ -584,7 +584,22 @@ function validateStoryEngineHardening() {
   check(/is-buffering/.test(story), "st-firm-story.js: surfaces a buffering state instead of freezing");
   check(/clearSeek\s*\(/.test(story) && /seekWatchdog/.test(story), "st-firm-story.js: has a seek watchdog backstop for file://");
   check(/requestScrub|scrubFrame/.test(story), "st-firm-story.js: throttles scrubber seeks to avoid media thrash");
-  check(/\.story-buffer-indicator/.test(read("assets/stories/st-firm-story.css")), "st-firm-story.css: defines the buffering indicator");
+  const storyCss = read("assets/stories/st-firm-story.css");
+  check(/\.story-buffer-indicator/.test(storyCss), "st-firm-story.css: defines the buffering indicator");
+
+  // Rewind/restart instant-cut guard: a discontinuous jump must snap, not
+  // cross-dissolve/scale-morph between journey photos (the Mombasa distortion).
+  check(/screen\.classList\.add\('is-seeking'\)/.test(story) && /screen\.offsetWidth/.test(story), "st-firm-story.js: seek() applies an instant-cut guard (is-seeking + forced reflow)");
+  check(/\.story-screen\.is-seeking \*\{transition:none!important\}/.test(storyCss), "st-firm-story.css: .is-seeking suppresses transitions for instant cuts");
+
+  // Journey phase-name drift guard: every data-journey-phase selector in the CSS
+  // must reference a real manifest phase id, or per-phase choreography silently dies.
+  const journeyProgram = JSON.parse(read("assets/stories/story-program.json"));
+  const journeyScene = journeyProgram.scenes.find((scene) => scene.id === "journey");
+  const validPhases = new Set([...(journeyScene.phases || []).map((phase) => phase.id), "idle"]);
+  const cssPhases = [...new Set([...storyCss.matchAll(/data-journey-phase="([a-z-]+)"/g)].map((match) => match[1]))];
+  const stalePhases = cssPhases.filter((phase) => !validPhases.has(phase));
+  check(stalePhases.length === 0, `st-firm-story.css: journey phase selectors all match manifest ids (stale: ${stalePhases.join(", ") || "none"})`);
 
   // file:// guard + dev server.
   check(fs.existsSync(path.join(root, "scripts/dev-server.cjs")), "scripts/dev-server.cjs exists");

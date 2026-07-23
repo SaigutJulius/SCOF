@@ -583,15 +583,12 @@
 .journey-frame-ravine{object-position:center 48%;filter:saturate(.92) contrast(1.03) brightness(.98)}
 .journey-frame-mombasa{object-position:center 48%;filter:saturate(.95) contrast(1.02)}
 .journey-frame-berlin{object-position:center 46%;filter:saturate(.82) contrast(1.06) brightness(.97)}
-.story-journey-scene[data-journey-phase="origin"] .journey-frame-ravine{opacity:1;filter:saturate(.98) contrast(1.02);transform:scale(1)}
-.story-journey-scene[data-journey-phase="departure-before"] .journey-frame-mombasa{opacity:1;filter:saturate(.98) contrast(1.02);transform:scale(1)}
-.story-journey-scene[data-journey-phase="transformation"] .journey-frame{transition:none}
-.story-journey-scene[data-journey-phase="transformation"] .journey-frame-mombasa{opacity:var(--journey-mombasa-opacity,1);filter:saturate(var(--journey-mombasa-saturation,.98)) contrast(1.02);transform:scale(var(--journey-mombasa-scale,1))}
-.story-journey-scene[data-journey-phase="transformation"] .journey-frame-berlin{opacity:var(--journey-transform-progress,0);filter:saturate(.82) contrast(1.06) brightness(.97);transform:scale(var(--journey-berlin-scale,1.035))}
-.story-journey-scene[data-journey-phase="established-berlin"] .journey-frame-berlin,.story-journey-scene[data-journey-phase="handoff"] .journey-frame-berlin{opacity:1;filter:saturate(.88) contrast(1.05) brightness(.99);transform:scale(1)}
+/* Retired: per-frame settle rules keyed to old phase names (origin/departure-before/
+   transformation/established-berlin) and the non-existent .journey-frame-berlin class.
+   The live equivalents use the real manifest phase IDs and real frame classes below. */
 .journey-color-wash{position:absolute;z-index:1;inset:0;background:radial-gradient(circle at 76% 22%,rgba(255,204,102,.18),transparent 28%),radial-gradient(circle at 14% 58%,rgba(24,145,105,.14),transparent 30%);mix-blend-mode:screen;transition:background .7s ease}
-.story-journey-scene[data-journey-phase="established-berlin"] .journey-color-wash,.story-journey-scene[data-journey-phase="handoff"] .journey-color-wash{background:radial-gradient(circle at 74% 25%,rgba(113,93,208,.17),transparent 31%),radial-gradient(circle at 17% 55%,rgba(29,142,190,.14),transparent 29%)}
-.journey-transform-scan{position:absolute;z-index:2;top:0;bottom:0;left:var(--journey-scan-left,-8%);width:8%;background:linear-gradient(90deg,transparent,rgba(217,255,138,.24),rgba(255,255,255,.92),rgba(202,181,255,.35),transparent);filter:blur(2px);opacity:0;transform:skewX(-10deg);pointer-events:none}.story-journey-scene[data-journey-phase="transformation"] .journey-transform-scan{opacity:1}
+.story-journey-scene[data-journey-phase="berlin-established"] .journey-color-wash,.story-journey-scene[data-journey-phase="handoff"] .journey-color-wash{background:radial-gradient(circle at 74% 25%,rgba(113,93,208,.17),transparent 31%),radial-gradient(circle at 17% 55%,rgba(29,142,190,.14),transparent 29%)}
+.journey-transform-scan{position:absolute;z-index:2;top:0;bottom:0;left:var(--journey-scan-left,-8%);width:8%;background:linear-gradient(90deg,transparent,rgba(217,255,138,.24),rgba(255,255,255,.92),rgba(202,181,255,.35),transparent);filter:blur(2px);opacity:0;transform:skewX(-10deg);pointer-events:none}
 .journey-laptop-signal{position:absolute;z-index:2;left:25%;top:57%;width:64%;height:3px;border-radius:999px;background:linear-gradient(90deg,#d8ff88,#46cf86 42%,#61aee4 72%,#9b77ec);box-shadow:0 0 8px rgba(95,225,143,.95),0 0 24px rgba(115,93,220,.68);opacity:0;transform:rotate(-10deg) scaleX(0);transform-origin:left center}.story-journey-scene[data-journey-phase="handoff"] .journey-laptop-signal{opacity:var(--journey-handoff-opacity,.35);transform:rotate(-10deg) scaleX(var(--journey-handoff-progress,0))}
 .journey-flight-route{inset:0;width:100%;height:100%;opacity:0;pointer-events:none;transition:opacity .35s ease}
 .journey-flight-route.is-cued{opacity:.9}
@@ -602,7 +599,6 @@
 .journey-location{top:7%;display:grid;gap:2px;max-width:42%;padding:7px 10px;border:1px solid rgba(255,255,255,.28);border-radius:12px;background:rgba(5,24,30,.46);box-shadow:0 12px 32px rgba(0,0,0,.18);opacity:0;transform:translateY(-10px);transition:opacity .45s ease,transform .55s ease;backdrop-filter:blur(14px)}
 .journey-location span{color:#d9ff8a;font-size:.42rem;font-weight:900;letter-spacing:.15em}.journey-location strong{font-size:.64rem;letter-spacing:.08em}
 .journey-location-ravine,.journey-location-mombasa{left:5%}.journey-location-berlin{right:5%;text-align:right}
-.story-journey-scene[data-journey-phase="origin"] .journey-location-ravine,.story-journey-scene[data-journey-phase="departure-before"] .journey-location-mombasa,.story-journey-scene[data-journey-phase="transformation"] .journey-location-mombasa,.story-journey-scene[data-journey-phase="established-berlin"] .journey-location-berlin,.story-journey-scene[data-journey-phase="handoff"] .journey-location-berlin{opacity:1;transform:none}
 .journey-kinetic-copy{right:5%;bottom:11%;left:42%;height:30%;display:grid;place-items:end stretch;text-align:right;pointer-events:none}
 .journey-line{position:absolute;right:0;bottom:0;max-width:100%;color:#fff;font-family:Arial,sans-serif;font-size:clamp(1.65rem,4.6vw,4.2rem);font-weight:950;letter-spacing:-.045em;line-height:.9;text-shadow:0 9px 35px rgba(0,0,0,.48);opacity:0;filter:blur(6px);transform:translateY(18px) scale(.93)}
 .journey-line.is-cued{animation:journey-copy-arrive .55s cubic-bezier(.17,.88,.23,1.08) both}
@@ -721,6 +717,10 @@
 .st-launch-copy,.ssos-launch-copy,.akademie-story-copy,.capability-stage,.journey-line,.ecosystem-copy,.ecosystem-vocal,.story-caption,.story-controls,.story-chapters{font-family:var(--story-font-product)}
 .story-screen[data-hod-transition] .journey-frame{transition-duration:var(--hod-transition-duration,.45s);transition-timing-function:var(--hod-transition-easing,ease)}
 .story-journey-scene[data-hod-controlled="true"] .journey-frame{animation:none!important;opacity:0!important;pointer-events:none}
+/* Instant-cut on seek/rewind/restart: a discontinuous time jump must snap to the
+   target frame, not cross-dissolve/scale from the frame we jumped away from. The
+   class is applied only for the single committed frame of a seek. */
+.story-screen.is-seeking *{transition:none!important}
 .story-journey-scene[data-hod-controlled="true"] .journey-frame.is-hod-primary{opacity:1!important;transform:scale(1)}
 .story-journey-scene[data-hod-controlled="true"][data-journey-phase="flight"] .journey-frame.is-hod-primary{filter:saturate(.72) brightness(.78)}
 .story-journey-scene[data-hod-controlled="true"][data-journey-phase="handoff"] .journey-frame.is-hod-primary{filter:saturate(.88) contrast(1.05) brightness(.99)}
