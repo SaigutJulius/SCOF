@@ -605,6 +605,10 @@ function validateStoryEngineHardening() {
   // last (Berlin/suit) frame cannot carry a frozen fade into a second play.
   check(/\.story-journey-scene:not\(\.is-active\) \.journey-frame[^{]*\{opacity:0!important;transition:none!important\}/.test(storyCss), "st-firm-story.css: journey frames hard-reset to opacity:0 when the scene is inactive (replay-safe)");
 
+  // Opening 'presents': PRE walks in from the left, SENTS from the right, converging.
+  check(/@keyframes st-present-walk-left/.test(storyCss) && /@keyframes st-present-walk-right/.test(storyCss), "st-firm-story.css: 'presents' has left + right convergence keyframes");
+  check(/strong\.is-cued span:nth-child\(-n\+3\)/.test(storyCss) && /strong\.is-cued span:nth-child\(n\+4\)/.test(storyCss), "st-firm-story.css: PRE/SENTS entrance is split by nth-child");
+
   // file:// guard + dev server.
   check(fs.existsSync(path.join(root, "scripts/dev-server.cjs")), "scripts/dev-server.cjs exists");
   check(fs.existsSync(path.join(root, "assets/env-guard.js")), "assets/env-guard.js exists");
