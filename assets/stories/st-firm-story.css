@@ -1,4 +1,6 @@
 /* ST-Firm Stories — cinematic, accessible presentation system */
+/* Archivo Black (SIL OFL 1.1, © 2020 The Archivo Project Authors) — self-hosted; see assets/fonts/OFL.txt */
+@font-face{font-family:"Archivo Black";font-style:normal;font-weight:900;font-display:swap;src:url("../fonts/archivo-black.woff2") format("woff2")}
 .story-section {
   --story-night:#06120f;
   --story-green:#0d9f5b;
@@ -104,7 +106,7 @@
 .st-launch-copy small{display:flex;gap:4px;margin-bottom:7px;color:#fff;font-size:.5rem;font-weight:950;letter-spacing:.16em}.st-launch-copy small span{display:inline-flex;padding:4px 7px;border-radius:999px;background:linear-gradient(100deg,rgba(5,126,112,.94),rgba(8,48,61,.95));box-shadow:0 5px 14px rgba(10,54,66,.16),inset 0 1px rgba(255,255,255,.22)}.st-launch-copy small span:last-child{background:linear-gradient(100deg,rgba(9,56,75,.96),rgba(82,58,143,.94))}
 .st-launch-copy p{display:flex;margin:0;color:#0b3153;font-family:Arial,sans-serif;font-size:clamp(1.8rem,4.6vw,3.6rem);font-weight:950;letter-spacing:.035em;line-height:.86;text-shadow:0 10px 35px rgba(29,83,123,.12)}
 .st-launch-copy p span{display:inline-block;opacity:0;transform:translateY(18px) rotateX(-38deg) scale(.78)}.st-launch-copy p.is-cued span{animation:st-letter-arrive .5s var(--letter-delay,0s) cubic-bezier(.16,.88,.25,1.18) both,st-letter-breathe 2.35s calc(var(--letter-delay,0s) + .62s) ease-in-out infinite}.st-launch-copy p span:nth-child(1){--letter-delay:0s}.st-launch-copy p span:nth-child(2){--letter-delay:.055s}.st-launch-copy p span:nth-child(3){--letter-delay:.11s}.st-launch-copy p span:nth-child(4){--letter-delay:.165s}.st-launch-copy p span:nth-child(5){--letter-delay:.22s}.st-launch-copy p span:nth-child(6){--letter-delay:.275s}.st-launch-copy p span:nth-child(7){--letter-delay:.33s}
-.st-launch-copy strong{display:flex;justify-content:center;gap:.006em;margin-top:6px;color:#1f7a45;font-family:"Arial Black",Arial,system-ui,sans-serif;font-weight:900;font-size:clamp(2.5rem,8.5vw,5.2rem);letter-spacing:.01em;line-height:.9}
+.st-launch-copy strong{display:flex;justify-content:center;gap:.006em;margin-top:6px;color:#1f7a45;font-family:"Archivo Black","Arial Black",Arial,system-ui,sans-serif;font-weight:900;font-size:clamp(2.3rem,8vw,4.9rem);letter-spacing:.005em;line-height:.92}
 .st-launch-copy strong span{display:inline-block;opacity:0;transform-origin:bottom center;background:linear-gradient(155deg,#123a6a 0%,#1f7a45 48%,#7250bd 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 6px 12px rgba(24,58,120,.22))}
 .st-launch-copy strong.is-cued span:nth-child(-n+3){animation:st-present-walk-left .64s var(--present-delay,0s) cubic-bezier(.3,.85,.3,1) both,st-present-heavy 3.4s calc(var(--present-delay,0s) + 1s) ease-in-out infinite}
 .st-launch-copy strong.is-cued span:nth-child(n+4){animation:st-present-walk-right .64s var(--present-delay,0s) cubic-bezier(.3,.85,.3,1) both,st-present-heavy 3.4s calc(var(--present-delay,0s) + 1s) ease-in-out infinite}

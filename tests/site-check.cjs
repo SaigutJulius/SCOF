@@ -496,6 +496,7 @@ const mimeTypes = {
   ".jpeg": "image/jpeg",
   ".mp3": "audio/mpeg",
   ".webmanifest": "application/manifest+json",
+  ".woff2": "font/woff2",
 };
 
 async function validateHttpSmoke() {
@@ -551,6 +552,7 @@ async function validateHttpSmoke() {
     ["/assets/brand/st-firm-icon-512.png", "image/png"],
     ["/assets/brand/st-firm-og.png", "image/png"],
     ["/assets/brand/st-firm.webmanifest", "application/manifest+json"],
+    ["/assets/fonts/archivo-black.woff2", "font/woff2"],
   ];
 
   try {
@@ -608,6 +610,12 @@ function validateStoryEngineHardening() {
   // Opening 'presents': PRE walks in from the left, SENTS from the right, converging.
   check(/@keyframes st-present-walk-left/.test(storyCss) && /@keyframes st-present-walk-right/.test(storyCss), "st-firm-story.css: 'presents' has left + right convergence keyframes");
   check(/strong\.is-cued span:nth-child\(-n\+3\)/.test(storyCss) && /strong\.is-cued span:nth-child\(n\+4\)/.test(storyCss), "st-firm-story.css: PRE/SENTS entrance is split by nth-child");
+
+  // Self-hosted elephant font for 'presents' (Archivo Black, SIL OFL).
+  check(/@font-face\{font-family:"Archivo Black"[^}]*url\("\.\.\/fonts\/archivo-black\.woff2"\)/.test(storyCss), "st-firm-story.css: self-hosted Archivo Black @font-face present");
+  check(/\.st-launch-copy strong\{[^}]*"Archivo Black"/.test(storyCss), "st-firm-story.css: 'presents' uses Archivo Black");
+  check(fs.existsSync(path.join(root, "assets/fonts/archivo-black.woff2")), "assets/fonts/archivo-black.woff2 exists");
+  check(fs.existsSync(path.join(root, "assets/fonts/OFL.txt")), "assets/fonts/OFL.txt font license exists");
 
   // file:// guard + dev server.
   check(fs.existsSync(path.join(root, "scripts/dev-server.cjs")), "scripts/dev-server.cjs exists");
